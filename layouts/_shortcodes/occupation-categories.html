@@ -12,7 +12,7 @@
   rather than being silently dropped.
 */ -}}
 
-{{- $occ := where (where site.RegularPages "Section" "posts") ".Params.occupationTitle" "!=" nil -}}
+{{- $occ := where (where site.RegularPages "Section" "in" site.Params.mainSections) ".Params.occupationTitle" "!=" nil -}}
 {{- $occs := slice -}}
 {{- range $occ -}}
   {{- if ne (printf "%v" .Params.occupationCategory) "" -}}

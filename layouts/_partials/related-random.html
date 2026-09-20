@@ -6,7 +6,7 @@
 {{- $notes := where (where site.RegularPages "Section" "notes") "Content" "!=" "" }}
 {{- $notes = where $notes ".Params.promotion" "!=" true }}
 {{- $notes = $notes | complement (slice $) }}
-{{- $posts := where (where site.RegularPages "Section" "posts") "Content" "!=" "" }}
+{{- $posts := where (where site.RegularPages "Section" "in" site.Params.mainSections) "Content" "!=" "" }}
 {{- $pick := slice }}
 {{- range $pool := slice $notes $posts }}
 {{-     $ranked := slice }}
