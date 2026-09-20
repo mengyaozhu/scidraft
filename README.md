@@ -4,7 +4,7 @@
 
 Built for quick research notes and comprehensive scientific articles — one content
 type, with BibTeX citations, KaTeX math, mermaid diagrams, pseudo-algorithm
-blocks, galleries, glossaries, and occupation reference indexes.
+blocks, galleries, and per-series A–Z / category indexes (the entry map).
 
 [![Minimum Hugo Version](https://img.shields.io/static/v1?label=Hugo&message=v0.146.0%2B&color=blue&logo=hugo)](https://github.com/gohugoio/hugo/releases/tag/v0.146.0)
 
