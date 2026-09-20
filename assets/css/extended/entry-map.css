@@ -1,5 +1,5 @@
-/* Entry index pages (entry-map / entry-categories) styling: large, bold,
-   underlined letter/category headings, entry blocks, alphabet jump bar. */
+/* Entry map styling (the entry-a-to-z and entry-categories views): large,
+   bold, underlined letter/category headings, entry blocks, alphabet jump bar. */
 
 /* Entry count in a visible light-grey box */
 .entry-count {

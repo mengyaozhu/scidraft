@@ -22,7 +22,7 @@
        Defaults when nothing is configured: entryTitle / entryCategory /
        entryAliases / entrySummary, no tag filter. Field lookups are
        lowercased because Hugo stores front-matter keys lowercase.
-       Styling: assets/css/extended/entry-index.css. */ -}}
+       Styling: assets/css/extended/entry-map.css. */ -}}
 
 {{- $setName := .Get "set" | default "default" }}
 {{- $cfg := index site.Params.entrySets $setName | default dict }}
