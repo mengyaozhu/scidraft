@@ -11,6 +11,7 @@
 {{- $preview := "" }}
 {{- $m := findRESubmatch `(?s)\{\{< preview >}\}(.*)\{\{< /preview >}\}` .RawContent 1 }}
 {{- with $m }}{{ $preview = index (index . 0) 1 }}{{ end }}
+<span data-flag="isset={{ isset .Params "showtitle" }} val={{ .Params.showTitle }}"></span>
 <article class="note-card">
     <header class="note-head">
         <span class="note-avatar" aria-hidden="true">D</span>
@@ -24,9 +25,17 @@
         </a>
         {{- end }}
     </header>
-    {{- /* Title on the card only for marked (long-form) notes that
-           explicitly set one in front matter. */ -}}
-    {{- if and $preview .Params.title }}<h2 class="note-title">{{ .Params.title }}</h2>{{- end }}
+    {{- /* Card title logic. Priority order:
+           1. front-matter showTitle (explicit): true forces the title on,
+              false forces it off — even when the preview shortcode
+              (marker) is present.
+           2. preview shortcode (inferred): a marked note shows its title,
+              an unmarked note does not.
+           Absent flag = defer to the marker rule; absent front-matter
+           title = no heading rendered regardless. */ -}}
+    {{- $showTitle := ne $preview "" }}
+    {{- if isset .Params "showtitle" }}{{ $showTitle = .Params.showTitle }}{{ end }}
+    {{- if and $showTitle .Params.title }}<h2 class="note-title">{{ .Params.title }}</h2>{{- end }}
     <div class="note-body md-content">
         {{- if $preview }}
         {{- $preview | markdownify }}
