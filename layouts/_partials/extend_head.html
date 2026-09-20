@@ -77,6 +77,38 @@
 </script>
 {{- end }}
 
+{{- /* Standalone math (inline $..$ / \(..\) and display $$..$$ / \[..\])
+       in note bodies: KaTeX auto-render typesets it in the browser. Enabled
+       by the `math` site param (hugo.toml) or a note's own `math = true`;
+       skipped inside pre/code so algorithm sources and syntax examples stay
+       literal. The pseudo-algorithm block above also loads katex.min.js,
+       but only for pages with algorithms — this block is what covers
+       ordinary math. One pipeline both ways: KaTeX, never MathJax. */ -}}
+{{- if or .Params.math site.Params.math }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+{{- if not (or (.Store.Get "hasAlgorithm") (eq .Section "notes") (and .IsHome site.Params.homeNotesFeed)) }}
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" defer></script>
+{{- end }}
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" defer></script>
+<script defer>
+  window.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    document.querySelectorAll(".md-content, .post-content").forEach(function (el) {
+      window.renderMathInElement(el, {
+        delimiters: [
+          { left: "$$", right: "$$", display: true },
+          { left: "\\[", right: "\\]", display: true },
+          { left: "$", right: "$", display: false },
+          { left: "\\(", right: "\\)", display: false }
+        ],
+        ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code", "option"],
+        throwOnError: false
+      });
+    });
+  });
+</script>
+{{- end }}
+
 {{- /* Citations: citation-js parses assets/bib/refs.bib; \cite{...}
        occurrences in the article become numbered [n] links numbered by
        first appearance, and the references shortcode container is filled

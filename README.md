@@ -25,6 +25,17 @@ theme = "SciDraft"
 # Required for the built-in search page (Hugo does not inherit this from themes)
 [outputs]
   home = ["HTML", "RSS", "JSON"]
+
+# Required for math in note bodies: preserve \( \) and $$ $$ delimiters
+# through Markdown so KaTeX auto-render can typeset them. Like [outputs],
+# this cannot be supplied by the theme — Hugo does not merge [markup].
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions.passthrough]
+      enable = true
+      [markup.goldmark.extensions.passthrough.delimiters]
+        block = [['$$', '$$'], ['\[', '\]']]
+        inline = [['\(', '\)'], ['$', '$']]
 ```
 
 Put notes in `content/notes/*.md`. Short notes render in full inside the feed;

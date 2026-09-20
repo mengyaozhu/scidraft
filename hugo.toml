@@ -35,6 +35,9 @@
 
 [markup]
   [markup.goldmark]
+    # NOTE: math delimiter preservation (goldmark passthrough) cannot be
+    # set from theme config — Hugo does not merge [markup] from themes.
+    # Sites must add the passthrough block themselves (see README).
     [markup.goldmark.renderer]
       unsafe = true
     [markup.goldmark.parser]
