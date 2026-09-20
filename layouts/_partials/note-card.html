@@ -1,15 +1,16 @@
 {{- /* One note card (context: the note page). Shared by the notes feed,
        the /notes/ list, and the promotion slot in both.
 
-       Long notes (word count above noteSummaryWords, default 150 —
-       overridable site-wide or per note via front matter `summaryWords`)
-       are truncated to the summary with a "Read more" link to the full
-       page. The summary honors a <!--more--> divider when the writer
-       sets one. Short notes render full content, unchanged. */ -}}
-{{- $threshold := .Params.summaryWords | default site.Params.noteSummaryWords | default 150 }}
-{{- $isLong := gt (countwords .RawContent) $threshold }}
+       Preview logic:
+       - If the note wraps a region in {{< preview >}}...{{< /preview >}},
+         the card shows that region plus a "Read more" link to the page.
+       - Without the markers, the full content is displayed and no
+         read-more link appears. */ -}}
 {{- $institute := .Params.notesInstitute | default site.Params.notesInstitute }}
 {{- $author := .Params.notesAuthor | default site.Params.notesAuthor }}
+{{- $preview := "" }}
+{{- $m := findRESubmatch `(?s)\{\{< preview >}\}(.*)\{\{< /preview >}\}` .RawContent 1 }}
+{{- with $m }}{{ $preview = index (index . 0) 1 }}{{ end }}
 <article class="note-card">
     <header class="note-head">
         <span class="note-avatar" aria-hidden="true">D</span>
@@ -24,8 +25,8 @@
         {{- end }}
     </header>
     <div class="note-body md-content">
-        {{- if $isLong }}
-        <p class="note-summary">{{ .Summary | plainify }}</p>
+        {{- if $preview }}
+        {{- $preview | markdownify }}
         <a class="note-readmore" href="{{ .RelPermalink }}">Read more »</a>
         {{- else }}
         {{ .Content }}
