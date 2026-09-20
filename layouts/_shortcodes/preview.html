@@ -1,6 +1,7 @@
-{{- /* Marks the preview region of a long note. Renders its inner content
-       unchanged on the note's full page; the note-card partial extracts
-       this region (via the matching markers in .RawContent) as the feed
-       card preview, shown with a "Read more" link. Notes without the
-       markers display full content with no read-more link. */ -}}
-{{ .Inner }}
+{{- /* Marks the preview region of a long note. On the note's full page the
+       inner content is rendered as Markdown, so the region looks exactly
+       like the rest of the note. The note-card partial separately extracts
+       this region from .RawContent for the feed card preview (with a
+       "Read more" link). Notes without the markers display full content
+       and no read-more link. */ -}}
+{{ .Inner | markdownify }}

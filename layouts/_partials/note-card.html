@@ -38,7 +38,9 @@
     {{- if and $showTitle .Params.title }}<h2 class="note-title">{{ .Params.title }}</h2>{{- end }}
     <div class="note-body md-content">
         {{- if $preview }}
-        {{- $preview | markdownify }}
+        {{- /* Full block Markdown rendering: paragraphs, lists, emphasis.
+               (markdownify would render inline only, breaking lists/bold.) */ -}}
+        {{- $preview | .RenderString (dict "display" "block") }}
         <a class="note-readmore" href="{{ .RelPermalink }}">Read more »</a>
         {{- else }}
         {{ .Content }}
