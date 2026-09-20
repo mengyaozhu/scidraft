@@ -1,21 +1,24 @@
 # SciDraft — function → files map
 
-This folder documents the theme's features *for maintainers*: what each function
-does, and which files and code lines control it. It ships with the theme but is
-ignored by the Hugo build — it never appears on any site.
+Maintainer documentation: what each feature does, and which files control it.
+Ships with the theme; ignored by the Hugo build (never appears on a site).
 
-How to read an entry:
-
-- **Where it appears** — the user-visible surface.
-- **Controlling files** — every file involved, with the symbol to look for
-  (preferred) and the line number at the time of writing (line numbers drift;
-  trust the symbol, use the number as a hint).
-- **Config** — settings that change behavior without touching code.
-- **Verify** — how to check the feature still works after a change.
-
-> Status: one function documented so far (bottom-of-note recommendations).
-> Rows will be added as more functions are written up.
+How to read an entry: find the **symbol** (survives edits), treat line numbers
+as hints, and use the **Verify** section of each doc after changes.
 
 | Function | Where it appears | Controlling files | Doc |
 |---|---|---|---|
-| Random recommendations | Box under every note, below prev/next navigation | `layouts/notes/single.html` (the `partial "note-recommendations.html"` call) · `layouts/_partials/note-recommendations.html` (selection logic) · `assets/css/extended/note-recommendations.css` (appearance) · `hugo.toml` → `recommendationCount` (how many) | [note-recommendations.md](note-recommendations.md) |
+| Notes feed (homepage + /notes/) | Homepage and /notes/ listing | `layouts/home.html` (mode switch `homeNotesFeed`) · `layouts/_partials/notes-feed.html` (feed logic) · `layouts/notes/list.html` (section list) · `hugo.toml` params | [notes-feed.md](notes-feed.md) |
+| Note cards | Every card in feeds and lists; the note page itself | `layouts/_partials/note-card.html` · `layouts/notes/single.html` · `assets/css/extended/notes.css` | [note-cards.md](note-cards.md) |
+| Preview markers + card titles | Card truncation, "Read more »", when a card shows its title | `note-card.html` (`findRESubmatch` on `.RawContent`, `showTitle`) · `layouts/_shortcodes/preview.html` | [note-cards.md](note-cards.md) |
+| Identity (institute / author) | Card header line, page byline, `<meta name="author">`, RSS | `note-card.html`, `notes/single.html`, `_partials/author.html` · `hugo.toml` params `institute`/`author` | [identity.md](identity.md) |
+| Note recommendations | Box under every note (random notes) | `notes/single.html` (call) · `_partials/note-recommendations.html` · `assets/css/extended/note-recommendations.css` · `recommendationCount` | [note-recommendations.md](note-recommendations.md) |
+| Promotions | Feed promo slot + three promo shortcodes | `promotion = true` front matter · `_shortcodes/promotion-*.html` · `data/template-rows.*` · `promotionLink` param | [promotions.md](promotions.md) |
+| Occupation indexes | /occupation-map/ and /occupation-categories/ pages | `_shortcodes/occupation-map.html`, `occupation-categories.html` · `assets/css/extended/occupation-map.css` · note front matter fields | [occupation-indexes.md](occupation-indexes.md) |
+| Scientific rendering | Math, pseudo-algorithms, mermaid, citations | `_markup/render-codeblock-*.html` · `_shortcodes/references.html` · `_partials/extend_head.html` · site `[markup]` passthrough | [scientific-rendering.md](scientific-rendering.md) |
+| Galleries | Image galleries in note bodies | `_shortcodes/gallery.html`, `gallery-item.html` · `assets/css/extended/gallery.css` | [gallery.md](gallery.md) |
+| Glossary | Inline terms + side panel | `_shortcodes/glossary.html`, `glossary-term.html` | [glossary.md](glossary.md) |
+| Navigation | Header menus (with dropdowns), prev/next, numbered pagination | `_partials/header.html` · `assets/css/extended/menu.css` · `assets/js/menu-toggle.js` · `_partials/note-nav-links.html` · `_partials/numbered-pagination.html` · `assets/css/extended/numbered-pagination.css` | [navigation.md](navigation.md) |
+| Search | /search/ page | `layouts/search.html` · `js/fastsearch.js` + Fuse (PaperMod) · `index.json` (site `[outputs]`) | [search.md](search.md) |
+| Theme toggle (light/dark) | Header icon; site-wide theme | `_partials/header.html` (moon/sun SVGs) · `_partials/footer.html` (toggle JS, `pref-theme`) · `assets/css/common/header.css` | [theme-toggle.md](theme-toggle.md) |
+| Scripts and asset loading | What loads on which page, and from where | `layouts/_partials/extend_head.html` (script hub) · `layouts/_partials/head.html` (bundles) · `assets/js/*` | [scripts-and-assets.md](scripts-and-assets.md) |
