@@ -1,0 +1,80 @@
+{{- /* Entry Categories: the same entries as entry-map, grouped by an "entry
+       category" field instead of alphabetically. One shortcode, many series:
+       field names and membership come from a named set in the site config.
+
+       Usage:      {{< entry-categories set="occupations" >}}
+       Per-call overrides (optional): titleField=, categoryField=,
+       aliasesField=, summaryField=, tag=, countLabel=
+
+       Entries with a missing or blank category are still rendered, under a
+       trailing "Uncategorised" section, rather than being silently dropped.
+       Styling: assets/css/extended/entry-index.css. */ -}}
+
+{{- $setName := .Get "set" | default "default" }}
+{{- $cfg := index site.Params.entrySets $setName | default dict }}
+{{- $titleField    := lower (.Get "titleField"    | default (index $cfg "titleField")    | default "entryTitle") }}
+{{- $categoryField := lower (.Get "categoryField" | default (index $cfg "categoryField") | default "entryCategory") }}
+{{- $aliasesField  := lower (.Get "aliasesField"  | default (index $cfg "aliasesField")  | default "entryAliases") }}
+{{- $summaryField  := lower (.Get "summaryField"  | default (index $cfg "summaryField")  | default "entrySummary") }}
+{{- $tag           := .Get "tag" | default (index $cfg "tag") }}
+{{- $countLabel    := .Get "countLabel" | default (index $cfg "countLabel") | default "Entries" }}
+
+{{- $pool := where site.RegularPages "Section" "in" site.Params.mainSections }}
+{{- with $tag }}{{ $pool = where $pool "Params.tags" "intersect" (slice .) }}{{ end }}
+{{- $entries := where $pool (printf "Params.%s" $titleField) "!=" nil }}
+
+{{- $cats := slice }}
+{{- range $entries }}
+  {{- if ne (printf "%v" (index .Params $categoryField)) "" }}
+    {{- $cats = $cats | append (index .Params $categoryField) }}
+  {{- end }}
+{{- end }}
+{{- $categories := sort (uniq $cats) }}
+
+<div class="entry-count"><strong>{{ len $entries }} {{ $countLabel }} Covered in {{ len $categories }} Categories</strong></div>
+
+<div class="entry-alphabet">
+{{- range $categories }}
+  <div class="entry-alphabet-line">
+    <a class="entry-alphabet-letter active" href="#{{ . | urlize }}">{{ . }}</a>
+  </div>
+{{- end }}
+</div>
+
+<div class="entry-map">
+{{- range $cat := $categories }}
+  {{- $group := sort (where $entries (printf "Params.%s" $categoryField) $cat) (printf "Params.%s" $titleField) "asc" }}
+  <h2 class="entry-letter" id="{{ $cat | urlize }}">{{ $cat }}</h2>
+  {{- range $group }}
+  <div class="entry-item">
+    <a class="entry-title" href="{{ .RelPermalink }}">{{ index .Params $titleField }}</a>
+    {{- with index .Params $aliasesField }}
+    <p class="entry-alt"><em>Also known as:</em> {{ if reflect.IsSlice . }}{{ delimit . ", " }}{{ else }}{{ . }}{{ end }}</p>
+    {{- end }}
+    {{- with index .Params $summaryField }}
+    <p class="entry-desc">{{ . }}</p>
+    {{- end }}
+  </div>
+  {{- end }}
+{{- end }}
+
+{{- /* Safety net: entries with a missing or blank category. */ -}}
+{{- $uncategorised := slice }}
+{{- range $entries }}
+  {{- if eq (printf "%v" (index .Params $categoryField)) "" }}{{ $uncategorised = $uncategorised | append . }}{{ end }}
+{{- end }}
+{{- with $uncategorised }}
+  <h2 class="entry-letter" id="uncategorised">Uncategorised</h2>
+  {{- range sort . (printf "Params.%s" $titleField) "asc" }}
+  <div class="entry-item">
+    <a class="entry-title" href="{{ .RelPermalink }}">{{ index .Params $titleField }}</a>
+    {{- with index .Params $aliasesField }}
+    <p class="entry-alt"><em>Also known as:</em> {{ if reflect.IsSlice . }}{{ delimit . ", " }}{{ else }}{{ . }}{{ end }}</p>
+    {{- end }}
+    {{- with index .Params $summaryField }}
+    <p class="entry-desc">{{ . }}</p>
+    {{- end }}
+  </div>
+  {{- end }}
+{{- end }}
+</div>

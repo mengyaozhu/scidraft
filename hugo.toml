@@ -26,6 +26,18 @@
   # Fallback link for {{< promotion-visual >}} images (empty by default)
   # promotionLink = ""
 
+  # Entry index sets: one block per series of notes, naming the front-matter
+  # fields the entry-map / entry-categories shortcodes read, the optional
+  # membership tag, and the count label. Falls back to entryTitle /
+  # entryCategory / entryAliases / entrySummary when a set is absent.
+  # [params.entrySets.example]
+  #   titleField    = "entryTitle"
+  #   categoryField = "entryCategory"
+  #   aliasesField  = "entryAliases"
+  #   summaryField  = "entrySummary"
+  #   tag           = ""
+  #   countLabel    = "Entries"
+
 # NOTE: [outputs] home = ["HTML", "RSS", "JSON"] cannot be inherited from
 # theme config (Hugo root key) — a site must set it itself for search to
 # work. Documented in README.

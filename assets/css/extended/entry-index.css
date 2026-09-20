@@ -1,7 +1,8 @@
-/* Occupation Map page styling: large, bold, underlined A/B/C letter headings */
+/* Entry index pages (entry-map / entry-categories) styling: large, bold,
+   underlined letter/category headings, entry blocks, alphabet jump bar. */
 
-/* Occupations-covered count in a visible light-grey box */
-.occupation-count {
+/* Entry count in a visible light-grey box */
+.entry-count {
     display: inline-block;
     background: #e9e9ec;
     color: var(--primary);
@@ -11,7 +12,7 @@
 }
 
 /* Alphabet quick-jump box: light-grey background, two lines of 13 letters each */
-.occupation-alphabet {
+.entry-alphabet {
     display: flex;
     flex-direction: column;
     gap: 0.3em;
@@ -21,31 +22,31 @@
     margin: 0 0 1.5em;
 }
 
-.occupation-alphabet-line {
+.entry-alphabet-line {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 0.25em 0.4em;
 }
 
-.occupation-alphabet-letter {
+.entry-alphabet-letter {
     font-size: 1rem;
     line-height: 1;
     padding: 0.05em 0.1em;
     text-decoration: none;
 }
 
-.occupation-alphabet-letter.active {
+.entry-alphabet-letter.active {
     color: var(--primary);
     font-weight: 700;
 }
 
-.occupation-alphabet-letter.inactive {
+.entry-alphabet-letter.inactive {
     color: #a7a7a7;
     font-weight: 400;
 }
 
-.occupation-map .occupation-letter {
+.entry-map .entry-letter {
     font-size: 2rem;
     font-weight: 700;
     text-decoration: underline;
@@ -53,22 +54,22 @@
     margin-bottom: 0.6em;
 }
 
-.occupation-map .occupation-entry {
+.entry-map .entry-entry {
     margin-bottom: 1.2em;
 }
 
-.occupation-map .occupation-title {
+.entry-map .entry-title {
     font-weight: 600;
     font-size: 1.05rem;
 }
 
-.occupation-map .occupation-alt {
+.entry-map .entry-alt {
     margin: 0.15em 0;
     font-size: 0.9rem;
     color: var(--secondary);
 }
 
-.occupation-map .occupation-desc {
+.entry-map .entry-desc {
     margin: 0.15em 0 0;
 }
 
@@ -81,25 +82,25 @@
    3. the system preference (auto mode) — handled by the media query,
       scoped with :not([data-theme="light"]) so a reader who manually
       chose light despite a dark system still gets light boxes. */
-.dark .occupation-count,
-[data-theme="dark"] .occupation-count,
-.dark .occupation-alphabet,
-[data-theme="dark"] .occupation-alphabet {
+.dark .entry-count,
+[data-theme="dark"] .entry-count,
+.dark .entry-alphabet,
+[data-theme="dark"] .entry-alphabet {
     background: rgb(45, 45, 45);
 }
 
-.dark .occupation-alphabet-letter.inactive,
-[data-theme="dark"] .occupation-alphabet-letter.inactive {
+.dark .entry-alphabet-letter.inactive,
+[data-theme="dark"] .entry-alphabet-letter.inactive {
     color: rgb(120, 120, 120);
 }
 
 @media (prefers-color-scheme: dark) {
-    html:not([data-theme="light"]) .occupation-count,
-    html:not([data-theme="light"]) .occupation-alphabet {
+    html:not([data-theme="light"]) .entry-count,
+    html:not([data-theme="light"]) .entry-alphabet {
         background: rgb(45, 45, 45);
     }
 
-    html:not([data-theme="light"]) .occupation-alphabet-letter.inactive {
+    html:not([data-theme="light"]) .entry-alphabet-letter.inactive {
         color: rgb(120, 120, 120);
     }
 }

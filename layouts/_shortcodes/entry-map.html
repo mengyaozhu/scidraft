@@ -1,0 +1,78 @@
+{{- /* Entry Map: an alphabetical index of every note that carries an "entry
+       title" field. Each entry shows the name, optional aliases, an optional
+       description, and a link to the note. One shortcode, many series: the
+       field names and the membership rule come from a named set in the site
+       config, selected per page.
+
+       Usage:      {{< entry-map set="occupations" >}}
+       Per-call overrides (optional): titleField=, aliasesField=, summaryField=,
+       tag=, countLabel=
+
+       Config (site hugo.toml):
+         [params.entrySets.occupations]
+           titleField    = "occupationTitle"
+           categoryField = "occupationCategory"   # used by entry-categories
+           aliasesField  = "alternativeTitles"
+           summaryField  = "shortDescription"
+           tag           = "Working with Agentic AI"   # optional membership filter
+           countLabel    = "Occupations"
+
+       Defaults when nothing is configured: entryTitle / entryCategory /
+       entryAliases / entrySummary, no tag filter. Field lookups are
+       lowercased because Hugo stores front-matter keys lowercase.
+       Styling: assets/css/extended/entry-index.css. */ -}}
+
+{{- $setName := .Get "set" | default "default" }}
+{{- $cfg := index site.Params.entrySets $setName | default dict }}
+{{- $titleField   := lower (.Get "titleField"   | default (index $cfg "titleField")   | default "entryTitle") }}
+{{- $aliasesField := lower (.Get "aliasesField" | default (index $cfg "aliasesField") | default "entryAliases") }}
+{{- $summaryField := lower (.Get "summaryField" | default (index $cfg "summaryField") | default "entrySummary") }}
+{{- $tag          := .Get "tag" | default (index $cfg "tag") }}
+{{- $countLabel   := .Get "countLabel" | default (index $cfg "countLabel") | default "Entries" }}
+
+{{- $pool := where site.RegularPages "Section" "in" site.Params.mainSections }}
+{{- with $tag }}{{ $pool = where $pool "Params.tags" "intersect" (slice .) }}{{ end }}
+{{- $entries := where $pool (printf "Params.%s" $titleField) "!=" nil }}
+{{- $sorted := sort $entries (printf "Params.%s" $titleField) "asc" }}
+
+{{- $published := slice }}
+{{- range $sorted }}{{ $published = $published | append (upper (substr (index .Params $titleField) 0 1)) }}{{ end }}
+
+<div class="entry-count"><strong>{{ len $entries }} {{ $countLabel }} Covered</strong></div>
+<div class="entry-alphabet">
+{{- range $line := (slice (seq 0 12) (seq 13 25)) }}
+  <div class="entry-alphabet-line">
+  {{- range $alphabet := $line }}
+    {{- $l := printf "%c" (add 97 $alphabet) }}
+    {{- $L := upper $l }}
+    {{- if in $published $L }}
+      <a class="entry-alphabet-letter active" href="#{{ $L }}">{{ $L }}</a>
+    {{- else }}
+      <span class="entry-alphabet-letter inactive">{{ $L }}</span>
+    {{- end }}
+  {{- end }}
+  </div>
+{{- end }}
+</div>
+<div class="entry-map">
+{{- $letter := "" }}
+{{- range $sorted }}
+  {{- $name := index .Params $titleField }}
+  {{- $l := upper (substr $name 0 1) }}
+  {{- if ne $l $letter }}
+    {{- $letter = $l }}
+    <h2 class="entry-letter" id="{{ $l }}">{{ $l }}</h2>
+  {{- end }}
+  <div class="entry-item">
+    <a class="entry-title" href="{{ .RelPermalink }}">{{ $name }}</a>
+    {{- with index .Params $aliasesField }}
+    <p class="entry-alt"><em>Also known as:</em> {{ if reflect.IsSlice . }}{{ delimit . ", " }}{{ else }}{{ . }}{{ end }}</p>
+    {{- end }}
+    {{- with index .Params $summaryField }}
+    <p class="entry-desc">{{ . }}</p>
+    {{- end }}
+  </div>
+{{- else }}
+<p>No entries published yet.</p>
+{{- end }}
+</div>

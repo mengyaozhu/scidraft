@@ -174,15 +174,41 @@ should render.
 | `{{</* preview */>}}…{{</* /preview */>}}` | Mark the feed-card region of a long note |
 | `{{</* references */>}}` | Render the BibTeX bibliography (see Citations) |
 | `{{</* gallery */>}}` + `{{</* gallery-item image=… caption=… link=… */>}}` | Image gallery |
-| `{{</* occupation-map */>}}` | Alphabetical occupation index over notes with `occupationTitle` |
-| `{{</* occupation-categories */>}}` | Occupation index grouped by `occupationCategory` |
+| `{{</* entry-map set="…" */>}}` | Alphabetical index over notes with a configured title field |
+| `{{</* entry-categories set="…" */>}}` | The same entries grouped by a configured category field |
 | `{{</* promotion-visual */>}}` | Rotating image promotion from a site data file (any item set; the shipped data is a resume-template example) |
 | `{{</* promotion-textual */>}}` | Text-based promotional card |
 | ```` ```pseudo-algorithm ```` (fence) | LaTeX `algorithmic` block, rendered by pseudocode.js + KaTeX |
 | ```` ```mermaid ```` (fence) | Mermaid diagram |
 
-Occupation indexes read `occupationTitle`, `occupationCategory`,
-`alternativeTitles`, and `shortDescription` from note front matter.
+### Entry indexes (one mechanism, many series)
+
+`entry-map` and `entry-categories` build index pages over notes that carry
+structured fields. Each **series** of notes gets its own map page, categories
+page, and field names — defined once in the site config:
+
+```toml
+[params.entrySets.occupations]
+  titleField    = "occupationTitle"
+  categoryField = "occupationCategory"
+  aliasesField  = "alternativeTitles"
+  summaryField  = "shortDescription"
+  tag           = "Working with Agentic AI"   # optional membership filter
+  countLabel    = "Occupations"
+
+[params.entrySets.skills]                     # a second series, its own fields
+  titleField    = "skillTitle"
+  categoryField = "skillCategory"
+  aliasesField  = "skillAliases"
+  summaryField  = "skillSummary"
+  tag           = "Agentic Skill"
+  countLabel    = "Skills"
+```
+
+A note becomes an entry by carrying the series' `titleField` value. Pages then
+select a series: `{{</* entry-map set="skills" */>}}`. Without any config, the
+theme falls back to generic field names (`entryTitle`, `entryCategory`,
+`entryAliases`, `entrySummary`).
 
 ---
 
