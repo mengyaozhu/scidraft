@@ -10,10 +10,10 @@
 
 <head>
     {{- partial "head.html" . }}
-    {{- /* FORCE MATHJAX LOADING - ALWAYS LOAD FOR POSTS */ -}}
-    {{- if or .Params.math site.Params.math }}
-    {{- partial "mathjax.html" . }}
-    {{- end }}
+    {{- /* MathJax trial-disabled: math renders via the KaTeX render hook;
+           pseudocode.js also typesets via KaTeX. The search page keeps its
+           own MathJax for math in search previews. Backup:
+           /tmp/baseof.html.bak-mathjax */ -}}
 </head>
 
 {{- if (or (ne .Kind `page` ) (eq .Layout `archives`) (eq .Layout `search`)) }}
