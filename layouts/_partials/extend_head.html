@@ -1,0 +1,160 @@
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MTJC6NWHQF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MTJC6NWHQF');
+</script>
+
+{{- /* Header submenu tap-to-toggle. The theme only bundles the scripts it
+       lists itself, so this must be wired here; assets/js is unioned with
+       the theme's, so resources.Get resolves the site's file. */}}
+{{- $menuToggle := resources.Get "js/menu-toggle.js" | js.Build | resources.Minify }}
+{{- if not site.Params.assets.disableFingerprinting }}
+{{- $menuToggle = $menuToggle | fingerprint }}
+{{- end }}
+<script defer src="{{ $menuToggle.RelPermalink }}"{{ with $menuToggle.Data.Integrity }} crossorigin="anonymous"
+    integrity="{{ . }}"{{ end }}></script>
+
+{{- /* Mermaid diagrams: loaded only on pages that contain a ```mermaid
+       block (the render hook sets the hasMermaid page store flag), plus
+       the notes feed wherever it lives: the /notes/ section page and —
+       when homeNotesFeed is on — the homepage, because both render many
+       notes' full content in their body while <head> is emitted before
+       any of it, so the per-page flags are never set there. Pinned major
+       on the same CDN as MathJax; theme "neutral" stays legible in both
+       light and dark modes. */ -}}
+{{- if or (.Store.Get "hasMermaid") (eq .Section "notes") (and .IsHome site.Params.homeNotesFeed) }}
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({
+    startOnLoad: true,
+    securityLevel: "strict",
+    theme: "neutral",
+    {{- /* Natural-size SVGs so pre.mermaid's overflow-x scrolls wide
+           charts on phones instead of shrinking them unreadable. */ -}}
+    flowchart: { useMaxWidth: false },
+    sequence: { useMaxWidth: false },
+    class: { useMaxWidth: false },
+    er: { useMaxWidth: false },
+    gantt: { useMaxWidth: false },
+  });
+</script>
+{{- end }}
+
+{{- /* Pseudo-algorithm rendering: pseudocode.js turns the LaTeX algorithmic
+       source kept by the render hook into HTML; KaTeX typesets the math
+       inside lines. Loaded only on pages the hook flagged. The sanitizer
+       adapts paper-LaTeX idioms the web renderer does not take: \(..\)
+       becomes $..$, and float-only commands ([H], \footnotesize, \label)
+       are dropped. On a parse failure the raw source is shown unhidden
+       instead of an empty box. Same notes-feed exception as Mermaid above:
+       the feed's head cannot see the render hooks' flags. */ -}}
+{{- if or (.Store.Get "hasAlgorithm") (eq .Section "notes") (and .IsHome site.Params.homeNotesFeed) }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pseudocode@2.4.0/build/pseudocode.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/pseudocode@2.4.0/build/pseudocode.min.js" defer></script>
+<script defer>
+  window.addEventListener("DOMContentLoaded", function () {
+    if (!window.pseudocode) return;
+    document.querySelectorAll("pre.algorithm-src").forEach(function (pre) {
+      var box = pre.closest(".pseudo-algorithm") || pre.parentElement;
+      try {
+        var src = pre.textContent
+          .replace(/\\\(/g, "$").replace(/\\\)/g, "$")
+          .replace(/\\begin\{(algorithm|algorithmic)\}\[[^\]]*\]/g, "\\begin{$1}")
+          .replace(/\\footnotesize/g, "")
+          .replace(/\\label\{[^}]*\}/g, "")
+          .replace(/\\hspace\{[^}]*\}/g, "$\\hspace{1em}$");
+        box.innerHTML = window.pseudocode.renderToString(src, { lineNumber: true });
+      } catch (err) {
+        pre.hidden = false;
+      }
+    });
+  });
+</script>
+{{- end }}
+
+{{- /* Citations: citation-js parses assets/bib/refs.bib; \cite{...}
+       occurrences in the article become numbered [n] links numbered by
+       first appearance, and the references shortcode container is filled
+       with APA-formatted entries in that order. Loaded only on pages the
+       references shortcode flagged. Raw sources (pre/code) are skipped so
+       examples of the syntax itself stay untouched. */ -}}
+{{- if .Store.Get "hasCitations" }}
+<script src="https://cdn.jsdelivr.net/npm/citation-js@0.6.9/build/citation.js" defer></script>
+<script defer>
+  window.addEventListener("DOMContentLoaded", function () {
+    /* The CDN bundle (0.6.9) registers its browserify require as a global
+       instead of a window.Cite global; the main module exports the class. */
+    var Cite = (typeof window.Cite !== "undefined" && window.Cite) ||
+               (typeof window.require === "function" && window.require("citation-js"));
+    var box = document.querySelector(".references");
+    var content = document.querySelector(".post-content") || document.querySelector("main");
+    if (!Cite || !box || !box.dataset.bibSrc || !content) return;
+    var order = [];
+    var backTargets = {};
+    var backCount = 0;
+    var walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (node) {
+        if (node.parentElement.closest("pre, code, script, style, .references")) return NodeFilter.FILTER_REJECT;
+        return node.textContent.indexOf("\\cite{") !== -1 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+      }
+    });
+    var nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(function (node) {
+      var frag = document.createDocumentFragment();
+      var text = node.textContent;
+      var re = /\\cite\{([^}]*)\}/g;
+      var match;
+      var last = 0;
+      while ((match = re.exec(text))) {
+        frag.appendChild(document.createTextNode(text.slice(last, match.index)));
+        var sup = document.createElement("sup");
+        sup.className = "citation";
+        // Anchor target for the back-links listed on the bibliography entry.
+        sup.id = "cite-back-" + backCount++;
+        sup.innerHTML = match[1].split(",").map(function (key) {
+          key = key.trim();
+          if (!key) return null;
+          var n = order.indexOf(key);
+          if (n === -1) { order.push(key); n = order.length - 1; }
+          (backTargets[key] = backTargets[key] || []).push(sup.id);
+          return '<a href="#ref-' + key + '">[' + (n + 1) + "]</a>";
+        }).filter(Boolean).join(",");
+        frag.appendChild(sup);
+        last = match.index + match[0].length;
+      }
+      frag.appendChild(document.createTextNode(text.slice(last)));
+      node.replaceWith(frag);
+    });
+    if (!order.length) return;
+    fetch(box.dataset.bibSrc).then(function (res) { return res.text(); }).then(function (bib) {
+      var data = new Cite(bib);
+      var list = document.createElement("ol");
+      list.className = "ref-list";
+      order.forEach(function (key, i) {
+        var li = document.createElement("li");
+        li.id = "ref-" + key;
+        var entry = data.data.find(function (e) { return e.id === key; });
+        li.innerHTML = '<span class="ref-num">[' + (i + 1) + "]</span> " +
+          (entry ? new Cite([entry]).format("bibliography", { format: "html", template: "vancouver", lang: "en-US" })
+                 : "<em>missing reference: " + key + "</em>");
+        // One back-arrow per citing location (Wikipedia footnote pattern).
+        var back = document.createElement("span");
+        back.className = "ref-back";
+        back.innerHTML = (backTargets[key] || []).map(function (id, n) {
+          return '<a href="#' + id + '" title="Back to citation ' + (n + 1) + '">\u21A9</a>';
+        }).join(" ");
+        li.appendChild(back);
+        list.appendChild(li);
+      });
+      box.appendChild(list);
+      box.hidden = false;
+    });
+  });
+</script>
+{{- end }}

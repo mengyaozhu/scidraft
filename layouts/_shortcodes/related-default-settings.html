@@ -1,0 +1,14 @@
+{{ $page := .Page }}
+{{ $related := $page.Site.RegularPages.Related $page }}
+{{ if $related }}
+<hr class="related-posts-divider">
+<h3>Relevant Definition with Explanations</h3>
+<ul class="related-posts">
+  {{ range first 5 $related }}
+  <li>
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    <small>{{ .Date.Format "Jan 2, 2006" }}</small>
+  </li>
+  {{ end }}
+</ul>
+{{ end }}

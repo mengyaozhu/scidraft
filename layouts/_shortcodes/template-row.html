@@ -1,0 +1,34 @@
+{{- $rows := (index site.Data "template-rows").rows -}}
+{{- $bundle := site.GetPage "/resume-templates/modern-professional-resume" -}}
+{{- $link := .Get "link" | default "https://www.resumetemplates.nl/" -}}
+<div data-template-row-random>
+  {{- range $row := $rows -}}
+  <div class="template-row" data-template-row-random-item>
+    <p class="template-row-label"><strong>{{ $row.label }}</strong></p>
+    <div class="image-gallery">
+      {{- range $row.images -}}
+      {{- $src := .file -}}
+      {{- $ilink := .link | default $link -}}
+      {{- with $bundle -}}{{- with .Resources.GetMatch $src -}}{{- $src = .RelPermalink -}}{{- end -}}{{- end -}}
+      <a class="gallery-item" href="{{ $ilink }}" target="_blank" rel="noopener">
+        <figure>
+          <img src="{{ $src }}" alt="{{ .caption }}">
+          <figcaption>{{ .caption }}</figcaption>
+        </figure>
+      </a>
+      {{- end -}}
+    </div>
+  </div>
+  {{- end -}}
+</div>
+<script>
+  (function () {
+    var box = document.currentScript && document.currentScript.previousElementSibling;
+    if (!box || !box.hasAttribute('data-template-row-random')) { return; }
+    var items = box.querySelectorAll('[data-template-row-random-item]');
+    if (!items.length) { return; }
+    for (var i = 0; i < items.length; i++) { items[i].style.display = 'none'; }
+    var pick = items[Math.floor(Math.random() * items.length)];
+    pick.style.display = '';
+  })();
+</script>

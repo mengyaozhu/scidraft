@@ -1,0 +1,17 @@
+/* Override PaperMod's default font (reset.css) with Georgia */
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+/* === Disable post-preview hover/click effect (PaperMod's post-entry.css) ===
+   Comment the two rule blocks below back in to RE-ENABLE the box lift
+   (translateY) and border color change.
+ */
+.post-entry {
+    transition: none;
+}
+.post-entry:hover,
+.post-entry:focus-within {
+    transform: none;
+    border-color: var(--border);
+}

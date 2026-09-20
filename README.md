@@ -1,0 +1,109 @@
+# SciDraft
+
+**A modern Hugo theme for scientific writing and research.**
+
+Built for quick research notes and comprehensive scientific articles — with BibTeX citations,
+math rendering, mermaid diagrams, galleries, glossaries, and a notes feed.
+
+[![Minimum Hugo Version](https://img.shields.io/static/v1?label=Hugo&message=v0.146.0%2B&color=blue&logo=hugo)](https://github.com/gohugoio/hugo/releases/tag/v0.146.0)
+
+> Based on [hugo-PaperMod](https://github.com/adityatelange/hugo-PaperMod) by Aditya Telange (MIT),
+> which is itself based on [hugo-paper](https://github.com/nanxiaobei/hugo-paper) by nanxiaobei.
+> PaperMod's documentation below is retained for reference during the transition and will be
+> replaced by SciDraft's own documentation.
+
+Demo: [dycoai.com](https://dycoai.com/)
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/21258296/114303440-bfc0ae80-9aeb-11eb-8cfa-48a4bb385a6d.png" alt="Mockup image" title="Mockup"/>
+</p>
+
+---
+
+## Features 💥
+
+`☄️ Fast | ☁️ Fluent | 🌙 Smooth | 📱 Responsive`
+
+- **Asset pipeline** -- Hugo's built-in asset generator with fingerprinting, bundling, and minification.
+- **Three layout modes** -- [Regular](https://github.com/adityatelange/hugo-PaperMod/wiki/Features#regular-mode-default-mode), [Home-Info](https://github.com/adityatelange/hugo-PaperMod/wiki/Features#home-info-mode), and [Profile](https://github.com/adityatelange/hugo-PaperMod/wiki/Features#profile-mode).
+- **Light and dark themes** -- Automatic switching based on browser preference, plus a manual toggle.
+- **Multilingual support** -- Includes a built-in language selector.
+- **Search** -- Client-side search powered by Fuse.js.
+- **SEO optimized** -- Open Graph, Twitter Cards, and Schema.org structured data out of the box.
+- **Cover images** -- Per-post cover images with responsive image support.
+- **Table of contents** -- Auto-generated from heading structure.
+- **Multiple authors** -- Native support for multi-author sites.
+- **Social icons and share buttons** -- Configurable social links and per-post sharing.
+- **Breadcrumb navigation**
+- **Post archives and taxonomies**
+- **Code block copy buttons** -- One-click copying with Chroma syntax highlighting.
+- **Related post suggestions**
+- **Zero JS build dependencies** -- No webpack, Node.js, or other tooling required.
+
+| Topic                                                                                             | Description                                     |
+| ------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| **[Installation guide](https://github.com/adityatelange/hugo-PaperMod/wiki/Installation)**        | Detailed installation and update instructions   |
+| **[Features wiki page](https://github.com/adityatelange/hugo-PaperMod/wiki/Features)**            | In-depth explanations of all features           |
+| **[FAQ wiki](https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs)**                          | Common questions and configuration walkthroughs |
+| **[Icons wiki](https://github.com/adityatelange/hugo-PaperMod/wiki/Icons)**                       | Documentation for social icons and share icons  |
+| **[Variables wiki](https://github.com/adityatelange/hugo-PaperMod/wiki/Variables)**               | List of all available template variables        |
+| **[Overiding templates](https://github.com/adityatelange/hugo-PaperMod/wiki/Template_Overrides)** | Guide to customizing templates without forking  |
+| **[Releases](https://github.com/adityatelange/hugo-PaperMod/releases)**                           | Detailed history of releases                    |
+
+---
+
+## Performance ☄️
+
+PaperMod consistently scores near-perfect results on [Pagespeed Insights](https://pagespeed.web.dev/report?url=https://adityatelange.github.io/hugo-PaperMod/).
+
+<img width="481" height="116" alt="image" src="https://github.com/user-attachments/assets/497d831b-d143-4a46-bc11-b1d7f8ef4a83" />
+
+---
+
+## Support 🫶
+
+- Star this repository to show your support.
+- Share PaperMod with others who might find it useful.
+- Sponsor the project on [GitHub Sponsors](https://github.com/sponsors/adityatelange) or [Ko-Fi](https://ko-fi.com/adityatelange).
+
+---
+
+## Special Thanks 🌟
+
+- [Highlight.js](https://github.com/highlightjs/highlight.js)
+- [Fuse.js](https://github.com/krisk/fuse)
+- [Feather Icons](https://github.com/feathericons/feather)
+- [Simple Icons](https://github.com/simple-icons/simple-icons)
+- All contributors and supporters
+
+---
+
+## Stargazers 📈
+
+[![Stargazers over time](https://starchart.cc/adityatelange/hugo-PaperMod.svg?background=%23ffffff00&axis=%23858585&line=%236b63ff)](https://starchart.cc/adityatelange/hugo-PaperMod)
+
+## Quick start
+
+```toml
+# hugo.toml (minimum for a SciDraft site)
+baseURL = "https://example.com/"
+title = "My Research Site"
+theme = "SciDraft"
+
+# Required for the built-in search page (Hugo does not inherit this from themes)
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+```
+
+Optional personalization:
+
+```toml
+[params]
+  notesInstitute = "Your Lab"   # default affiliation shown on note cards
+  notesAuthor = "Your Name"     # default author shown on note cards
+  homeNotesFeed = true          # true = notes feed homepage, false = classic post list
+```
+
+Your BibTeX citations live in `assets/bib/refs.bib` (create your own);
+cite with `\cite{key}` and place the `{{< references >}}` shortcode where
+the bibliography should render.

@@ -1,0 +1,23 @@
+{{ $page := .Page }}
+{{ $related := $page.Site.RegularPages.Related $page }}
+{{ if $related }}
+<hr class="related-posts-divider">
+<h3>More Relevant Definitions</h3>
+<ul class="related-posts">
+  {{ range first 5 $related }}
+  <li>
+    <div class="related-post-line">
+      <a href="{{ .RelPermalink }}" style="text-decoration: none;">{{ .Title }}</a>
+      <small>{{ .Date.Format "Jan 2, 2006" }}</small>
+      {{ if .Params.tags }}
+        <div class="related-tags" style="display: inline;">
+          {{ range first 3 .Params.tags }}
+            <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="related-tag" style="text-decoration: underline; display: inline-block; margin-left: 5px; font-size: 0.85em;">{{ . }}</a>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  </li>
+  {{ end }}
+</ul>
+{{ end }}

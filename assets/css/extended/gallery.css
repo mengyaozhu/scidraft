@@ -1,0 +1,37 @@
+/* Image gallery: 3 tiles per row, wrapping to new rows automatically */
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 1em 0;
+}
+
+.image-gallery .gallery-item figure {
+    margin: 0;
+}
+
+.image-gallery .gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+}
+
+.image-gallery .gallery-item figcaption {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--secondary);
+    margin-top: 0.4em;
+}
+
+/* Narrow screens: 2 columns, then 1 */
+@media (max-width: 680px) {
+    .image-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 440px) {
+    .image-gallery {
+        grid-template-columns: 1fr;
+    }
+}

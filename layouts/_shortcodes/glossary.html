@@ -1,0 +1,136 @@
+<!-- Right-side glossary panel + scroll tracking -->
+<aside class="glossary-panel" id="glossary-panel"></aside>
+<script>
+(function () {
+    function init() {
+        var post = document.querySelector('.post-content') || document;
+        var panel = document.getElementById('glossary-panel');
+        if (!panel) return;
+
+        var terms = Array.prototype.slice.call(post.querySelectorAll('.glossary-term'));
+        var entryEls = {};
+        var byTag = {};
+
+        // Build one panel entry per unique term (first occurrence wins)
+        var seen = {};
+        terms.forEach(function (t) {
+            var id = t.getAttribute('data-gid');
+            if (!id || seen[id]) return;
+            var def = t.getAttribute('data-def') || '';
+            if (!def) return;
+            seen[id] = true;
+            byTag[id] = { node: t, name: t.textContent.trim(), def: def };
+        });
+
+        var ids = Object.keys(byTag);
+        if (!ids.length) { panel.style.display = 'none'; return; }
+
+        var html = '';
+        ids.forEach(function (id) {
+            html += '<div class="glossary-entry" data-gid="' + id + '"><strong>' + byTag[id].name +
+                    '</strong><div>' + byTag[id].def + '</div></div>';
+        });
+        panel.innerHTML = html;
+
+        panel.querySelectorAll('.glossary-entry').forEach(function (el) {
+            entryEls[el.getAttribute('data-gid')] = el;
+        });
+
+        function setActive(id, targetTop) {
+            panel.querySelectorAll('.glossary-entry.glossary-at').forEach(function (el) {
+                el.classList.remove('glossary-at');
+            });
+            if (id && entryEls[id]) {
+                entryEls[id].classList.add('glossary-at');
+                // Vertically align the definition with the phrase: scroll the panel
+                // so the entry's top sits at the requested viewport line.
+                if (targetTop !== undefined) {
+                    var panelTop = panel.getBoundingClientRect().top;
+                    var target = targetTop - panelTop - 2;
+                    target = Math.max(0, Math.min(target, panel.scrollHeight - panel.clientHeight));
+                    panel.scrollTop = target;
+                }
+            }
+        }
+
+        // The reading line: 55% down the viewport
+        var readLine = function () { return window.innerHeight * 0.55; };
+
+        // Bottom edge of the last glossed term. Once the reading line moves
+        // past this, the panel no longer matches any on-screen definition, so
+        // it is hidden instead of lingering on the right as the reader scrolls
+        // through the remaining sections (Explore the Concepts, References).
+        var lastTerm = terms.length ? terms[terms.length - 1] : null;
+
+        function update() {
+            var line = readLine();
+
+            // Hide the panel once the reader has scrolled a bit past the last
+            // term. Subtracting a fraction of a viewport from the reading line
+            // moves the hide point somewhat earlier than the half-viewport
+            // setting, while still letting the box linger briefly.
+            var pastEnd = lastTerm ? lastTerm.getBoundingClientRect().bottom < line - window.innerHeight * 0.2 : false;
+            if (pastEnd) {
+                if (panel.style.display !== 'none') panel.style.display = 'none';
+            } else {
+                if (panel.style.display === 'none') panel.style.display = '';
+            }
+
+            // Advance through adjacent terms one at a time: the active term is
+            // the one whose vertical midpoint is the nearest to the reading
+            // line. Each term has a unique midpoint, so even tightly-packed
+            // phrases get shown sequentially as the reader scrolls, instead of
+            // jumping straight to the last one or showing several at once.
+            var scrollY = window.scrollY;
+            var active = null;
+            var activeNode = null;
+            var closestDelta = Infinity;
+            terms.forEach(function (t) {
+                var mid = t.getBoundingClientRect().top + scrollY + t.offsetHeight / 2;
+                var delta = Math.abs(mid - (scrollY + line));
+                if (delta < closestDelta) {
+                    closestDelta = delta;
+                    active = t.getAttribute('data-gid');
+                    activeNode = t;
+                }
+            });
+            if (active && byTag[active] && activeNode) {
+                setActive(active, activeNode.getBoundingClientRect().top);
+            }
+            // Nothing found (e.g. no terms): fall back to the first term so the
+            // panel is not empty.
+            else if (terms.length && byTag[terms[0].getAttribute('data-gid')]) {
+                setActive(terms[0].getAttribute('data-gid'), terms[0].getBoundingClientRect().top);
+            }
+        }
+
+        // Click a term to show its definition, aligned to the phrase
+        terms.forEach(function (t) {
+            t.addEventListener('click', function () {
+                var id = t.getAttribute('data-gid');
+                setActive(id, t.getBoundingClientRect().top);
+            });
+        });
+
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+
+        // Vertically align the fixed panel with the top of the article content
+        // (below the post title / meta / TOC), instead of a fixed viewport offset.
+        function alignPanelTop() {
+            var contentTop = post.getBoundingClientRect().top + window.scrollY;
+            panel.style.top = (contentTop + 16) + 'px';
+        }
+        window.addEventListener('resize', alignPanelTop);
+        alignPanelTop();
+
+        update();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>

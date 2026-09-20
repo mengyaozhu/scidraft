@@ -1,0 +1,10 @@
+/* Mermaid diagrams (render-codeblock-mermaid.html emits pre.mermaid).
+
+   The theme's overflow rule targets `pre code`, which diagram blocks do
+   not have, so wide charts would overflow the content column on narrow
+   screens; give the diagram block its own horizontal scroll instead.
+   Diagrams render at natural size (useMaxWidth is disabled in the
+   extend_head.html loader) so that scroll path actually engages. */
+pre.mermaid {
+    overflow-x: auto;
+}

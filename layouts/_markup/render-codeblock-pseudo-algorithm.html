@@ -1,0 +1,12 @@
+{{- /* Pseudo-algorithm blocks: ```pseudo-algorithm fences keep the LaTeX
+       algorithmic source verbatim in a hidden pre for the pseudocode.js
+       loader in extend_head.html to render. Escaping is doubled on purpose
+       here (htmlEscape then safeHTML) so the markup is emitted exactly
+       once-escaped. Flag the page so the libraries load only where an
+       algorithm exists. */ -}}
+<div class="pseudo-algorithm">
+<pre class="algorithm-src" hidden>
+{{- .Inner | htmlEscape | strings.TrimSpace | safeHTML -}}
+</pre>
+</div>
+{{- .Page.Store.Set "hasAlgorithm" true -}}

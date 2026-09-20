@@ -1,0 +1,24 @@
+{{- /* Three random notes plus three random posts as one stacked bullet list
+       in a paginav-style box under the prev/next navigation. Each pool is
+       ranked by a build-seeded hash mixed with the current page, so picks
+       differ per note and reshuffle on every deploy/rebuild. */ -}}
+{{- $seed := now.Unix }}
+{{- $notes := where (where site.RegularPages "Section" "notes") "Content" "!=" "" }}
+{{- $notes = where $notes ".Params.promotion" "!=" true }}
+{{- $notes = $notes | complement (slice $) }}
+{{- $posts := where (where site.RegularPages "Section" "posts") "Content" "!=" "" }}
+{{- $pick := slice }}
+{{- range $pool := slice $notes $posts }}
+{{-     $ranked := slice }}
+{{-     range $pool }}
+{{-         $ranked = $ranked | append (dict "k" (hash.XxHash (printf "%d-%s-%s" $seed $.Path .Path)) "p" .) }}
+{{-     end }}
+{{-     $pick = $pick | append (first 3 (sort $ranked "k")) }}
+{{- end }}
+<nav class="related-random">
+    <ul>
+        {{- range $pick }}
+        <li><a href="{{ .p.RelPermalink }}">{{ .p.Title }}</a></li>
+        {{- end }}
+    </ul>
+</nav>

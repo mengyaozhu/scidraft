@@ -1,0 +1,79 @@
+/* Textual promotion box: tinted card with bold headline, subtitle, dark pill button */
+
+.textual-promotion {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2.2em 2.4em;
+    margin: 1.6em 0;
+    color: var(--primary);
+}
+
+.textual-promotion-title {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    color: var(--primary);
+}
+
+.textual-promotion-subtitle {
+    margin: 0.9em 0 1.6em;
+    font-size: 1rem;
+    line-height: 1.4;
+    color: var(--secondary);
+    max-width: 46em;
+}
+
+.textual-promotion-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.textual-promotion-button {
+    display: inline-block;
+    background: #3a3f45;
+    color: #fff !important;
+    border-radius: 999px;
+    padding: 0.75em 1.9em;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-decoration: none !important;
+    line-height: 1;
+    transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.textual-promotion-button:hover {
+    background: #24282c;
+    transform: translateY(-1px);
+}
+
+.textual-promotion--center {
+    text-align: center;
+}
+
+.textual-promotion--center .textual-promotion-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.textual-promotion--center .textual-promotion-actions {
+    justify-content: center;
+}
+
+@media (max-width: 680px) {
+    .textual-promotion {
+        padding: 1.6em 1.4em;
+    }
+
+    .textual-promotion-title {
+        font-size: 21px;
+    }
+
+    .textual-promotion-button {
+        width: 100%;
+        text-align: center;
+    }
+}

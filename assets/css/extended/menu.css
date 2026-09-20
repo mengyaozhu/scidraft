@@ -1,0 +1,182 @@
+/* Bold header menu items */
+.menu a {
+    font-weight: 400;
+}
+
+/* The theme marks the current page with a weight bump and a 2px underline,
+   which reads as heavy. Keep the underline as the cue but soften it, at both
+   menu levels, so the active item is findable without shouting. */
+.menu .active {
+    font-weight: 400;
+    text-decoration-thickness: 1px;
+}
+
+/* Right-arrow glyph for submenu rows, matching together.ai's arrow:
+   a horizontal shaft with a two-segment head, stroked rather than filled.
+   Used as a mask so the arrow takes the row's text colour. */
+:root {
+    --menu-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M4.96875 12.0547H18.9688M18.9688 12.0547L11.9688 5.05469M18.9688 12.0547L11.9688 19.05469' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
+}
+
+/* === Submenu dropdown ===
+
+   The theme sets overflow-x: auto on .menu. An overflow container clips
+   absolutely-positioned children, so the dropdown would be cut off unless
+   overflow is released on the parent list.
+*/
+.menu {
+    overflow: visible;
+}
+
+.menu > li {
+    position: relative;
+}
+
+/* Caret indicator, shown only on items that have children.
+   Points down while closed, flips up while the dropdown is open. */
+.menu-caret {
+    display: inline-flex;
+    align-items: center;
+    margin-inline-start: 0.25em;
+    vertical-align: middle;
+    transition: transform 0.15s ease;
+}
+
+/* A parent with no page of its own renders as .menu-label instead of an
+   anchor: menu-toggle.js makes tapping or pressing Enter on it toggle the
+   submenu. It is not an anchor, so it misses the theme's `.menu a` rule
+   and would otherwise inherit the 18px body size; pin it to the same 16px
+   the anchors use so a label and a link sit at one optical weight. */
+.menu-label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--primary);
+}
+
+.menu-label:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: var(--radius);
+}
+
+.menu > li.has-submenu:hover > a .menu-caret,
+.menu > li.has-submenu:focus-within > a .menu-caret,
+.menu > li.has-submenu:hover > .menu-label .menu-caret,
+.menu > li.has-submenu:focus-within > .menu-label .menu-caret {
+    transform: rotate(180deg);
+}
+
+/* The parent sits at the right end of the menu, so anchor the panel's
+   right edge to the parent's: growing leftward can never run past the
+   viewport edge, at any width. */
+.menu .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: auto;
+    right: 0;
+    z-index: 100;
+    min-width: max-content;
+    margin: 0;
+    padding: 0.4rem 0;
+    list-style: none;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
+}
+
+.menu > li.has-submenu:hover > .submenu,
+.menu > li.has-submenu:focus-within > .submenu {
+    display: block;
+}
+
+.menu .submenu li {
+    margin: 0;
+}
+
+/* Flex row so the arrow can be pinned to the right edge of the row. */
+.menu .submenu a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.25rem 1.1rem;
+    font-size: 15px;
+}
+
+.menu .submenu a:hover {
+    background: var(--tertiary);
+}
+
+/* Label and note stack, so the note reads as a caption for the label. */
+.submenu-label {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+}
+
+/* Explanatory note under a submenu label. Weight is pinned so it stays
+   regular against the anchor it sits inside. */
+.submenu-note {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--secondary);
+    white-space: normal;
+}
+
+/* Current submenu row. The theme underlines the label, which in a two-line
+   row drops the line straight onto the note below it. Underline the note
+   instead, so the line sits under the entry rather than between its lines. */
+.menu .submenu .active {
+    text-decoration: none;
+}
+
+.menu .submenu a.submenu-active .submenu-note {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25rem;
+}
+
+/* Right arrow on each submenu row: signals that the row is clickable.
+   Drawn as a ::after so it stays out of the accessibility tree, and its
+   space is always reserved so revealing it does not shift the label. */
+.menu .submenu a::after {
+    content: "";
+    flex: 0 0 auto;
+    width: 1em;
+    height: 1em;
+    margin-inline-start: 0.75em;
+    background-color: currentColor;
+    -webkit-mask: var(--menu-arrow) center / contain no-repeat;
+    mask: var(--menu-arrow) center / contain no-repeat;
+    opacity: 0;
+    transform: translateX(-0.25em);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.menu .submenu a:hover::after,
+.menu .submenu a:focus-visible::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* === Touch and narrow screens ===
+
+   Hover does not exist on touch devices, and iOS Safari does not reliably
+   set :focus when a non-interactive <span> is tapped, so the
+   :hover/:focus-within rules above cannot open the dropdown there.
+   assets/js/menu-toggle.js toggles .open on the parent <li> on tap,
+   Enter, and Space; .open shows the dropdown at every width, so phones
+   behave like tablets and desktops instead of carrying an always-visible
+   static copy of the children. */
+.menu > li.has-submenu.open > .submenu {
+    display: block;
+}
+
+.menu > li.has-submenu.open > a .menu-caret,
+.menu > li.has-submenu.open > .menu-label .menu-caret {
+    transform: rotate(180deg);
+}

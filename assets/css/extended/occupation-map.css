@@ -1,0 +1,105 @@
+/* Occupation Map page styling: large, bold, underlined A/B/C letter headings */
+
+/* Occupations-covered count in a visible light-grey box */
+.occupation-count {
+    display: inline-block;
+    background: #e9e9ec;
+    color: var(--primary);
+    border-radius: 6px;
+    padding: 0.5em 1em;
+    margin: 0 0 1.2em;
+}
+
+/* Alphabet quick-jump box: light-grey background, two lines of 13 letters each */
+.occupation-alphabet {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+    background: #e9e9ec;
+    border-radius: 6px;
+    padding: 0.7em 1em;
+    margin: 0 0 1.5em;
+}
+
+.occupation-alphabet-line {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.25em 0.4em;
+}
+
+.occupation-alphabet-letter {
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0.05em 0.1em;
+    text-decoration: none;
+}
+
+.occupation-alphabet-letter.active {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.occupation-alphabet-letter.inactive {
+    color: #a7a7a7;
+    font-weight: 400;
+}
+
+.occupation-map .occupation-letter {
+    font-size: 2rem;
+    font-weight: 700;
+    text-decoration: underline;
+    margin-top: 1.4em;
+    margin-bottom: 0.6em;
+}
+
+.occupation-map .occupation-entry {
+    margin-bottom: 1.2em;
+}
+
+.occupation-map .occupation-title {
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.occupation-map .occupation-alt {
+    margin: 0.15em 0;
+    font-size: 0.9rem;
+    color: var(--secondary);
+}
+
+.occupation-map .occupation-desc {
+    margin: 0.15em 0 0;
+}
+
+/* Dark mode overrides for the fixed #e9e9ec / #a7a7a7 values above.
+   Text colors need no overrides: var(--primary) / var(--secondary) flip
+   on their own. Dark mode has three entry paths that must ALL get dark
+   boxes (same pattern as table.css):
+   1. the .dark class — set when the reader toggles the theme manually;
+   2. [data-theme="dark"] — explicit dark setting in head.html;
+   3. the system preference (auto mode) — handled by the media query,
+      scoped with :not([data-theme="light"]) so a reader who manually
+      chose light despite a dark system still gets light boxes. */
+.dark .occupation-count,
+[data-theme="dark"] .occupation-count,
+.dark .occupation-alphabet,
+[data-theme="dark"] .occupation-alphabet {
+    background: rgb(45, 45, 45);
+}
+
+.dark .occupation-alphabet-letter.inactive,
+[data-theme="dark"] .occupation-alphabet-letter.inactive {
+    color: rgb(120, 120, 120);
+}
+
+@media (prefers-color-scheme: dark) {
+    html:not([data-theme="light"]) .occupation-count,
+    html:not([data-theme="light"]) .occupation-alphabet {
+        background: rgb(45, 45, 45);
+    }
+
+    html:not([data-theme="light"]) .occupation-alphabet-letter.inactive {
+        color: rgb(120, 120, 120);
+    }
+}

@@ -1,0 +1,7 @@
+{{- /* Mermaid code blocks: ```mermaid fences become <pre class="mermaid">
+       for the loader in extend_head.html to render. Flag the page so the
+       ~1MB Mermaid library is only loaded where a diagram exists. */ -}}
+<pre class="mermaid">
+{{- .Inner | htmlEscape | strings.TrimSpace | safeHTML -}}
+</pre>
+{{- .Page.Store.Set "hasMermaid" true -}}

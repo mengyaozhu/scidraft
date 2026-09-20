@@ -1,0 +1,4 @@
+{{- $def := .Get "def" | default "" | plainify }}
+{{- $tag := .Get "id" | default "" }}
+{{- $text := .Inner | $.Page.RenderString }}
+<span class="glossary-term" data-gid="{{ $tag }}" data-def="{{ $def }}">{{ $text }}</span>

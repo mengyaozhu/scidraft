@@ -1,0 +1,9 @@
+{{- $image := .Get "image" -}}
+{{- $caption := .Get "caption" -}}
+{{- $link := .Get "link" -}}
+<a class="gallery-item" href="{{ $link }}" target="_blank" rel="noopener">
+  <figure>
+    <img src="{{ $image }}" alt="{{ $caption }}">
+    {{- with $caption }}<figcaption>{{ . }}</figcaption>{{ end -}}
+  </figure>
+</a>

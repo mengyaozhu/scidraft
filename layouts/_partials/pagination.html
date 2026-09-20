@@ -1,0 +1,28 @@
+{{- /* Numbered pagination bar: ‹ Previous   1 … 4 … 9   Next ›
+
+       Context: any Hugo paginator (must expose TotalPages, PageNumber,
+       Pagers, HasPrev/HasNext, Prev/Next). Shows the first page, the last
+       page, and a window of pages around the current one; a single "…"
+       marks each gap. The current page gets .active. Hidden entirely when
+       there is only one page. */}}
+{{- if gt .TotalPages 1 }}
+{{- $cur := .PageNumber }}
+{{- $total := .TotalPages }}
+<nav class="numbered-pagination" aria-label="Pagination">
+    {{- if .HasPrev }}<a class="page-step" href="{{ .Prev.URL }}">‹ Previous</a>{{ end }}
+    <span class="page-numbers">
+    {{- $prev := 0 }}
+    {{- range .Pagers }}
+    {{- $n := .PageNumber }}
+    {{- $show := or (eq $n 1) (eq $n $total) (and (ge $n (sub $cur 2)) (le $n (add $cur 2))) }}
+    {{- if $show }}
+    {{- if and (gt $prev 0) (gt $n (add $prev 1)) }}<span class="page-gap">…</span>{{ end }}
+    <a class="page-num{{ if eq $n $cur }} active{{ end }}" href="{{ .URL }}"
+        {{- if eq $n $cur }} aria-current="page"{{ end }}>{{ $n }}</a>
+    {{- $prev = $n }}
+    {{- end }}
+    {{- end }}
+    </span>
+    {{- if .HasNext }}<a class="page-step" href="{{ .Next.URL }}">Next ›</a>{{ end }}
+</nav>
+{{- end }}

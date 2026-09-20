@@ -1,0 +1,54 @@
+/* Numbered pagination bar (‹ Previous   1 2 3 … 9   Next ›), screenshot
+   style: plain underlined links, active page as a filled rounded square.
+   Theme variables keep light/dark modes correct. Deliberately does NOT
+   reuse the theme's .pagination class (its pill-button rules conflict). */
+
+.numbered-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.2rem;
+    max-width: 720px;
+    margin: 1.2rem auto;
+}
+
+/* The underline is a border-bottom on the inner span, so the number and
+   its underline form one layout box that flex centers in the link. */
+/* The "number + underline" entity: the underline is a block ::after of
+   the span, so it is part of the span's layout box. Centering the span
+   in the link therefore centers the whole entity, giving equal blank
+   space above the digit and below the bar. */
+.numbered-pagination a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.2rem;
+    height: 2.2rem;
+    color: var(--secondary);
+    font-size: 1rem;
+    padding: 0 0.55rem;
+    border-radius: 10px;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    text-decoration-thickness: 1px;
+}
+
+.numbered-pagination a:hover {
+    color: var(--primary);
+}
+
+.numbered-pagination a.page-num.active {
+    background: var(--primary);
+    color: var(--theme);
+}
+
+.page-gap {
+    color: var(--secondary);
+}
+
+/* Space between the note PREV/NEXT boxes and the "Back to feed" button. */
+.note-single + .paginav {
+    margin: 1.2rem auto;
+    max-width: 720px;
+}

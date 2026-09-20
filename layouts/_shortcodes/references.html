@@ -1,0 +1,7 @@
+{{- /* Bibliography container. The citation loader in extend_head.html
+       parses assets/bib/refs.bib, replaces \cite{...} in the article with
+       numbered links, and fills this container with the formatted entries.
+       Flag the page so the library loads only where citations exist. */ -}}
+{{- $bib := resources.Get "bib/refs.bib" -}}
+<div class="references" hidden data-bib-src="{{ with $bib }}{{ .RelPermalink }}{{ end }}"></div>
+{{- .Page.Store.Set "hasCitations" true -}}

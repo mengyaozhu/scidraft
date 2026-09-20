@@ -1,0 +1,76 @@
+# theme.toml for the SciDraft Hugo theme
+
+name = "SciDraft"
+license = "MIT"
+licenselink = "https://github.com/dycoai/SciDraft/blob/main/LICENSE" # update to final repo URL at publish time
+description = "A modern Hugo theme for scientific writing and research"
+homepage = "https://dycoai.com/"
+demosite = "https://dycoai.com/"
+tags = [
+  "responsive",
+  "blog",
+  "clean",
+  "minimal",
+  "light",
+  "dark",
+  "fast",
+  "search",
+  "seo",
+  "chroma",
+  "personal",
+  "science",
+  "academic",
+  "research",
+  "notes",
+  "math",
+  "citations"
+]
+features = [
+  "responsive",
+  "single-column",
+  "blog",
+  "cover-image",
+  "table-of-contents",
+  "opengraph",
+  "twitter-cards",
+  "favicon",
+  "archive",
+  "share-icons",
+  "cover",
+  "multilingual",
+  "social-icons",
+  "minified-assets",
+  "theme-toggle",
+  "menu-location-indicator",
+  "scroll-to-top",
+  "search",
+  "breadcrumbs",
+  "reading-time",
+  "word-count",
+  "code-copy",
+  "comments",
+  "edit-post",
+  "canonical-link",
+  "profile-mode",
+  "home-info-mode",
+  "related-posts",
+  "rss",
+  "multiple-authors",
+  "post-nav-links",
+  "bibtex-citations",
+  "research-notes",
+  "mermaid-diagrams",
+  "galleries",
+  "glossary"
+]
+min_version = "0.146.0"
+
+[author]
+  name = "SciDraft"
+
+# This theme is a derivative of hugo-PaperMod
+[original]
+  name = "PaperMod"
+  author = "Aditya Telange"
+  homepage = "https://github.com/adityatelange"
+  repo = "https://github.com/adityatelange/hugo-PaperMod/"

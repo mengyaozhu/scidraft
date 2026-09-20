@@ -1,0 +1,41 @@
+/* Random related notes & posts at the bottom of each note: one stacked
+   bullet list in a box matching the prev/next navigation (.paginav). */
+
+.related-random {
+    margin-top: var(--gap);
+    /* Same bottom margin the prev/next nav box uses, so the Back-to-feed
+       button keeps its breathing room below this box too. */
+    margin-bottom: 1.2em;
+    padding: 0.6rem 0.9rem;
+    border-radius: var(--radius);
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.related-random ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.related-random li {
+    margin: 0;
+    padding: 0.3em 0.45rem;
+    border-radius: 6px;
+}
+
+.related-random li + li {
+    border-top: 1px solid var(--border);
+}
+
+/* Full-row hover highlight, same tint the prev/next nav box uses. */
+.related-random li:hover {
+    background: var(--border);
+}
+
+.related-random a {
+    color: var(--primary);
+    text-decoration: none;
+}

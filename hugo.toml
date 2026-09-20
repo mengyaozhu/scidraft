@@ -1,0 +1,41 @@
+# SciDraft theme defaults.
+# Hugo merges this with the site's config; any setting in the site's
+# hugo.toml overrides the same key here. A fresh SciDraft site gets all
+# of these out of the box.
+
+[pagination]
+  pagerSize = 6
+
+[params]
+  # Scientific content: enable math rendering by default
+  math = true
+  # Homepage switch: true = Twitter-style notes feed, false = conventional post-card flow
+  homeNotesFeed = true
+  ShowShareButtons = true
+  ShowReadingTime = true
+  ShowToc = true
+  ShowBreadCrumbs = true
+  ShowPostNavLinks = true
+  ShowCodeCopyButtons = true
+  ShowRelatedPosts = true
+  # Per-note identity defaults; each note's front matter can override
+  # with its own notesInstitute / notesAuthor
+  # notesInstitute = ""
+  # notesAuthor = ""
+
+# NOTE: [outputs] home = ["HTML", "RSS", "JSON"] cannot be inherited from
+# theme config (Hugo root key) — a site must set it itself for search to
+# work. Documented in README.
+
+[taxonomies]
+  tag = "tags"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+  [markup.highlight]
+    noClasses = false

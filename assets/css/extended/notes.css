@@ -1,0 +1,128 @@
+/* Twitter/X-style short posts (content type "note"). */
+
+.notes-feed {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.note-card {
+    background: var(--theme);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+}
+
+/* Dark mode: --theme equals the page background there, so cards use the
+   slightly lighter code background to stay distinct (as in light mode).
+   Two entry paths like table.css above: .dark for the manual toggle,
+   media query for the auto/system-preference path. */
+.dark .note-card,
+[data-theme="dark"] .note-card {
+    background: var(--code-bg);
+}
+
+@media (prefers-color-scheme: dark) {
+    html:not([data-theme="light"]) .note-card {
+        background: var(--code-bg);
+    }
+}
+
+.note-head {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.note-avatar {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--tertiary);
+    color: var(--theme);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+/* Dark mode: --tertiary is nearly identical to the card's --code-bg there,
+   which makes the avatar invisible. --secondary is a mid-grey that keeps the
+   circle distinct while the dark --theme letter stays readable on it.
+   Two entry paths matching .note-card above. */
+.dark .note-avatar,
+[data-theme="dark"] .note-avatar {
+    background: var(--secondary);
+}
+
+@media (prefers-color-scheme: dark) {
+    html:not([data-theme="light"]) .note-avatar {
+        background: var(--secondary);
+    }
+}
+
+.note-names {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    min-width: 0;
+}
+
+.note-author {
+    font-weight: 700;
+}
+
+.note-handle,
+.note-time {
+    color: var(--secondary);
+    font-size: 0.85rem;
+}
+
+.note-head .note-time {
+    margin-inline-start: auto;
+    white-space: nowrap;
+}
+
+.note-body {
+    margin-top: 0.6rem;
+}
+
+.note-body p {
+    margin: 0 0 0.6rem;
+}
+
+.note-body p:last-child {
+    margin-bottom: 0;
+}
+
+.note-tags {
+    margin-top: 0.6rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.9rem;
+}
+
+.note-tag {
+    color: var(--tertiary);
+    font-size: 0.85rem;
+}
+
+.note-single {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.note-title {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    margin: 0.4rem 0 0.6rem;
+    color: var(--primary);
+}
+
+.dark .note-title,
+[data-theme="dark"] .note-title {
+    color: var(--primary);
+}

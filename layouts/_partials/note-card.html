@@ -1,0 +1,26 @@
+{{- /* One note card (context: the note page). Shared by the notes feed,
+       the /notes/ list, and the promotion slot in both. */ -}}
+{{- $institute := .Params.notesInstitute | default site.Params.notesInstitute }}
+{{- $author := .Params.notesAuthor | default site.Params.notesAuthor }}
+<article class="note-card">
+    <header class="note-head">
+        <span class="note-avatar" aria-hidden="true">D</span>
+        <span class="note-names">
+            <span class="note-author">{{ $institute }}</span>
+            <span class="note-handle">@{{ $author }}</span>
+        </span>
+        {{- if not .Params.promotion }}
+        <a class="note-time" href="{{ .RelPermalink }}" title="{{ .Date.Format "Jan 2, 2006 15:04" }}">
+            {{ .Date.Format "Jan 2, 2006" }}
+        </a>
+        {{- end }}
+    </header>
+    <div class="note-body md-content">
+        {{ .Content }}
+    </div>
+    {{- with .Params.tags }}
+    <footer class="note-tags">
+        {{- range . }}<a class="note-tag" href="{{ printf "tags/%s/" (urlize .) | absLangURL }}">#{{ . }}</a>{{ end }}
+    </footer>
+    {{- end }}
+</article>

@@ -1,0 +1,73 @@
+/* Inline citations and bibliography (references shortcode + the citation
+   loader in extend_head.html). */
+sup.citation a {
+    text-decoration: none;
+    padding-inline: 1px;
+}
+
+/* Anchor jumps land the target flush at the viewport top; leave the
+   cited sentence breathing room below the top edge instead. */
+sup.citation {
+    scroll-margin-top: 3rem;
+}
+
+.references li {
+    scroll-margin-top: 1.5rem;
+}
+
+.references {
+    margin-block-start: 1.5rem;
+    font-size: 0.9em;
+}
+
+.references .ref-list {
+    list-style: none;
+    margin: 0;
+    padding-inline-start: 0;
+}
+
+/* Hanging indent: the [n] label hangs into the gutter. */
+.references li {
+    margin-block-end: 0.5rem;
+    padding-inline-start: 2.2rem;
+    text-indent: -2.2rem;
+}
+
+/* citation-js emits block divs (.csl-bib-body > .csl-entry >
+   .csl-left-margin + .csl-right-inline), which would push the entry text
+   below the [n] label; flatten them onto the label's line. The Vancouver
+   template also prints its own "1." number in .csl-left-margin, which
+   would duplicate ours — hide it. */
+.references li div {
+    display: inline;
+}
+
+.references .csl-left-margin {
+    display: none;
+}
+
+.references .ref-num {
+    margin-inline-end: 0.35rem;
+    font-weight: 600;
+}
+
+.references a {
+    color: var(--primary);
+}
+
+/* Return arrows on bibliography entries: one per citing location. */
+.references .ref-back {
+    margin-inline-start: 0.4rem;
+    font-size: 0.85em;
+    white-space: nowrap;
+}
+
+.references .ref-back a {
+    color: var(--secondary);
+    text-decoration: none;
+}
+
+.references .ref-back a:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}

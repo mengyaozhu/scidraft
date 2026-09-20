@@ -1,0 +1,22 @@
+:root {
+    --main-width: 720px;      /* match theme default */
+    --nav-width: 720px;       /* match header to content width for alignment */
+    --gap: 24px;               /* consistent side padding */
+}
+
+.post-content {
+    max-width: calc(var(--main-width) - var(--gap) * 0) !important;
+}
+
+/* The header nav is a wrapping flex row: logo left, menu right. When the
+   menu no longer fits beside the logo it wraps to a second row, and the
+   wrapper's space-between then leaves that row sized to its own content
+   instead of the page gutters. The menu's right edge therefore stops
+   lining up with the content column exactly on the widths that wrap.
+   Below the theme's breakpoint the menu always wraps, so pin it to a
+   full-width row there and keep its left edge on the gutter. */
+@media (max-width: 768px) {
+    .menu {
+        flex: 1 1 100%;
+    }
+}

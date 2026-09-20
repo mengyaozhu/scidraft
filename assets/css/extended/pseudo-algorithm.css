@@ -1,0 +1,38 @@
+/* Pseudo-algorithm boxes (render-codeblock-pseudo-algorithm.html emits
+   .pseudo-algorithm; pseudocode.js fills it with the rendered pseudocode
+   and pseudocode.min.css supplies the paper-like line layout).
+
+   These overrides are specific enough (.pseudo-algorithm .ps-root ...) to
+   win over the CDN stylesheet regardless of load order: it draws hard
+   #000 rules, which are invisible in dark mode, and its thin font weight
+   reads fainter than the article text. */
+.pseudo-algorithm .ps-root {
+    color: var(--primary);
+    font-weight: 400;
+}
+
+.pseudo-algorithm .ps-root .ps-algorithm {
+    border-top: 1.5px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    background: var(--code-bg);
+    border-radius: var(--radius);
+    padding: 0.6rem 0.9rem;
+    margin: 0;
+}
+
+.pseudo-algorithm .ps-root .ps-algorithm.with-caption > .ps-line:first-child {
+    border-bottom: 1px solid var(--secondary);
+}
+
+/* The theme's .md-content p:not(:last-child) rule (specificity 0,2,1)
+   would otherwise loosen the pseudocode lines with a 20px gap; this
+   selector (0,3,0) out-specifies it. */
+.pseudo-algorithm .ps-root .ps-line {
+    margin: 0;
+    padding-block: 1px;
+}
+
+/* Wide lines scroll inside the box instead of overflowing the column. */
+.pseudo-algorithm {
+    overflow-x: auto;
+}

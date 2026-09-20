@@ -1,0 +1,7 @@
+{{- $url := .Destination -}}
+{{- $isExternal := hasPrefix $url "http" -}}
+{{- if $isExternal -}}
+<a href="{{ $url }}" target="_blank" rel="noopener noreferrer">{{ .Text }}</a>
+{{- else -}}
+<a href="{{ $url }}">{{ .Text }}</a>
+{{- end -}}

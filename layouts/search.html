@@ -1,0 +1,287 @@
+{{- define "main" }}
+
+<header class="page-header">
+    <h1>{{- (printf "%s&nbsp;" .Title ) | htmlUnescape -}}</h1>
+    {{- if .Description }}
+    <div class="post-description">
+        {{ .Description }}
+    </div>
+    {{- end }}
+</header>
+
+<div id="search-container">
+    <input type="text" id="search-input" placeholder="{{ .Params.placeholder | default (printf "%s ↵" .Title) }}" aria-label="search">
+    <div id="search-results"></div>
+</div>
+
+<!-- Load MathJax for rendering math in previews -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+
+<script>
+    // Protection used by stripHtml and highlightTerms so math isn't mangled
+    const MATH_RE = /\$\$?([^$]+)\$\$?/g;
+
+    // Split a query into terms; quoted groups become single phrase terms
+    function tokenize(query) {
+        const tokens = [];
+        const re = /"([^"]+)"|(\S+)/g;
+        let m;
+        while ((m = re.exec(query)) !== null) {
+            if (m[1]) {
+                tokens.push(m[1].trim().toLowerCase()); // quoted phrase
+            } else if (m[2]) {
+                tokens.push(m[2].toLowerCase());        // single word
+            }
+        }
+        return tokens;
+    }
+
+    // Strip HTML tags while preserving math delimiters
+    function stripHtml(html) {
+        const math = [];
+        let out = html.replace(MATH_RE, (m) => {
+            math.push(m);
+            return `\u0000${math.length - 1}\u0000`;
+        });
+        out = out.replace(/<[^>]*>/g, ' ');
+        return out.replace(/\u0000(\d+)\u0000/g, (_, i) => math[i]);
+    }
+
+    // Highlight terms/phrases in text without touching math
+    function highlightTerms(text, terms) {
+        if (!terms || terms.length === 0 || !text) return text;
+        const math = [];
+        let out = text.replace(MATH_RE, (m) => {
+            math.push(m);
+            return `\u0000${math.length - 1}\u0000`;
+        });
+        terms.forEach((term) => {
+            out = out.replace(new RegExp(escapeRegex(term), 'gi'),
+                '<mark class="search-highlight">$&</mark>');
+        });
+        return out.replace(/\u0000(\d+)\u0000/g, (_, i) => math[i]);
+    }
+
+    // Excerpt around the first matching term
+    function getPreview(content, terms, previewLength = 300) {
+        const clean = stripHtml(content);
+        let start = 0, end = Math.min(previewLength, clean.length);
+        if (terms) {
+            for (const term of terms) {
+                const pos = clean.toLowerCase().indexOf(term.toLowerCase());
+                if (pos !== -1) {
+                    start = Math.max(0, pos - 80);
+                    end = Math.min(clean.length, pos + 220);
+                    break;
+                }
+            }
+        }
+        // Don't clip mid-word
+        while (start > 0 && clean[start] !== ' ' && clean[start] !== '\n') start--;
+        while (end < clean.length && end - start < previewLength &&
+               clean[end] !== ' ' && clean[end] !== '\n') end++;
+        const excerpt = clean.substring(start, end);
+        return (start > 0 ? '...' : '') + excerpt + (end < clean.length ? '...' : '');
+    }
+
+    function escapeRegex(str) {
+        return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // Re-render math in current results
+    function renderMath() {
+        if (window.MathJax) MathJax.typesetPromise();
+    }
+
+    // Score a page against the search terms
+    function scorePage(page, terms) {
+        const title = (page.title || '').toLowerCase();
+        const summary = (page.summary || '').toLowerCase();
+        const content = (page.content || '').toLowerCase();
+        const matched = [];
+        let score = 0;
+        for (const term of terms) {
+            let n = 0;
+            if (title.includes(term)) n += 10;
+            if (summary.includes(term)) n += 5;
+            if (content.includes(term)) n += 1;
+            if (n) { score += n; matched.push(term); }
+        }
+        return { score, matched };
+    }
+
+    // Escape markup in a piece of text, then highlight terms in it
+    function renderText(text, terms) {
+        return highlightTerms(text.replace(/&/g, '&amp;').replace(/</g, '&lt;'), terms);
+    }
+
+    async function performSearch() {
+        const query = document.getElementById('search-input').value.trim();
+        const resultsContainer = document.getElementById('search-results');
+
+        if (query.length < 2) {
+            resultsContainer.innerHTML = '';
+            return;
+        }
+
+        const pages = await (await fetch('/index.json')).json();
+        const terms = tokenize(query);
+
+        const results = pages
+            .map((page) => {
+                const { score, matched } = scorePage(page, terms);
+                return score ? { ...page, matched, score } : null;
+            })
+            .filter(Boolean)
+            .sort((a, b) => b.score - a.score);
+
+        if (results.length === 0) {
+            resultsContainer.innerHTML =
+                `<p class="search-no-results">No results found for "${query}"</p>`;
+            return;
+        }
+
+        resultsContainer.innerHTML = '<ul class="search-results-list">' + results.map((r) => {
+            const preview = r.summary || (r.content ? getPreview(r.content, r.matched) : '');
+            return `
+                <li class="search-result-item">
+                    <h3><a href="${r.permalink}">${renderText(r.title, r.matched)}</a></h3>
+                    <div class="search-preview">${renderText(preview, r.matched)}</div>
+                    <div class="search-meta">
+                        ${r.date ? `<span class="search-date">${r.date}</span>` : ''}
+                        ${r.tags ? `<span class="search-tags">${r.tags}</span>` : ''}
+                    </div>
+                </li>`;
+        }).join('') + '</ul>';
+
+        setTimeout(renderMath, 100);
+    }
+
+    let searchTimeout;
+    document.getElementById('search-input').addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(performSearch, 300);
+    });
+</script>
+
+<style>
+    #search-container {
+        margin: 20px 0;
+    }
+    
+    #search-input {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 16px;
+        border: 1px solid var(--border);
+        background: var(--theme);
+        color: var(--content);
+        border-radius: 8px;
+        transition: all 0.2s;
+    }
+    
+    #search-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.1);
+    }
+    
+    .search-results-list {
+        list-style: none;
+        padding: 0;
+        margin-top: 30px;
+    }
+    
+    .search-result-item {
+        margin: 20px 0;
+        padding: 20px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--theme);
+        transition: all 0.2s;
+    }
+    
+    .search-result-item:hover {
+        transform: translateX(5px);
+        border-color: var(--primary);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .search-result-item h3 {
+        margin: 0 0 10px 0;
+        font-size: 1.3em;
+    }
+    
+    .search-result-item h3 a {
+        color: var(--primary);
+        text-decoration: none;
+    }
+    
+    .search-result-item h3 a:hover {
+        text-decoration: underline;
+    }
+    
+    .search-preview {
+        color: var(--content);
+        font-size: 14px;
+        line-height: 1.6;
+        margin: 10px 0;
+        word-break: break-word;
+    }
+    
+    /* Math rendering in preview */
+    .search-preview mjx-container {
+        font-size: 0.9em;
+        display: inline;
+    }
+    
+    .search-preview .MathJax {
+        font-size: 0.9em;
+    }
+    
+    .search-meta {
+        margin-top: 12px;
+        font-size: 12px;
+        color: var(--secondary);
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    mark.search-highlight {
+        background: #ffeb3b;
+        color: #000;
+        padding: 2px 4px;
+        border-radius: 3px;
+        font-weight: 600;
+    }
+    
+    .search-no-results {
+        text-align: center;
+        color: var(--secondary);
+        padding: 40px;
+        font-size: 16px;
+    }
+    
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+        mark.search-highlight {
+            background: #ffd700;
+            color: #1a1a1a;
+        }
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .search-result-item {
+            padding: 15px;
+        }
+        
+        .search-meta {
+            font-size: 11px;
+            gap: 10px;
+        }
+    }
+</style>
+
+{{- end }}

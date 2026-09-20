@@ -1,0 +1,50 @@
+{{- /*
+  Textual promotion box.
+
+  Renders a light card with a bold headline, an optional subtitle, and one or
+  two dark pill buttons. All content is text/CSS, so it stays crisp, selectable,
+  translatable, and responsive (no image asset required).
+
+  Usage (all parameters optional; defaults produce the standard box):
+    {{< textual-promotion >}}
+
+    {{< textual-promotion
+         title="Build what's next|on the AI Native Cloud"
+         subtitle="Full-stack AI platform, powered by cutting-edge research."
+         buttonText="START BUILDING"
+         buttonLink="https://example.com/" >}}
+
+  Parameters
+    title          Headline. Use "|" to split into multiple lines.
+    subtitle       Smaller supporting line below the headline.
+    buttonText     Button label.
+    buttonLink     Button URL.
+    align          "left" (default) or "center".
+    rel            rel attribute for links (default "noopener").
+    target         Link target (default "_blank").
+*/ -}}
+
+{{- $title := .Get "title" | default "Build what's next|on the AI Native Cloud" -}}
+{{- $subtitle := .Get "subtitle" | default "Full-stack AI platform, powered by cutting-edge research." -}}
+{{- $buttonText := .Get "buttonText" | default "START BUILDING" -}}
+{{- $buttonLink := .Get "buttonLink" | default "https://www.resumetemplates.nl/" -}}
+{{- $align := .Get "align" | default "left" -}}
+{{- $rel := .Get "rel" | default "noopener" -}}
+{{- $target := .Get "target" | default "_blank" -}}
+
+<div class="textual-promotion textual-promotion--{{ $align }}">
+  <div class="textual-promotion-title">
+    {{- range $i, $line := split $title "|" -}}
+      {{- if $i }}<br>{{ end -}}
+      {{- $line -}}
+    {{- end -}}
+  </div>
+  {{- with $subtitle }}
+  <p class="textual-promotion-subtitle">{{ . }}</p>
+  {{- end }}
+  <div class="textual-promotion-actions">
+    {{- with $buttonText }}
+    <a class="textual-promotion-button" href="{{ $buttonLink }}" target="{{ $target }}" rel="{{ $rel }}">{{ . }}</a>
+    {{- end }}
+  </div>
+</div>

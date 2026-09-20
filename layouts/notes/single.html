@@ -1,0 +1,30 @@
+{{- define "main" }}
+{{- /* Per-note identity with site defaults: a note's front matter can
+       override either value; absent keys fall back to hugo.toml. */}}
+{{- $institute := .Params.notesInstitute | default site.Params.notesInstitute }}
+{{- $author := .Params.notesAuthor | default site.Params.notesAuthor }}
+<article class="note-card note-single">
+    <header class="note-head">
+        <span class="note-avatar" aria-hidden="true">D</span>
+        <span class="note-names">
+            <span class="note-author">{{ $institute }}</span>
+            <span class="note-handle">@{{ $author }}</span>
+        </span>
+        <span class="note-time">{{ .Date.Format "Jan 2, 2006 · 15:04" }}</span>
+    </header>
+    <h1 class="note-title">{{ .Title }}</h1>
+    <div class="note-body md-content">
+        {{ .Content }}
+    </div>
+    {{- with .Params.tags }}
+    <footer class="note-tags">
+        {{- range . }}<a class="note-tag" href="{{ printf "tags/%s/" (urlize .) | absLangURL }}">#{{ . }}</a>{{ end }}
+    </footer>
+    {{- end }}
+</article>
+{{- partial "note-nav-links.html" . }}
+{{- partial "related-random.html" . }}
+<nav class="pagination notes-pagination">
+    <a class="button" href="{{ (.Site.GetPage "/notes").RelPermalink }}">« Back to feed</a>
+</nav>
+{{- end }}

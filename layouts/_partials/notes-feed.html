@@ -1,0 +1,41 @@
+{{- /* Shared notes feed for the homepage and /notes/ (context: the notes
+       section page). Promotion notes (front matter `promotion = true`) are
+       excluded from the date flow and shown as the 3rd card on each page.
+
+       The promotion is picked pseudo-randomly: a per-build seed (build
+       timestamp) hashed with the page number gives an equal-probability
+       index into the promotions, reshuffled on every deploy/rebuild. With
+       two or more promotions, a pick equal to the previous page's is
+       re-drawn among the remaining ones, so the same promotion never
+       appears on consecutive pages. With exactly one promotion it shows
+       on every page; with none the feed keeps 6 regular cards per page. */ -}}
+{{- $realNotes := where .Pages "Content" "!=" "" }}
+{{- $promos := sort (where $realNotes ".Params.promotion" true) "Path" }}
+{{- $regular := where $realNotes ".Params.promotion" "!=" true }}
+{{- $n := len $promos }}
+{{- $paginator := .Paginate $regular (cond (gt $n 0) 5 6) }}
+{{- $promo := "" }}
+{{- if gt $n 0 }}
+{{-     $seed := now.Unix }}
+{{-     $page := $paginator.PageNumber }}
+{{/* Walk pages 1..N so each page sees the previous page's final pick;
+     a collision re-draws among the remaining promotions. */}}
+{{-     $final := -1 }}
+{{-     range $p := seq 1 $page }}
+{{-         $r := mod (int (printf "0x%s" (slicestr (hash.XxHash (printf "%d-%d" $seed $p)) 0 8))) $n }}
+{{-         if and (gt $n 1) (eq $r $final) }}
+{{-             $r = mod (add $r 1 (mod (int (printf "0x%s" (slicestr (hash.XxHash (printf "%d-%d-r" $seed $p)) 0 8))) (sub $n 1))) $n }}
+{{-         end }}
+{{-         $final = $r }}
+{{-     end }}
+{{-     $promo = index $promos $final }}
+{{- end }}
+<div class="notes-feed">
+    {{- range $i, $note := $paginator.Pages }}
+    {{- partial "note-card.html" $note }}
+    {{- if and (ne $promo "") (eq $i 1) }}
+    {{- partial "note-card.html" $promo }}
+    {{- end }}
+    {{- end }}
+    {{- partial "pagination.html" $paginator }}
+</div>
