@@ -1,3 +1,7 @@
+{{- /* Advertisement / sponsored card. Parameters: link, image, alt,
+       text (or inner content), target (default _blank), rel (default
+       "nofollow sponsored"), class, width/height, w/h (responsive
+       max-width/height). */ -}}
 {{- $link := .Get "link" | default "" }}
 {{- $image := .Get "image" | default "" }}
 {{- $alt := .Get "alt" | default "Advertisement" }}

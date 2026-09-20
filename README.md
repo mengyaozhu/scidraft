@@ -163,10 +163,10 @@ should render.
 | `{{</* preview */>}}…{{</* /preview */>}}` | Mark the feed-card region of a long note |
 | `{{</* references */>}}` | Render the BibTeX bibliography (see Citations) |
 | `{{</* gallery */>}}` + `{{</* gallery-item image=… caption=… link=… */>}}` | Image gallery |
-| `{{</* glossary */>}}` + `{{</* term id=… def=… */>}}text{{</* /term */>}}` | Inline glossary terms with a side panel |
+| `{{</* glossary */>}}` + `{{</* glossary-term id=… def=… */>}}text{{</* /glossary-term */>}}` | Inline glossary terms with a side panel |
 | `{{</* occupation-map */>}}` | Alphabetical occupation index over notes with `occupationTitle` |
 | `{{</* occupation-categories */>}}` | Occupation index grouped by `occupationCategory` |
-| `{{</* related */>}}` / `{{</* related-default-settings */>}}` | Tag-based related lists (full / compact) |
+| `{{</* related */>}}` / `{{</* related-compact */>}}` | Tag-based related lists (full / compact) |
 | `{{</* template-row */>}}` | Random promotional row from `data/template-rows.*` |
 | `{{</* textual-promotion */>}}` | Self-contained promotional card |
 | ```` ```pseudo-algorithm ```` (fence) | LaTeX `algorithmic` block, rendered by pseudocode.js + KaTeX |

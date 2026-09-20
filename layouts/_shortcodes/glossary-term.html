@@ -2,7 +2,7 @@
        Parameters:
          id  = term identifier used to match the glossary entry
          def = definition text shown in the glossary panel
-       Usage: {{< term id="dms" def="Document Management System" >}}DMS{{< /term >}}
+       Usage: {{< glossary-term id="dms" def="Document Management System" >}}DMS{{< /glossary-term >}}
        Requires {{< glossary >}} to be present once on the page. */ -}}
 {{- $def := .Get "def" | default "" | plainify }}
 {{- $tag := .Get "id" | default "" }}
