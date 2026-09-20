@@ -7,8 +7,7 @@ math rendering, mermaid diagrams, galleries, glossaries, and a notes feed.
 
 [![Minimum Hugo Version](https://img.shields.io/static/v1?label=Hugo&message=v0.146.0%2B&color=blue&logo=hugo)](https://github.com/gohugoio/hugo/releases/tag/v0.146.0)
 
-> Based on [hugo-PaperMod](https://github.com/adityatelange/hugo-PaperMod) by Aditya Telange (MIT),
-> which is itself based on [hugo-paper](https://github.com/nanxiaobei/hugo-paper) by nanxiaobei.
+> Based on [hugo-PaperMod](https://github.com/adityatelange/hugo-PaperMod) by Aditya Telange (MIT).
 > PaperMod's documentation below is retained for reference during the transition and will be
 > replaced by SciDraft's own documentation.
 
