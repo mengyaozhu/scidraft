@@ -24,6 +24,9 @@
         </a>
         {{- end }}
     </header>
+    {{- /* Title on the card only for marked (long-form) notes that
+           explicitly set one in front matter. */ -}}
+    {{- if and $preview .Params.title }}<h2 class="note-title">{{ .Params.title }}</h2>{{- end }}
     <div class="note-body md-content">
         {{- if $preview }}
         {{- $preview | markdownify }}
