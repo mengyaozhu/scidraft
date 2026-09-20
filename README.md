@@ -167,8 +167,8 @@ should render.
 | `{{</* occupation-map */>}}` | Alphabetical occupation index over notes with `occupationTitle` |
 | `{{</* occupation-categories */>}}` | Occupation index grouped by `occupationCategory` |
 | `{{</* related */>}}` / `{{</* related-compact */>}}` | Tag-based related lists (full / compact) |
-| `{{</* template-row */>}}` | Random promotional row from `data/template-rows.*` |
-| `{{</* textual-promotion */>}}` | Self-contained promotional card |
+| `{{</* promotion-visual */>}}` | Rotating image promotion from a site data file (any item set; the shipped data is a resume-template example) |
+| `{{</* promotion-textual */>}}` | Text-based promotional card |
 | ```` ```pseudo-algorithm ```` (fence) | LaTeX `algorithmic` block, rendered by pseudocode.js + KaTeX |
 | ```` ```mermaid ```` (fence) | Mermaid diagram |
 

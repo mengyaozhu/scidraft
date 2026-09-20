@@ -23,6 +23,9 @@
   institute = "DyCoAI.com"
   author = "mengyaozhu"
 
+  # Fallback link for {{< promotion-visual >}} images (empty by default)
+  # promotionLink = ""
+
 # NOTE: [outputs] home = ["HTML", "RSS", "JSON"] cannot be inherited from
 # theme config (Hugo root key) — a site must set it itself for search to
 # work. Documented in README.

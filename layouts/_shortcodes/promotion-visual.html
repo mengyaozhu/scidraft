@@ -1,11 +1,18 @@
-{{- /* Random promotional row (resume-template showcase). Picks one row
-       at random on each build from the site's data file
-       (data/template-rows.*) and renders it as an image gallery linking
-       to link= (default: resumetemplates.nl). The randomness is
-       intentional per-build; see also related-random.html. */ -}}
-{{- $rows := (index site.Data "template-rows").rows -}}
+{{- /* Visual promotion: a row of items shown as an image gallery, with one
+       row picked at random on each build (deliberate per-build rotation; see
+       also related-random.html). The featured item set is yours — the example
+       data ships as data/template-rows (resume templates), but any data file
+       or content bundle works.
+
+       Parameters:
+         data  = name of the site data file to read (default "template-rows")
+         link  = fallback link for images (default: site param promotionLink)
+
+       Paired with promotion-textual.html (text version of the same idea). */ -}}
+{{- $data := .Get "data" | default "template-rows" -}}
+{{- $rows := (index site.Data $data).rows -}}
 {{- $bundle := site.GetPage "/resume-templates/modern-professional-resume" -}}
-{{- $link := .Get "link" | default "https://www.resumetemplates.nl/" -}}
+{{- $link := .Get "link" | default site.Params.promotionLink -}}
 <div data-template-row-random>
   {{- range $row := $rows -}}
   <div class="template-row" data-template-row-random-item>
