@@ -1,4 +1,10 @@
-# Entry indexes (entry-map / entry-categories)
+# The entry map (entry-a-to-z / entry-categories)
+
+**Entry map** is the umbrella concept: an index built from a series of notes
+that carry structured front-matter fields. It has two views — the
+**A–Z view** (`entry-a-to-z`) and the **categories view** (`entry-categories`).
+One mechanism, many series: each series of notes gets its own pair of pages,
+using its own field names.
 
 Two auto-generated index pages over notes that carry structured front-matter
 fields. One mechanism, many **series**: each series of notes gets its own map
@@ -9,7 +15,7 @@ page and categories page, using its own field names.
 Any page whose body calls the shortcodes — typically two pages per series:
 
 ```markdown
-{{</* entry-map set="occupations" */>}}          <!-- alphabetical -->
+{{</* entry-a-to-z set="occupations" */>}}       <!-- A–Z view -->
 {{</* entry-categories set="occupations" */>}}   <!-- grouped by category -->
 ```
 
@@ -17,7 +23,7 @@ Any page whose body calls the shortcodes — typically two pages per series:
 
 | File | Role | Look for |
 |---|---|---|
-| `layouts/_shortcodes/entry-map.html` | Alphabetical index | `$titleField`, `$pool`, `$sorted` |
+| `layouts/_shortcodes/entry-a-to-z.html` | A–Z view | `$titleField`, `$pool`, `$sorted` |
 | `layouts/_shortcodes/entry-categories.html` | Grouped index | `$categoryField`, `$categories`, `Uncategorised` |
 | `assets/css/extended/entry-index.css` | Styling for both | `.entry-*` classes |
 | site `hugo.toml` → `[params.entrySets.*]` | One block per series | field names + membership + label |
@@ -54,7 +60,7 @@ Resolution: per-call parameter → the set's block → theme defaults
 1. Pool = pages in `mainSections`; if the set has a `tag`, only notes carrying
    it; then only those **with a `titleField` value** — that field's presence is
    what makes a note an entry.
-2. `entry-map` sorts by the title field and prints a letter jump bar plus one
+2. `entry-a-to-z` sorts by the title field and prints a letter jump bar plus one
    block per entry (name, aliases, description, link).
 3. `entry-categories` groups by the category field, alphabetically, with an
    "Uncategorised" section for entries with a blank category.
@@ -65,7 +71,7 @@ Resolution: per-call parameter → the set's block → theme defaults
 1. Add a `[params.entrySets.<name>]` block naming that series' fields.
 2. Give the series' notes a value for the `titleField` (and category/aliases/
    summary as wanted).
-3. Create two pages calling `{{< entry-map set="<name>" >}}` and
+3. Create two pages calling `{{< entry-a-to-z set="<name>" >}}` and
    `{{< entry-categories set="<name>" >}}`.
 4. Add menu entries if desired.
 

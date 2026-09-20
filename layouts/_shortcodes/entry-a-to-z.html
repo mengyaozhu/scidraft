@@ -1,10 +1,12 @@
-{{- /* Entry Map: an alphabetical index of every note that carries an "entry
-       title" field. Each entry shows the name, optional aliases, an optional
+{{- /* Entry Map — A–Z view: an alphabetical index of every note that carries
+       an "entry" title field. ("Entry map" is the umbrella concept; this
+       shortcode is its alphabetical view, entry-categories is its grouped
+       view.) Each entry shows the name, optional aliases, an optional
        description, and a link to the note. One shortcode, many series: the
        field names and the membership rule come from a named set in the site
        config, selected per page.
 
-       Usage:      {{< entry-map set="occupations" >}}
+       Usage:      {{< entry-a-to-z set="occupations" >}}
        Per-call overrides (optional): titleField=, aliasesField=, summaryField=,
        tag=, countLabel=
 

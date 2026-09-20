@@ -174,16 +174,16 @@ should render.
 | `{{</* preview */>}}…{{</* /preview */>}}` | Mark the feed-card region of a long note |
 | `{{</* references */>}}` | Render the BibTeX bibliography (see Citations) |
 | `{{</* gallery */>}}` + `{{</* gallery-item image=… caption=… link=… */>}}` | Image gallery |
-| `{{</* entry-map set="…" */>}}` | Alphabetical index over notes with a configured title field |
+| `{{</* entry-a-to-z set="…" */>}}` | A–Z index over notes with a configured title field |
 | `{{</* entry-categories set="…" */>}}` | The same entries grouped by a configured category field |
 | `{{</* promotion-visual */>}}` | Rotating image promotion from a site data file (any item set; the shipped data is a resume-template example) |
 | `{{</* promotion-textual */>}}` | Text-based promotional card |
 | ```` ```pseudo-algorithm ```` (fence) | LaTeX `algorithmic` block, rendered by pseudocode.js + KaTeX |
 | ```` ```mermaid ```` (fence) | Mermaid diagram |
 
-### Entry indexes (one mechanism, many series)
+### The entry map (one mechanism, many series)
 
-`entry-map` and `entry-categories` build index pages over notes that carry
+`entry-a-to-z` and `entry-categories` build index pages over notes that carry
 structured fields. Each **series** of notes gets its own map page, categories
 page, and field names — defined once in the site config:
 
@@ -206,7 +206,7 @@ page, and field names — defined once in the site config:
 ```
 
 A note becomes an entry by carrying the series' `titleField` value. Pages then
-select a series: `{{</* entry-map set="skills" */>}}`. Without any config, the
+select a series: `{{</* entry-a-to-z set="skills" */>}}`. Without any config, the
 theme falls back to generic field names (`entryTitle`, `entryCategory`,
 `entryAliases`, `entrySummary`).
 
