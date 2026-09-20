@@ -60,4 +60,4 @@ configures nothing gets 3.
 3. Rebuild and reload: the selection should change between builds (randomness
    working).
 4. Grep check that the file paths named above still exist (renames happen —
-   see `docs/FUNCTIONS.md`).
+   see `docs/README.md`).

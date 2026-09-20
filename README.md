@@ -212,6 +212,11 @@ theme falls back to generic field names (`entryTitle`, `entryCategory`,
 
 ---
 
+## Maintainer documentation
+
+A code-level map of every function — what it does and which files control it —
+is in [`docs/README.md`](docs/README.md), with one detail page per function.
+
 ## Layouts and styling
 
 - `layouts/` — templates (`_partials/`, `_shortcodes/`, `_markup/` render hooks,

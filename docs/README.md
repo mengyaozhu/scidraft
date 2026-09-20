@@ -1,7 +1,12 @@
 # SciDraft — function → files map
 
-Maintainer documentation: what each feature does, and which files control it.
-Ships with the theme; ignored by the Hugo build (never appears on a site).
+**Maintainer documentation.** This is the code-level map of the theme's
+functions: what each one does and which files control it. For the
+user-facing documentation — install, configuration, usage — see the
+[theme's README](../README.md) in the theme root.
+
+Ships with the theme but is ignored by the Hugo build (never appears on a
+site). Each function's own doc lives in this folder next to this index.
 
 How to read an entry: find the **symbol** (survives edits), treat line numbers
 as hints, and use the **Verify** section of each doc after changes.
