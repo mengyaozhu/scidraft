@@ -126,3 +126,16 @@
 [data-theme="dark"] .note-title {
     color: var(--primary);
 }
+
+/* Long-note summary card (content beyond noteSummaryWords) */
+.note-summary {
+    margin: 0 0 0.5rem;
+}
+.note-readmore {
+    display: inline-block;
+    font-weight: 600;
+    text-decoration: none;
+}
+.note-readmore:hover {
+    text-decoration: underline;
+}

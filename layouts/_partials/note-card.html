@@ -1,5 +1,13 @@
 {{- /* One note card (context: the note page). Shared by the notes feed,
-       the /notes/ list, and the promotion slot in both. */ -}}
+       the /notes/ list, and the promotion slot in both.
+
+       Long notes (word count above noteSummaryWords, default 150 —
+       overridable site-wide or per note via front matter `summaryWords`)
+       are truncated to the summary with a "Read more" link to the full
+       page. The summary honors a <!--more--> divider when the writer
+       sets one. Short notes render full content, unchanged. */ -}}
+{{- $threshold := .Params.summaryWords | default site.Params.noteSummaryWords | default 150 }}
+{{- $isLong := gt (countwords .RawContent) $threshold }}
 {{- $institute := .Params.notesInstitute | default site.Params.notesInstitute }}
 {{- $author := .Params.notesAuthor | default site.Params.notesAuthor }}
 <article class="note-card">
@@ -16,7 +24,12 @@
         {{- end }}
     </header>
     <div class="note-body md-content">
+        {{- if $isLong }}
+        <p class="note-summary">{{ .Summary | plainify }}</p>
+        <a class="note-readmore" href="{{ .RelPermalink }}">Read more »</a>
+        {{- else }}
         {{ .Content }}
+        {{- end }}
     </div>
     {{- with .Params.tags }}
     <footer class="note-tags">
