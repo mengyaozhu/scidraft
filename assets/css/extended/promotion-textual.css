@@ -93,3 +93,9 @@
     margin-bottom: 0.5rem;
     vertical-align: middle;
 }
+
+/* Inside a flex row header the badge sits on the baseline, no extra gap. */
+.template-row-label .promotion-sponsored-label {
+    margin-bottom: 0;
+    flex: 0 0 auto;
+}

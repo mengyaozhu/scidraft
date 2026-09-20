@@ -35,3 +35,12 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Visual-promotion row header: title on the left, "Sponsored" badge (when
+   the sponsored=true flag is set) pushed to the right of the same line. */
+.template-row-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
