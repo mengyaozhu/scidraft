@@ -1,4 +1,4 @@
-/* Textual promotion box: tinted card with bold headline, subtitle, dark pill button */
+/* Promotion (textual) box — styles the {{< promotion-textual >}} shortcode: tinted card with bold headline, subtitle, dark pill button */
 
 .textual-promotion {
     background: var(--code-bg);

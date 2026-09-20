@@ -70,7 +70,7 @@
 
 {{- if gt $paginator.TotalPages 1 }}
 <footer class="page-footer">
-    {{- partial "pagination.html" $paginator }}
+    {{- partial "numbered-pagination.html" $paginator }}
 </footer>
 {{- end }}
 

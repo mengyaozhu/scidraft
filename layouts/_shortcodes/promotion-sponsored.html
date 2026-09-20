@@ -45,13 +45,13 @@
 {{- if $h }}{{ $css = printf "%s max-height:%s;" $css $h }}{{ end }}
 {{- if $scalePercent }}{{ $css = printf "%s max-width:%s; height:auto;" $css $scalePercent }}{{ end }}
 
-<div class="ad-banner {{ $class }}">
+<div class="promotion-sponsored {{ $class }}">
   {{- if $image }}
     <a href="{{ $link }}" target="{{ $target }}" rel="{{ $rel }}">
       <img src="{{ $image }}" alt="{{ $alt }}" loading="lazy"{{ $attr | safeHTMLAttr }}{{ if $css }} style="{{ ($css | safeCSS) }}"{{ end }}>
     </a>
   {{- else if $text }}
-    <a href="{{ $link }}" target="{{ $target }}" rel="{{ $rel }}" class="ad-banner-text">
+    <a href="{{ $link }}" target="{{ $target }}" rel="{{ $rel }}" class="promotion-sponsored-text">
       {{ $text | safeHTML }}
     </a>
   {{- else if $link }}
