@@ -1,13 +1,15 @@
-{{- /* A stack of random recommendations under the prev/next navigation.
+{{- /* Note recommendations: a short stack of random notes under the
+       prev/next navigation (selection is random by build-seeded hash, not
+       tag similarity — see docs/note-recommendations.md).
        One pool: all non-promotion notes from the main sections, excluding
        the current page. Picks are ranked by a build-seeded hash mixed with
        the current page, so they differ per note and reshuffle on every
-       deploy/rebuild. Count comes from site.Params.relatedCount
+       deploy/rebuild. Count comes from site.Params.recommendationCount
        (set in the site's hugo.toml); anything missing or below 1
        falls back to 3. */ -}}
 {{- $seed := now.Unix }}
 {{- $count := 3 }}
-{{- with site.Params.relatedCount }}
+{{- with site.Params.recommendationCount }}
 {{-     if gt (int .) 0 }}{{ $count = int . }}{{ end }}
 {{- end }}
 {{- $pool := where (where site.RegularPages "Section" "in" site.Params.mainSections) "Content" "!=" "" }}
@@ -18,7 +20,7 @@
 {{-     $ranked = $ranked | append (dict "k" (hash.XxHash (printf "%d-%s-%s" $seed $.Path .Path)) "p" .) }}
 {{- end }}
 {{- $pick := first $count (sort $ranked "k") }}
-<nav class="related-random">
+<nav class="note-recommendations">
     <ul>
         {{- range $pick }}
         <li><a href="{{ .p.RelPermalink }}">{{ .p.Title }}</a></li>

@@ -18,4 +18,4 @@ How to read an entry:
 
 | Function | Where it appears | Controlling files | Doc |
 |---|---|---|---|
-| Random recommendations | Box under every note, below prev/next navigation | `layouts/notes/single.html` (the `partial "related-random.html"` call) · `layouts/_partials/related-random.html` (selection logic) · `assets/css/extended/related-random.css` (appearance) · `hugo.toml` → `relatedCount` (how many) | [random-recommendations.md](random-recommendations.md) |
+| Random recommendations | Box under every note, below prev/next navigation | `layouts/notes/single.html` (the `partial "note-recommendations.html"` call) · `layouts/_partials/note-recommendations.html` (selection logic) · `assets/css/extended/note-recommendations.css` (appearance) · `hugo.toml` → `recommendationCount` (how many) | [note-recommendations.md](note-recommendations.md) |

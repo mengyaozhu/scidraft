@@ -128,7 +128,7 @@ the first, the byline joins them.
   author = "mengyaozhu"
 
   # Recommendations under each note
-  relatedCount = 3             # any number; invalid values fall back to 3
+  recommendationCount = 3      # any number; invalid values fall back to 3
 
   # PaperMod-compatible toggles
   ShowShareButtons = true
