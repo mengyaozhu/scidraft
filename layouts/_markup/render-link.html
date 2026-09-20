@@ -1,3 +1,6 @@
+{{- /* Link render hook: external links (http/https) open in a new tab
+       with rel="noopener noreferrer" (security: the opened page cannot
+       access this window); internal links render as normal links. */ -}}
 {{- $url := .Destination -}}
 {{- $isExternal := hasPrefix $url "http" -}}
 {{- if $isExternal -}}

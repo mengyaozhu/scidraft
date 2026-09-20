@@ -1,3 +1,7 @@
+{{- /* One gallery image (used inside {{< gallery >}}). Parameters:
+       image   = image URL/path (required)
+       caption = caption text, also used as alt text
+       link    = URL opened in a new tab when the image is clicked */ -}}
 {{- $image := .Get "image" -}}
 {{- $caption := .Get "caption" -}}
 {{- $link := .Get "link" -}}

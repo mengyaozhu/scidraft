@@ -1,3 +1,8 @@
+{{- /* Occupation Map: alphabetical index of every note carrying an
+       occupationTitle in its front matter. Each entry shows the title,
+       alternative job-market titles, a short description, and a link.
+       Notes are collected from site.Params.mainSections, so the section
+       rename needs no change here. Styling: occupation-map.css. */ -}}
 {{- $occ := where (where site.RegularPages "Section" "in" site.Params.mainSections) ".Params.occupationTitle" "!=" nil -}}
 {{- $sorted := sort $occ ".Params.occupationTitle" "asc" -}}
 {{- $letter := "" -}}

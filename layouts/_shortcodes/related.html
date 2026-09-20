@@ -1,3 +1,7 @@
+{{- /* "More Relevant Definitions" list: up to 5 pages Hugo considers
+       related to the current page (tag/content based), shown with date
+       and tags. Use it where the tag-based related list fits better than
+       the random recommendations. */ -}}
 {{ $page := .Page }}
 {{ $related := $page.Site.RegularPages.Related $page }}
 {{ if $related }}

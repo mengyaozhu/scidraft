@@ -1,3 +1,8 @@
+{{- /* Random promotional row (resume-template showcase). Picks one row
+       at random on each build from the site's data file
+       (data/template-rows.*) and renders it as an image gallery linking
+       to link= (default: resumetemplates.nl). The randomness is
+       intentional per-build; see also related-random.html. */ -}}
 {{- $rows := (index site.Data "template-rows").rows -}}
 {{- $bundle := site.GetPage "/resume-templates/modern-professional-resume" -}}
 {{- $link := .Get "link" | default "https://www.resumetemplates.nl/" -}}
