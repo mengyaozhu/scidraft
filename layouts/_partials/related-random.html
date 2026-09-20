@@ -1,20 +1,23 @@
-{{- /* Three random notes plus three random posts as one stacked bullet list
-       in a paginav-style box under the prev/next navigation. Each pool is
-       ranked by a build-seeded hash mixed with the current page, so picks
-       differ per note and reshuffle on every deploy/rebuild. */ -}}
+{{- /* A stack of random recommendations under the prev/next navigation.
+       One pool: all non-promotion notes from the main sections, excluding
+       the current page. Picks are ranked by a build-seeded hash mixed with
+       the current page, so they differ per note and reshuffle on every
+       deploy/rebuild. Count comes from site.Params.relatedCount
+       (set in the site's hugo.toml); anything missing or below 1
+       falls back to 3. */ -}}
 {{- $seed := now.Unix }}
-{{- $notes := where (where site.RegularPages "Section" "notes") "Content" "!=" "" }}
-{{- $notes = where $notes ".Params.promotion" "!=" true }}
-{{- $notes = $notes | complement (slice $) }}
-{{- $posts := where (where site.RegularPages "Section" "in" site.Params.mainSections) "Content" "!=" "" }}
-{{- $pick := slice }}
-{{- range $pool := slice $notes $posts }}
-{{-     $ranked := slice }}
-{{-     range $pool }}
-{{-         $ranked = $ranked | append (dict "k" (hash.XxHash (printf "%d-%s-%s" $seed $.Path .Path)) "p" .) }}
-{{-     end }}
-{{-     $pick = $pick | append (first 3 (sort $ranked "k")) }}
+{{- $count := 3 }}
+{{- with site.Params.relatedCount }}
+{{-     if gt (int .) 0 }}{{ $count = int . }}{{ end }}
 {{- end }}
+{{- $pool := where (where site.RegularPages "Section" "in" site.Params.mainSections) "Content" "!=" "" }}
+{{- $pool = where $pool ".Params.promotion" "!=" true }}
+{{- $pool = $pool | complement (slice $) }}
+{{- $ranked := slice }}
+{{- range $pool }}
+{{-     $ranked = $ranked | append (dict "k" (hash.XxHash (printf "%d-%s-%s" $seed $.Path .Path)) "p" .) }}
+{{- end }}
+{{- $pick := first $count (sort $ranked "k") }}
 <nav class="related-random">
     <ul>
         {{- range $pick }}
