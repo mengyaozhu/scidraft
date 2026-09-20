@@ -18,10 +18,10 @@
   ShowPostNavLinks = true
   ShowCodeCopyButtons = true
   ShowRelatedPosts = true
-  # Per-note identity defaults; each note's front matter can override
-  # with its own notesInstitute / notesAuthor
-  # notesInstitute = ""
-  # notesAuthor = ""
+  # Identity defaults; each note's front matter can override with its
+  # own institute / author
+  institute = "DyCoAI.com"
+  author = "mengyaozhu"
 
 # NOTE: [outputs] home = ["HTML", "RSS", "JSON"] cannot be inherited from
 # theme config (Hugo root key) — a site must set it itself for search to

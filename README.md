@@ -98,8 +98,8 @@ Optional personalization:
 
 ```toml
 [params]
-  notesInstitute = "Your Lab"   # default affiliation shown on note cards
-  notesAuthor = "Your Name"     # default author shown on note cards
+  institute = "Your Lab"       # default affiliation shown on note cards
+  author = "Your Name"        # default author shown on note cards and bylines
   homeNotesFeed = true          # true = notes feed homepage, false = classic post list
 ```
 

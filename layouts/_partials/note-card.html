@@ -6,12 +6,12 @@
          the card shows that region plus a "Read more" link to the page.
        - Without the markers, the full content is displayed and no
          read-more link appears. */ -}}
-{{- $institute := .Params.notesInstitute | default site.Params.notesInstitute }}
-{{- $author := .Params.notesAuthor | default site.Params.notesAuthor }}
+{{- $institute := .Params.institute | default site.Params.institute }}
+{{- $author := .Params.author | default site.Params.author }}
+{{- if reflect.IsSlice $author }}{{ $author = index $author 0 }}{{ end }}
 {{- $preview := "" }}
 {{- $m := findRESubmatch `(?s)\{\{< preview >}\}(.*)\{\{< /preview >}\}` .RawContent 1 }}
 {{- with $m }}{{ $preview = index (index . 0) 1 }}{{ end }}
-<span data-flag="isset={{ isset .Params "showtitle" }} val={{ .Params.showTitle }}"></span>
 <article class="note-card">
     <header class="note-head">
         <span class="note-avatar" aria-hidden="true">D</span>

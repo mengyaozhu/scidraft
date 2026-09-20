@@ -1,8 +1,9 @@
 {{- define "main" }}
 {{- /* Per-note identity with site defaults: a note's front matter can
        override either value; absent keys fall back to hugo.toml. */}}
-{{- $institute := .Params.notesInstitute | default site.Params.notesInstitute }}
-{{- $author := .Params.notesAuthor | default site.Params.notesAuthor }}
+{{- $institute := .Params.institute | default site.Params.institute }}
+{{- $author := .Params.author | default site.Params.author }}
+{{- if reflect.IsSlice $author }}{{ $author = index $author 0 }}{{ end }}
 <article class="note-card note-single">
     <header class="note-head">
         <span class="note-avatar" aria-hidden="true">D</span>
