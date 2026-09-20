@@ -94,8 +94,18 @@
     vertical-align: middle;
 }
 
-/* Inside a flex row header the badge sits on the baseline, no extra gap. */
-.template-row-label .promotion-sponsored-label {
+/* Text promo header: title left, badge right, badge aligned with the first
+   title line (align-items: flex-start). */
+.textual-promotion-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+/* Inside a flex header the badge needs no extra gap and must not shrink. */
+.template-row-label .promotion-sponsored-label,
+.textual-promotion-head .promotion-sponsored-label {
     margin-bottom: 0;
     flex: 0 0 auto;
 }
