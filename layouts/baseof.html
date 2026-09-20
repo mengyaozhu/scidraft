@@ -10,10 +10,9 @@
 
 <head>
     {{- partial "head.html" . }}
-    {{- /* MathJax trial-disabled: math renders via the KaTeX render hook;
-           pseudocode.js also typesets via KaTeX. The search page keeps its
-           own MathJax for math in search previews. Backup:
-           /tmp/baseof.html.bak-mathjax */ -}}
+    {{- /* Math renders via the KaTeX render hook; pseudocode.js also typesets
+           via KaTeX. The search page loads its own MathJax (in search.html)
+           for math inside dynamically generated search previews. */ -}}
 </head>
 
 {{- if (or (ne .Kind `page` ) (eq .Layout `archives`) (eq .Layout `search`)) }}
