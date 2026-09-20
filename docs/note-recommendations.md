@@ -49,7 +49,7 @@ configures nothing gets 3.
 | Different number | Set `recommendationCount` in the site's `hugo.toml` |
 | Remove the box entirely | Delete the `partial "note-recommendations.html"` line in `notes/single.html` |
 | Move it above the prev/next navigation | Swap the two `partial` lines in `notes/single.html` |
-| Only recommend notes sharing tags (smart, not random) | Replace the ranking block in `note-recommendations.html` with Hugo's `.Related` method — a starting implementation is parked at `reference/theme-candidates/shortcodes/` (site-level, not shipped) |
+| Only recommend notes sharing tags (smart, not random) | Replace the ranking block in `note-recommendations.html` with Hugo's `.Related` method — a starting implementation is parked at `reference/function-archive/related-notes/` (site-level, not shipped; see its RESTORE.md) |
 | Different look | Edit `.note-recommendations` rules in `note-recommendations.css` |
 
 ## Verify after a change
