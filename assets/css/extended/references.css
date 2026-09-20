@@ -1,5 +1,6 @@
-/* Inline citations and bibliography (references shortcode + the citation
-   loader in extend_head.html). */
+/* References block (the {{< references >}} shortcode, filled by the citation
+   loader in extend_head.html) plus the one rule for inline citation markers
+   (sup.citation) — the \cite links that point into this list. */
 sup.citation a {
     text-decoration: none;
     padding-inline: 1px;
