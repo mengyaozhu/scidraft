@@ -36,11 +36,23 @@ data file, rendered as an image gallery; each image links out.
   promotionLink = "https://example.com/"
 ```
 
-## 4. Sponsored card
+## 4. Sponsored disclosure (not a separate style)
 
-`{{< promotion-sponsored >}}` — a banner-style unit with sponsored defaults
-(`rel="nofollow sponsored"`, alt "Advertisement"). **Currently unstyled** —
-no stylesheet targets its markup; add rules if used.
+Both inline styles accept `sponsored=true`:
+
+```markdown
+{{</* promotion-textual sponsored=true title="…" … */>}}
+{{</* promotion-visual sponsored=true */>}}
+```
+
+The flag switches every link in the block to `rel="sponsored noopener"` and
+renders a small "Sponsored" label (`.promotion-sponsored-label`). Use it for
+any paid or affiliate placement — unmarked commercial links risk
+search-engine penalties.
+
+The standalone `promotion-sponsored` shortcode was retired once this flag
+existed; its archive lives at
+`reference/function-archive/promotion-sponsored/` (see its RESTORE.md).
 
 ## Verify after a change
 

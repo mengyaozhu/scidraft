@@ -176,8 +176,8 @@ should render.
 | `{{</* gallery */>}}` + `{{</* gallery-item image=… caption=… link=… */>}}` | Image gallery |
 | `{{</* entry-a-to-z set="…" */>}}` | A–Z index over notes with a configured title field |
 | `{{</* entry-categories set="…" */>}}` | The same entries grouped by a configured category field |
-| `{{</* promotion-visual */>}}` | Rotating image promotion from a site data file (any item set; the shipped data is a resume-template example) |
-| `{{</* promotion-textual */>}}` | Text-based promotional card |
+| `{{</* promotion-visual */>}}` | Rotating image promotion from a site data file; `sponsored=true` adds paid-placement disclosure |
+| `{{</* promotion-textual */>}}` | Text-based promotional card (add `sponsored=true` for paid-placement disclosure) |
 | ```` ```pseudo-algorithm ```` (fence) | LaTeX `algorithmic` block, rendered by pseudocode.js + KaTeX |
 | ```` ```mermaid ```` (fence) | Mermaid diagram |
 

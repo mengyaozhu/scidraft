@@ -31,9 +31,12 @@
 {{- $buttonLink := .Get "buttonLink" | default "https://www.resumetemplates.nl/" -}}
 {{- $align := .Get "align" | default "left" -}}
 {{- $rel := .Get "rel" | default "noopener" -}}
+{{- $sponsored := .Get "sponsored" | default false -}}
+{{- if $sponsored }}{{ $rel = "sponsored noopener" }}{{ end -}}
 {{- $target := .Get "target" | default "_blank" -}}
 
 <div class="textual-promotion textual-promotion--{{ $align }}">
+  {{- if $sponsored }}<span class="promotion-sponsored-label">Sponsored</span>{{ end }}
   <div class="textual-promotion-title">
     {{- range $i, $line := split $title "|" -}}
       {{- if $i }}<br>{{ end -}}

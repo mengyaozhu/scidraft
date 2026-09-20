@@ -77,3 +77,19 @@
         text-align: center;
     }
 }
+
+/* "Sponsored" label — shared by promotion-textual and promotion-visual when
+   the sponsored=true flag is set (disclosure for paid/affiliate links). */
+.promotion-sponsored-label {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.05rem 0.35rem;
+    margin-bottom: 0.5rem;
+    vertical-align: middle;
+}
