@@ -2,84 +2,17 @@
 
 **A modern Hugo theme for scientific writing and research.**
 
-Built for quick research notes and comprehensive scientific articles — with BibTeX citations,
-math rendering, mermaid diagrams, galleries, glossaries, and a notes feed.
+Built for quick research notes and comprehensive scientific articles — one content
+type, with BibTeX citations, KaTeX math, mermaid diagrams, pseudo-algorithm
+blocks, galleries, glossaries, and occupation reference indexes.
 
 [![Minimum Hugo Version](https://img.shields.io/static/v1?label=Hugo&message=v0.146.0%2B&color=blue&logo=hugo)](https://github.com/gohugoio/hugo/releases/tag/v0.146.0)
 
 > Based on [hugo-PaperMod](https://github.com/adityatelange/hugo-PaperMod) by Aditya Telange (MIT).
-> PaperMod's documentation below is retained for reference during the transition and will be
-> replaced by SciDraft's own documentation.
 
 Demo: [dycoai.com](https://dycoai.com/)
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/21258296/114303440-bfc0ae80-9aeb-11eb-8cfa-48a4bb385a6d.png" alt="Mockup image" title="Mockup"/>
-</p>
-
 ---
-
-## Features 💥
-
-`☄️ Fast | ☁️ Fluent | 🌙 Smooth | 📱 Responsive`
-
-- **Asset pipeline** -- Hugo's built-in asset generator with fingerprinting, bundling, and minification.
-- **Three layout modes** -- [Regular](https://github.com/adityatelange/hugo-PaperMod/wiki/Features#regular-mode-default-mode), [Home-Info](https://github.com/adityatelange/hugo-PaperMod/wiki/Features#home-info-mode), and [Profile](https://github.com/adityatelange/hugo-PaperMod/wiki/Features#profile-mode).
-- **Light and dark themes** -- Automatic switching based on browser preference, plus a manual toggle.
-- **Multilingual support** -- Includes a built-in language selector.
-- **Search** -- Client-side search powered by Fuse.js.
-- **SEO optimized** -- Open Graph, Twitter Cards, and Schema.org structured data out of the box.
-- **Cover images** -- Per-post cover images with responsive image support.
-- **Table of contents** -- Auto-generated from heading structure.
-- **Multiple authors** -- Native support for multi-author sites.
-- **Social icons and share buttons** -- Configurable social links and per-post sharing.
-- **Breadcrumb navigation**
-- **Post archives and taxonomies**
-- **Code block copy buttons** -- One-click copying with Chroma syntax highlighting.
-- **Related post suggestions**
-- **Zero JS build dependencies** -- No webpack, Node.js, or other tooling required.
-
-| Topic                                                                                             | Description                                     |
-| ------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| **[Installation guide](https://github.com/adityatelange/hugo-PaperMod/wiki/Installation)**        | Detailed installation and update instructions   |
-| **[Features wiki page](https://github.com/adityatelange/hugo-PaperMod/wiki/Features)**            | In-depth explanations of all features           |
-| **[FAQ wiki](https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs)**                          | Common questions and configuration walkthroughs |
-| **[Icons wiki](https://github.com/adityatelange/hugo-PaperMod/wiki/Icons)**                       | Documentation for social icons and share icons  |
-| **[Variables wiki](https://github.com/adityatelange/hugo-PaperMod/wiki/Variables)**               | List of all available template variables        |
-| **[Overiding templates](https://github.com/adityatelange/hugo-PaperMod/wiki/Template_Overrides)** | Guide to customizing templates without forking  |
-| **[Releases](https://github.com/adityatelange/hugo-PaperMod/releases)**                           | Detailed history of releases                    |
-
----
-
-## Performance ☄️
-
-PaperMod consistently scores near-perfect results on [Pagespeed Insights](https://pagespeed.web.dev/report?url=https://adityatelange.github.io/hugo-PaperMod/).
-
-<img width="481" height="116" alt="image" src="https://github.com/user-attachments/assets/497d831b-d143-4a46-bc11-b1d7f8ef4a83" />
-
----
-
-## Support 🫶
-
-- Star this repository to show your support.
-- Share PaperMod with others who might find it useful.
-- Sponsor the project on [GitHub Sponsors](https://github.com/sponsors/adityatelange) or [Ko-Fi](https://ko-fi.com/adityatelange).
-
----
-
-## Special Thanks 🌟
-
-- [Highlight.js](https://github.com/highlightjs/highlight.js)
-- [Fuse.js](https://github.com/krisk/fuse)
-- [Feather Icons](https://github.com/feathericons/feather)
-- [Simple Icons](https://github.com/simple-icons/simple-icons)
-- All contributors and supporters
-
----
-
-## Stargazers 📈
-
-[![Stargazers over time](https://starchart.cc/adityatelange/hugo-PaperMod.svg?background=%23ffffff00&axis=%23858585&line=%236b63ff)](https://starchart.cc/adityatelange/hugo-PaperMod)
 
 ## Quick start
 
@@ -94,15 +27,168 @@ theme = "SciDraft"
   home = ["HTML", "RSS", "JSON"]
 ```
 
-Optional personalization:
+Put notes in `content/notes/*.md`. Short notes render in full inside the feed;
+long articles use preview markers (below). A minimal note:
+
+```toml
++++
+title = "A Short Note"
+date = 2026-01-15
+tags = ["Topic"]
++++
+
+The note body in Markdown.
+```
+
+---
+
+## The content model: one type, any length
+
+Everything is a *note*. Length is a property of the content, not a separate type.
+
+### Preview markers (long articles)
+
+Wrap the part that should appear on the feed card:
+
+```markdown
+## 1. Introduction
+
+{{</* preview */>}}
+Opening paragraphs that appear on the card …
+{{</* /preview */>}}
+
+The rest of the article — only on the note's own page.
+```
+
+- With markers: the card shows the marked region plus a **Read more »** link.
+- Without markers: the card shows the full content and no link.
+
+### Card titles
+
+| `showTitle` | Preview markers | Title on card |
+|---|---|---|
+| absent | present | **shown** |
+| absent | absent | hidden |
+| `true` | any | **shown** |
+| `false` | any | hidden |
+
+The front-matter flag always wins over the marker rule. A note with no
+front-matter `title` never renders an empty heading.
+
+### Promotions
+
+Mark a note `promotion = true` to pull it out of the chronological flow and
+feature it as the third card on feed pages (rotating per build, never twice in
+a row).
+
+---
+
+## Identity: institute and author
+
+Every card and note page shows an institute name and an author handle. The
+resolution order is:
+
+1. the note's own front matter (`institute`, `author`)
+2. the site defaults in `hugo.toml`
+3. the theme defaults (`DyCoAI.com`, `mengyaozhu`)
+
+```toml
+# hugo.toml — one place for all notes
+[params]
+  institute = "My Lab"
+  author = "myhandle"
+```
+
+```toml
+# a single note can override either value
++++
+institute = "Guest Lab"
+author = "coauthor"
++++
+```
+
+`author` also feeds the page byline, `<meta name="author">`, and RSS. Both a
+plain string and a list (`author = ["A", "B"]`) are accepted; the card shows
+the first, the byline joins them.
+
+---
+
+## Configuration reference
 
 ```toml
 [params]
-  institute = "Your Lab"       # default affiliation shown on note cards
-  author = "Your Name"        # default author shown on note cards and bylines
-  homeNotesFeed = true          # true = notes feed homepage, false = classic post list
+  # Content
+  mainSections = ["notes"]     # sections that feed listings (used by occupation
+                               # indexes and random recommendations)
+  math = true                  # KaTeX math rendering
+  homeNotesFeed = true         # true = notes feed homepage, false = classic post list
+
+  # Identity defaults (see above)
+  institute = "DyCoAI.com"
+  author = "mengyaozhu"
+
+  # Recommendations under each note
+  relatedCount = 3             # any number; invalid values fall back to 3
+
+  # PaperMod-compatible toggles
+  ShowShareButtons = true
+  ShowReadingTime = true
+  ShowToc = true
+  ShowBreadCrumbs = true
+  ShowPostNavLinks = true
+  ShowCodeCopyButtons = true
+  ShowRelatedPosts = true
 ```
 
-Your BibTeX citations live in `assets/bib/refs.bib` (create your own);
-cite with `\cite{key}` and place the `{{< references >}}` shortcode where
-the bibliography should render.
+### Math
+
+Math is typeset by **KaTeX at build time** — formulas arrive in the HTML
+already rendered, with no client-side math library on content pages. Inline
+`\( … \)` / `$ … $` and display `\[ … \]` / `$$ … $$` both work. The search
+page loads MathJax itself, because search previews are generated in the
+browser.
+
+### Citations
+
+Put your references in `assets/bib/refs.bib`, cite with `\cite{key}` in the
+text, and place the `{{</* references */>}}` shortcode where the bibliography
+should render.
+
+---
+
+## Shortcodes
+
+| Shortcode | Purpose |
+|---|---|
+| `{{</* preview */>}}…{{</* /preview */>}}` | Mark the feed-card region of a long note |
+| `{{</* references */>}}` | Render the BibTeX bibliography (see Citations) |
+| `{{</* gallery */>}}` + `{{</* gallery-item image=… caption=… link=… */>}}` | Image gallery |
+| `{{</* glossary */>}}` + `{{</* term id=… def=… */>}}text{{</* /term */>}}` | Inline glossary terms with a side panel |
+| `{{</* occupation-map */>}}` | Alphabetical occupation index over notes with `occupationTitle` |
+| `{{</* occupation-categories */>}}` | Occupation index grouped by `occupationCategory` |
+| `{{</* related */>}}` / `{{</* related-default-settings */>}}` | Tag-based related lists (full / compact) |
+| `{{</* template-row */>}}` | Random promotional row from `data/template-rows.*` |
+| `{{</* textual-promotion */>}}` | Self-contained promotional card |
+| ```` ```pseudo-algorithm ```` (fence) | LaTeX `algorithmic` block, rendered by pseudocode.js + KaTeX |
+| ```` ```mermaid ```` (fence) | Mermaid diagram |
+
+Occupation indexes read `occupationTitle`, `occupationCategory`,
+`alternativeTitles`, and `shortDescription` from note front matter.
+
+---
+
+## Layouts and styling
+
+- `layouts/` — templates (`_partials/`, `_shortcodes/`, `_markup/` render hooks,
+  `notes/` section layouts)
+- `assets/css/core/` — palette variables (`theme-vars.css`)
+- `assets/css/common/` — PaperMod base styles
+- `assets/css/extended/` — SciDraft's own styles (notes, citations, galleries,
+  occupation map, …) — the place to add overrides
+- `assets/js/` — search, menu toggle, license notices
+
+---
+
+## License
+
+MIT, with the inherited copyright notices preserved — see [LICENSE](LICENSE).
