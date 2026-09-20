@@ -174,7 +174,6 @@ should render.
 | `{{</* preview */>}}…{{</* /preview */>}}` | Mark the feed-card region of a long note |
 | `{{</* references */>}}` | Render the BibTeX bibliography (see Citations) |
 | `{{</* gallery */>}}` + `{{</* gallery-item image=… caption=… link=… */>}}` | Image gallery |
-| `{{</* glossary */>}}` + `{{</* glossary-term id=… def=… */>}}text{{</* /glossary-term */>}}` | Inline glossary terms with a side panel |
 | `{{</* occupation-map */>}}` | Alphabetical occupation index over notes with `occupationTitle` |
 | `{{</* occupation-categories */>}}` | Occupation index grouped by `occupationCategory` |
 | `{{</* promotion-visual */>}}` | Rotating image promotion from a site data file (any item set; the shipped data is a resume-template example) |

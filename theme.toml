@@ -60,8 +60,7 @@ features = [
   "bibtex-citations",
   "research-notes",
   "mermaid-diagrams",
-  "galleries",
-  "glossary"
+  "galleries"
 ]
 min_version = "0.146.0"
 
