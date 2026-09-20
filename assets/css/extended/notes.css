@@ -139,3 +139,13 @@
 .note-readmore:hover {
     text-decoration: underline;
 }
+
+/* Dark-mode tag visibility: --tertiary (rgb 65,66,68) on dark bg is ~1.5:1
+   contrast — near invisible. Lift tags to legible palette colors, dark only. */
+[data-theme="dark"] .note-tag {
+    color: var(--secondary);
+}
+[data-theme="dark"] .note-single .note-tag,
+[data-theme="dark"] .post-tags a {
+    color: var(--primary);
+}
