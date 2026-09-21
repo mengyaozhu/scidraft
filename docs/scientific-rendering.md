@@ -14,6 +14,11 @@ Four rendering pipelines, all wired through the theme's script hub
 If math shows as raw text, the cause is almost always the missing passthrough
 block in the *site* config, or `math` not enabled.
 
+**One trap to know:** never write a literal `<` (or `&`) inside math delimiters.
+The passthrough keeps it verbatim, so the browser reads it as the start of an
+HTML tag and silently swallows the text that follows. Write `\lt` for "<" —
+e.g. `x_{\lt t}` — and `\amp` for "&".
+
 ## Pseudo-algorithms (pseudocode.js + KaTeX)
 
 Write a fenced block:
