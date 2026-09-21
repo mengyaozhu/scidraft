@@ -1,7 +1,14 @@
 {{- /* Bibliography container. The citation loader in extend_head.html
        parses assets/bib/refs.bib, replaces \cite{...} in the article with
        numbered links, and fills this container with the formatted entries.
-       Flag the page so the library loads only where citations exist. */ -}}
+       Flag the page so the library loads only where citations exist.
+
+       The version query is deliberate: the bibliography is fetched by the
+       browser, and its URL carries no content hash when fingerprinting is off,
+       so without it an edited refs.bib keeps being served from the browser
+       cache and pages show "missing reference" for entries that are present.
+       now.Unix is the build time, so the query changes on every rebuild and
+       stays stable in between. */ -}}
 {{- $bib := resources.Get "bib/refs.bib" -}}
-<div class="references" hidden data-bib-src="{{ with $bib }}{{ .RelPermalink }}{{ end }}"></div>
+<div class="references" hidden data-bib-src="{{ with $bib }}{{ .RelPermalink }}?v={{ now.Unix }}{{ end }}"></div>
 {{- .Page.Store.Set "hasCitations" true -}}
