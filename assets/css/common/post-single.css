@@ -58,6 +58,7 @@
 
 details.toc {
     margin-bottom: var(--content-gap);
+    font-size: 15px;   /* auxiliary navigation: 2px below body text */
     background: var(--code-bg);
     border-radius: var(--radius);
     border: 1px solid var(--border);
@@ -117,6 +118,7 @@ details li ul {
     color: var(--content);
     margin: 30px 0;
     max-width: var(--main-width);
+    font-size: 16px;
 }
 
 .post-footer {
