@@ -1,0 +1,22 @@
+{{- /* Sitemap, adapted from Hugo's built-in template with one rule added:
+       a note with no content is not published yet, so it is left out of what
+       search engines are told about. Only empty *notes* are dropped — pages
+       whose body comes from their own layout (search, archives) and all
+       section/taxonomy pages stay listed. */ -}}
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  {{- $emptyNotes := where (where (where .Data.Pages "Kind" "page") "Section" "notes") "Content" "==" "" }}
+  {{- $pages := .Data.Pages | complement $emptyNotes }}
+  {{- range $pages }}
+    {{- if .Permalink -}}
+  <url>
+    <loc>{{ .Permalink }}</loc>{{ if not .Lastmod.IsZero }}
+    <lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02T15:04:05-07:00" ) }}</lastmod>{{ end }}{{ with .Sitemap.ChangeFreq }}
+    <changefreq>{{ . }}</changefreq>{{ end }}{{ if ge .Sitemap.Priority 0.0 }}
+    <priority>{{ .Sitemap.Priority }}</priority>{{ end }}{{ if .IsTranslated }}{{ range .Translations }}
+    <xhtml:link rel="alternate" hreflang="{{ .Language.LanguageCode }}" href="{{ .Permalink }}" />{{ end }}
+    <xhtml:link rel="alternate" hreflang="{{ .Language.LanguageCode }}" href="{{ .Permalink }}" />{{ end }}
+  </url>
+    {{- end -}}
+  {{ end }}
+</urlset>
