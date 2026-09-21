@@ -93,9 +93,5 @@
     font-size: 16px;
 }
 
-.menu .active {
-    font-weight: 500;
-    text-decoration: underline;
-    text-underline-offset: 0.3rem;
-    text-decoration-thickness: 2px;
-}
+/* The active menu item's appearance is owned by menu.css (one setting, one
+   home) so this rule is not duplicated here. */

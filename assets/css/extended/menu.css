@@ -8,6 +8,8 @@
    menu levels, so the active item is findable without shouting. */
 .menu .active {
     font-weight: 400;
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
     text-decoration-thickness: 1px;
 }
 
