@@ -90,24 +90,14 @@
     border: 1px solid var(--border);
     border-radius: 4px;
     padding: 0.05rem 0.35rem;
-    margin-bottom: 0.5rem;
     vertical-align: middle;
 }
 
-/* Text promo header: title left, badge right, badge aligned with the first
-   title line (align-items: flex-start). */
-.textual-promotion-head {
+/* Badge line: own row, right-aligned, directly above the promoted content
+   (disclosure before content, without stealing title width). */
+.promotion-sponsored-line {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 0.75rem;
+    justify-content: flex-end;
+    margin: 0 0 0.35rem;
 }
 
-/* Inside a flex header the badge needs no extra gap and must not shrink. */
-.template-row-label .promotion-sponsored-label,
-.textual-promotion-head .promotion-sponsored-label {
-    margin-bottom: 0;
-    flex: 0 0 auto;
-    /* optical alignment with the first text line inside a taller line box */
-    margin-top: 0.2rem;
-}

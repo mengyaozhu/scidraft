@@ -18,7 +18,10 @@
 <div data-template-row-random>
   {{- range $row := $rows -}}
   <div class="template-row" data-template-row-random-item>
-    <p class="template-row-label"><strong>{{ $row.label }}</strong>{{ if $sponsored }} <span class="promotion-sponsored-label">Sponsored</span>{{ end }}</p>
+    {{- if $sponsored }}
+    <p class="promotion-sponsored-line"><span class="promotion-sponsored-label">Sponsored</span></p>
+    {{- end }}
+    <p class="template-row-label"><strong>{{ $row.label }}</strong></p>
     <div class="image-gallery">
       {{- range $row.images -}}
       {{- $src := .file -}}

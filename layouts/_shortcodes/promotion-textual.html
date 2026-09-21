@@ -36,14 +36,14 @@
 {{- $target := .Get "target" | default "_blank" -}}
 
 <div class="textual-promotion textual-promotion--{{ $align }}">
-  <div class="textual-promotion-head">
-    <div class="textual-promotion-title">
-      {{- range $i, $line := split $title "|" -}}
-        {{- if $i }}<br>{{ end -}}
-        {{- $line -}}
-      {{- end -}}
-    </div>
-    {{- if $sponsored }}<span class="promotion-sponsored-label">Sponsored</span>{{ end }}
+  {{- if $sponsored }}
+  <p class="promotion-sponsored-line"><span class="promotion-sponsored-label">Sponsored</span></p>
+  {{- end }}
+  <div class="textual-promotion-title">
+    {{- range $i, $line := split $title "|" -}}
+      {{- if $i }}<br>{{ end -}}
+      {{- $line -}}
+    {{- end -}}
   </div>
   {{- with $subtitle }}
   <p class="textual-promotion-subtitle">{{ . }}</p>
