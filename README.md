@@ -150,10 +150,19 @@ the first, the byline joins them.
   ShowRelatedPosts = true
 ```
 
+### Menus
+
+Menu items live in the site's `hugo.toml` under `[menu.main]`: items, weights,
+parents, and an optional `note` subtitle shown under a child name. Adding,
+reordering, or nesting them is documented in
+[docs/navigation.md](docs/navigation.md#site-menus).
+
 ### Math
 
-Math is typeset by **KaTeX at build time** — formulas arrive in the HTML
-already rendered, with no client-side math library on content pages. Inline
+Math is typeset by **KaTeX** in the visitor's browser (auto-render), so no
+math is pre-rendered into the HTML. Markdown must not eat the delimiters —
+enable the goldmark passthrough block shown in Quick start, or math will
+appear as raw text. Inline
 `\( … \)` / `$ … $` and display `\[ … \]` / `$$ … $$` both work. The search
 page loads MathJax itself, because search previews are generated in the
 browser.

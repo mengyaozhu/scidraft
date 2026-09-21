@@ -1,4 +1,4 @@
-# Scripts and asset loading
+# Asset loading (what each page loads)
 
 How SciDraft decides what to load on each page.
 
@@ -32,12 +32,12 @@ site/theme style additions.
 KaTeX, pseudocode.js, Mermaid, and citation-js load from jsDelivr. Offline
 builds still work; the rendered features need network at view time.
 
-## Known site-specific item
+## Analytics: none by default
 
-`extend_head.html` currently contains a **Google Analytics tag with a
-hardcoded tracking ID**. It is site-specific and should move to site config
-(or be removed) before the theme is published — as shipped, every user's site
-would report to that property.
+The theme ships **no analytics**. `extend_head.html` has a marked placeholder
+where a site owner can paste their own snippet (Google Analytics, Plausible,
+etc.); a site can also override that partial entirely from its own
+`layouts/_partials/extend_head.html`.
 
 ## Verify after a change
 
