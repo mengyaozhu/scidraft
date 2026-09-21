@@ -153,7 +153,6 @@ details li ul {
     color: var(--secondary);
     font-size: 14px;
     line-height: 34px;
-    background: var(--code-bg);
 }
 
 .post-tags a:hover,

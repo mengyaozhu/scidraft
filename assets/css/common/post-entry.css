@@ -46,12 +46,11 @@
 
 .post-entry {
     position: relative;
-    transition: none;   /* hover lift deliberately disabled (see below) */
     margin-bottom: var(--gap);
     padding: var(--gap);
     background: var(--entry);
     border-radius: var(--radius);
-    transition: transform 0.25s ease;
+    transition: none;   /* hover lift deliberately disabled (see the note below) */
     border: 1px solid var(--border);
 }
 
