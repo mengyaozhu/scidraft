@@ -13,9 +13,9 @@
    visual promo's row label) so they cannot drift apart. */
 .textual-promotion-title,
 .template-row-label {
-    font-size: 26px;
-    font-weight: 700;
-    line-height: 1.02;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.05;
     letter-spacing: -0.01em;
     color: var(--primary);
 }
@@ -79,7 +79,7 @@ p.template-row-label {
 
     .textual-promotion-title,
     .template-row-label {
-        font-size: 21px;
+        font-size: 20px;
     }
 
     .textual-promotion-button {
