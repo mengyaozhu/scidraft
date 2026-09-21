@@ -106,6 +106,16 @@ two classes), which no single extra class can outrank.
 - Raw `pre`/`code` blocks are skipped, so syntax examples stay literal.
 - Styling: `assets/css/common/references.css` — named after the block it
   mostly styles; it also holds the one rule for inline citation markers.
+- Loading is conditional on the shortcode, not on `\cite{...}` markers. A page
+  without the shortcode downloads neither citation-js nor the bibliography and
+  leaves the markers as plain text. A page with the shortcode but no markers
+  still loads the library, while the bibliography is not fetched: the loader
+  returns before the request when it finds nothing to number.
+- Cost, paid by pages that use the shortcode: citation-js is about 530 KB over
+  the wire (2.8 MB unpacked, from jsDelivr), and `refs.bib` is fetched in the
+  browser after the page has loaded — which is why the reference list appears a
+  moment after the text. List pages load neither, because their `<head>` is
+  written before the cards' shortcodes run.
 
 ## LaTeX text commands (\textbf, \textit, \emph, \texttt)
 
