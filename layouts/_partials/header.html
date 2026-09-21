@@ -75,12 +75,12 @@
             {{- end }}
         </div>
             {{- $currentPage := . }}
-            {{- /* When the homepage is the notes feed (homeNotesFeed), the
+            {{- /* The homepage is the notes feed, so the
                    home page IS the /notes/ content: treat "/" as "/notes/"
                    so the "Thoughts on AI" menu item shows its active
                    underline there too. */}}
             {{- $page_url := $currentPage.Permalink | absLangURL }}
-            {{- if and $currentPage.IsHome site.Params.homeNotesFeed }}
+            {{- if $currentPage.IsHome }}
             {{- $notesSection := site.GetPage "/notes" }}
             {{- with $notesSection }}{{ $page_url = (cond (strings.HasSuffix .RelPermalink "/") .RelPermalink (printf "%s/" .RelPermalink)) | absLangURL }}{{ end }}
             {{- end }}
