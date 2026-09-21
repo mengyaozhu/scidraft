@@ -1,79 +1,12 @@
-{{- /* Homepage, with two switchable modes via the site parameter
-       `homeNotesFeed` (set in hugo.toml [params]):
-
-       true  → the Twitter-style short-notes feed (cards from
-               content/notes/, 20 per page, newest first), with the site
-               title as the feed header — X-style short-form home.
-       false → the conventional post-card flow (long articles from the
-               main sections, with pinned-first ordering), identical to
-               the classic PaperMod-style homepage listing.
-
-       Switching is a one-line edit of homeNotesFeed; both modes share
-       the existing styles (notes.css for cards, theme styles for posts).
-*/ -}}
+{{- /* Homepage: the notes feed, always. SciDraft has a single homepage
+       model — the feed of notes (content/notes/) with its cards, promotions
+       and pagination. There is no mode switch and no alternative layout. */ -}}
 {{- define "main" }}
-
 {{- $notesSection := site.GetPage "/notes" }}
-{{- if and site.Params.homeNotesFeed $notesSection }}
-
-{{- /* ---- Mode 1: notes information flow (shared with /notes/) ---- */}}
-{{- partial "notes-feed.html" $notesSection }}
-
+{{- with $notesSection }}
+{{- partial "notes-feed.html" . }}
 {{- else }}
-
-{{- /* ---- Mode 2: conventional post-card flow ---- */}}
-{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
-{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
-{{- $pinned := where $pages "Params.pinned" true }}
-{{- if $pinned }}
-{{- $pinned = sort $pinned "Date" "desc" }}
-{{- $unpinned := where $pages "Params.pinned" "ne" true }}
-{{- $unpinned = sort $unpinned "Date" "desc" }}
-{{- $pages = $pinned | append $unpinned }}
+<p>No <code>content/notes/</code> section found — add notes there to populate
+the homepage feed.</p>
 {{- end }}
-{{- $paginator := .Paginate $pages }}
-
-{{- range $index, $page := $paginator.Pages }}
-{{- $class := "post-entry" }}
-{{- if (and (eq $paginator.PageNumber 1) (eq $index 0) (not (or site.Params.disableSpecial1stPost site.Params.homeInfoParams))) }}
-{{- $class = "first-entry" }}
 {{- end }}
-<article class="{{ $class }}">
-    {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
-    {{- partial "cover.html" (dict "cxt" $page "IsSingle" false "isHidden" $isHidden) }}
-    <header class="entry-header">
-        <h2 class="entry-hint-parent">
-            {{- $page.Title }}
-            {{- if $page.Draft }}
-            <span class="entry-hint" title="Draft">
-                <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-                    <path
-                        d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-                </svg>
-            </span>
-            {{- end }}
-        </h2>
-    </header>
-    {{- if (ne (.Param "hideSummary") true) }}
-    <div class="entry-content">
-        <p>{{ $page.Summary | plainify | htmlUnescape }}{{ if $page.Truncated }}...{{ end }}</p>
-    </div>
-    {{- end }}
-    {{- if not (.Param "hideMeta") }}
-    <footer class="entry-footer">
-        {{- partial "post_meta.html" $page -}}
-    </footer>
-    {{- end }}
-    <a class="entry-link" aria-label="post link to {{ $page.Title | plainify }}" href="{{ $page.Permalink }}"></a>
-</article>
-{{- end }}
-
-{{- if gt $paginator.TotalPages 1 }}
-<footer class="page-footer">
-    {{- partial "numbered-pagination.html" $paginator }}
-</footer>
-{{- end }}
-
-{{- end }}{{/* end homeNotesFeed switch */}}
-
-{{- end }}{{- /* end main */ -}}

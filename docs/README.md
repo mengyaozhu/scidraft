@@ -13,7 +13,7 @@ as hints, and use the **Verify** section of each doc after changes.
 
 | Function | Where it appears | Controlling files | Doc |
 |---|---|---|---|
-| Notes feed (homepage + /notes/) | Homepage and /notes/ listing | `layouts/home.html` (mode switch `homeNotesFeed`) · `layouts/_partials/notes-feed.html` (feed logic) · `layouts/notes/list.html` (section list) · `hugo.toml` params | [notes-feed.md](notes-feed.md) |
+| Notes feed (homepage + /notes/) | Homepage and /notes/ listing | `layouts/home.html` `layouts/_partials/notes-feed.html` (feed logic) · `layouts/notes/list.html` (section list) · `hugo.toml` params | [notes-feed.md](notes-feed.md) |
 | Note cards | Every card in feeds and lists; the note page itself | `layouts/_partials/note-card.html` · `layouts/notes/single.html` · `assets/css/scidraft/notes.css` | [note-cards.md](note-cards.md) |
 | Preview markers + card titles | Card truncation, "Read more »", when a card shows its title | `note-card.html` (`findRESubmatch` on `.RawContent`, `showTitle`) · `layouts/_shortcodes/preview.html` | [note-cards.md](note-cards.md) |
 | Identity (institute / author) | Card header line, page byline, `<meta name="author">`, RSS | `note-card.html`, `notes/single.html`, `_partials/author.html` · `hugo.toml` params `institute`/`author` | [identity.md](identity.md) |

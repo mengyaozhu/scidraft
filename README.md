@@ -129,10 +129,9 @@ the first, the byline joins them.
 ```toml
 [params]
   # Content
-  mainSections = ["notes"]     # sections that feed listings (used by occupation
-                               # indexes and random recommendations)
+  mainSections = ["notes"]     # the notes section: the feed lists it, and the
+                               # entry-map / recommendations read it
   math = true                  # KaTeX math rendering
-  homeNotesFeed = true         # true = notes feed homepage, false = classic post list
 
   # Identity defaults (see above)
   institute = "DyCoAI.com"
