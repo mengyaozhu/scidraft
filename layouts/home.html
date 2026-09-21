@@ -34,7 +34,7 @@
 {{- $paginator := .Paginate $pages }}
 
 {{- range $index, $page := $paginator.Pages }}
-{{- $class := "post-entry" }}
+{{- $class := "note-entry" }}
 {{- if (and (eq $paginator.PageNumber 1) (eq $index 0) (not (or site.Params.disableSpecial1stPost site.Params.homeInfoParams))) }}
 {{- $class = "first-entry" }}
 {{- end }}
