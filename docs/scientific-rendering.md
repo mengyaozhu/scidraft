@@ -14,10 +14,28 @@ Four rendering pipelines, all wired through the theme's script hub
 If math shows as raw text, the cause is almost always the missing passthrough
 block in the *site* config, or `math` not enabled.
 
-**One trap to know:** never write a literal `<` (or `&`) inside math delimiters.
-The passthrough keeps it verbatim, so the browser reads it as the start of an
-HTML tag and silently swallows the text that follows. Write `\lt` for "<" —
-e.g. `x_{\lt t}` — and `\amp` for "&".
+**Two traps to know.** First, never write a literal `<` (or `&`) inside math
+delimiters: the passthrough keeps it verbatim, so the browser reads it as the
+start of an HTML tag and silently swallows the text that follows. Write `\lt`
+for "<" — e.g. `x_{\lt t}` — and `\amp` for "&".
+
+Second, inside a display block, never let a line *begin* with a character that
+Markdown reads as a list marker: `-`, `+`, `*`, or a digit followed by `.` or
+`)`. A long equation split across lines is the usual way this happens —
+
+$$
+a = b
++ c
+$$
+
+— and Markdown turns the second line into a bullet, so the equation is rendered
+as a stray paragraph of LaTeX followed by a list item. Put the operator at the
+end of the previous line instead:
+
+$$
+a = b +
+c
+$$
 
 ## Pseudo-algorithms (pseudocode.js + KaTeX)
 
