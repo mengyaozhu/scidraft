@@ -9,12 +9,21 @@
     color: var(--primary);
 }
 
-.textual-promotion-title {
+/* Promotion title — shared by both promo types (textual headline and the
+   visual promo's row label) so they cannot drift apart. */
+.textual-promotion-title,
+.template-row-label {
     font-size: 26px;
     font-weight: 700;
     line-height: 1.02;
     letter-spacing: -0.01em;
     color: var(--primary);
+}
+
+/* The visual row label is a <p><strong>…</strong></p>: neutralise the
+   wrapper's paragraph spacing and let the shared title rule drive size. */
+p.template-row-label {
+    margin: 0 0 0.6em;
 }
 
 .textual-promotion-subtitle {
@@ -68,7 +77,8 @@
         padding: 1.6em 1.4em;
     }
 
-    .textual-promotion-title {
+    .textual-promotion-title,
+    .template-row-label {
         font-size: 21px;
     }
 
