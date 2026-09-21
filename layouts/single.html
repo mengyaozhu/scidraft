@@ -14,7 +14,10 @@
       </span>
       {{- end }}
     </h1>
-    {{- if .Description }}
+    {{- /* The description prints by default; a page can hide it while keeping
+           it for search engines and social previews (they read the front
+           matter directly). */ -}}
+    {{- if and .Description (not (.Param "hideDescription")) }}
     <div class="post-description">
       {{ .Description }}
     </div>
