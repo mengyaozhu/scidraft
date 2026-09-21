@@ -82,22 +82,26 @@
    the sponsored=true flag is set (disclosure for paid/affiliate links). */
 .promotion-sponsored-label {
     display: inline-block;
-    font-size: 0.68rem;
+    font-size: 0.65rem;
+    line-height: 1;
     font-weight: 600;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--secondary);
     border: 1px solid var(--border);
     border-radius: 4px;
-    padding: 0.05rem 0.35rem;
+    padding: 0.12rem 0.35rem;
     vertical-align: middle;
 }
 
-/* Badge line: own row, right-aligned, directly above the promoted content
-   (disclosure before content, without stealing title width). */
+/* Badge line: own row, LEFT-aligned with the title on the same vertical
+   axis, directly above the promoted content (disclosure before content,
+   without stealing title width). Small type + tight spacing keep the added
+   height to roughly half a text line. */
 .promotion-sponsored-line {
     display: flex;
-    justify-content: flex-end;
-    margin: 0 0 0.35rem;
+    justify-content: flex-start;
+    margin: 0 0 0.2rem;
+    line-height: 1;
 }
 
