@@ -27,6 +27,8 @@
 {{- $pages = $pctx.Pages }}
 {{- end }}
 {{- $pages = where $pages "Params.hiddenInRss" "!=" true -}}
+{{- /* Notes with no content are not yet published: keep them out of the feed. */ -}}
+{{- $pages = where $pages "Content" "!=" "" -}}
 {{- $limit := site.Config.Services.RSS.Limit }}
 {{- if ge $limit 1 }}
 {{- $pages = $pages | first $limit }}
