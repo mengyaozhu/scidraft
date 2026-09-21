@@ -108,4 +108,6 @@
 .textual-promotion-head .promotion-sponsored-label {
     margin-bottom: 0;
     flex: 0 0 auto;
+    /* optical alignment with the first text line inside a taller line box */
+    margin-top: 0.2rem;
 }

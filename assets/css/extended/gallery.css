@@ -40,7 +40,8 @@
    the sponsored=true flag is set) pushed to the right of the same line. */
 .template-row-label {
     display: flex;
-    align-items: center;
+    align-items: flex-start;   /* badge aligns with the FIRST line, also when
+                                  the label wraps on narrow screens */
     justify-content: space-between;
     gap: 0.75rem;
 }
