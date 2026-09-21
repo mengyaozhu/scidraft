@@ -107,6 +107,24 @@ two classes), which no single extra class can outrank.
 - Styling: `assets/css/common/references.css` — named after the block it
   mostly styles; it also holds the one rule for inline citation markers.
 
+## LaTeX text commands (\textbf, \textit, \emph, \texttt)
+
+Prose pasted out of a LaTeX source often carries commands that Markdown has no
+meaning for and KaTeX will not touch, because they sit outside math delimiters.
+`assets/js/latex-text.js`, loaded by `extend_head.html`, converts the four that
+appear in practice into their HTML equivalents: bold, italic, emphasis and code.
+Commands inside code blocks, inside an equation, or in the bibliography are
+skipped, and an argument whose braces do not balance is left exactly as written.
+
+Two consequences worth knowing. The conversion happens in the browser, so the raw
+command is visible for a moment while the page loads, the same way citations
+behave. And because the script skips `.katex` subtrees, its tag must stay below
+the math block in `extend_head.html`: that ordering is what guarantees a command
+belonging to an equation is never rewritten.
+
+If you write notes yourself, prefer Markdown (`**bold**`, `*italic*`, `` `code` ``)
+and treat this pass as a safety net for pasted material.
+
 ## Search page exception
 
 The search page generates result previews in the browser and loads its **own**
@@ -121,5 +139,7 @@ That is the only MathJax left in the theme.
 4. `\cite{...}` becomes a numbered link; `{{< references >}}` lists entries.
 5. A table carrying `{.table-academic}` or `{.table-striped}` changes skin,
    while neighbouring tables keep the default one.
-6. Check the browser console for CDN load failures (all four pipelines rely on
+6. `\textbf{...}` in note text renders bold, while the same command inside a code
+   block stays literal.
+7. Check the browser console for CDN load failures (all four pipelines rely on
    jsDelivr).

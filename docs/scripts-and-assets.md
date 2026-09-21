@@ -14,6 +14,12 @@ wired. Blocks load only when needed:
 | Pseudo-algorithm (CDN: pseudocode + KaTeX) | Page has a pseudo-algorithm block, or is the notes feed | `hasAlgorithm` |
 | Math auto-render (CDN: KaTeX + auto-render) | `math = true` (site or note) | — |
 | Citations (CDN: citation-js) | Page uses the `references` shortcode | `hasCitations` |
+| LaTeX text commands (bundled locally) | Page renders note bodies: a note, a standalone page, `/notes/` or the homepage | — |
+
+Order inside `extend_head.html` matters for the last two blocks: the LaTeX-text
+pass must stay below the math block, so that KaTeX has already replaced math text
+nodes and the pass can skip `.katex` subtrees instead of rewriting a command that
+belongs to an equation.
 
 The notes-feed exception exists because feed pages render many notes' bodies
 while `<head>` is emitted before the render hooks run, so per-page flags would
@@ -24,7 +30,8 @@ be missed.
 `layouts/_partials/head.html` builds fingerprinted bundles: the stylesheet
 (licence banner → `core/` variables, reset and media queries → everything in
 `common/` → Chroma themes → everything in `extended/`), `search.js`
-(fuse + fastsearch + license), and the menu toggle.
+(fuse + fastsearch + license). Two further local scripts are wired in
+`extend_head.html`: the menu toggle and `js/latex-text.js`.
 
 Load order is deliberate: `common/` holds the theme's own styles, and
 `extended/` — whose `custom.css` begins empty — is loaded last, so a site

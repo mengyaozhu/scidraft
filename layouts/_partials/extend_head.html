@@ -190,3 +190,21 @@
   });
 </script>
 {{- end }}
+{{- /* LaTeX text commands in note bodies: \textbf, \textit, \emph and \texttt
+       are converted to strong, em and code by assets/js/latex-text.js, with the
+       reasoning documented in that file.
+
+       Loaded on the pages that render note bodies: a note itself (Kind page,
+       which also covers standalone pages), the /notes/ feed and the homepage,
+       whose cards carry note text. This block must stay BELOW the math block
+       above: handlers registered later run later, so KaTeX has already replaced
+       math text nodes and the script can skip .katex subtrees instead of
+       rewriting a command that belongs to an equation. */}}
+{{- if or (eq .Kind "page") (eq .Section "notes") (.IsHome) }}
+{{- $latexText := resources.Get "js/latex-text.js" | js.Build | resources.Minify }}
+{{- if not site.Params.assets.disableFingerprinting }}
+{{- $latexText = $latexText | fingerprint }}
+{{- end }}
+<script defer src="{{ $latexText.RelPermalink }}"{{ with $latexText.Data.Integrity }} crossorigin="anonymous"
+    integrity="{{ . }}"{{ end }}></script>
+{{- end }}
