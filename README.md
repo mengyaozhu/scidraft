@@ -181,9 +181,17 @@ Both need block attributes enabled in the **site** config
 
 ### Citations
 
-Put your references in `assets/bib/refs.bib`, cite with `\cite{key}` in the
-text, and place the `{{</* references */>}}` shortcode where the bibliography
-should render.
+Keep one bibliography per paper under `assets/bib/` — `bib/paper-a.bib`,
+`bib/paper-b.bib` — and cite with `\cite{key}` in the text. Place the shortcode
+where the list should render, naming the file:
+
+```markdown
+{{</* references bib="bib/paper-a.bib" title="References" */>}}
+```
+
+`bib` is required, `title` is optional and becomes the heading above the list. A
+note can carry several of them, each with its own file; each list is numbered from
+one and holds the citations of the text before it.
 
 ---
 

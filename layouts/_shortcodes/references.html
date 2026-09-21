@@ -1,14 +1,41 @@
-{{- /* Bibliography container. The citation loader in extend_head.html
-       parses assets/bib/refs.bib, replaces \cite{...} in the article with
-       numbered links, and fills this container with the formatted entries.
-       Flag the page so the library loads only where citations exist.
+{{- /* Reference list for one paper.
 
-       The version query is deliberate: the bibliography is fetched by the
-       browser, and its URL carries no content hash when fingerprinting is off,
-       so without it an edited refs.bib keeps being served from the browser
-       cache and pages show "missing reference" for entries that are present.
-       now.Unix is the build time, so the query changes on every rebuild and
-       stays stable in between. */ -}}
-{{- $bib := resources.Get "bib/refs.bib" -}}
-<div class="references" hidden data-bib-src="{{ with $bib }}{{ .RelPermalink }}?v={{ now.Unix }}{{ end }}"></div>
+       Usage, with both arguments shown:
+
+         {{< references bib="bib/paper-a.bib" title="References" >}}
+
+       bib    required. Path of the bibliography under the site's assets/
+              directory, for example bib/refs.bib or bib/paper-a.bib. There is
+              deliberately no default file: a site that publishes several papers
+              keeps one bibliography per paper, and a silent default would hide
+              a note that forgot to name its own.
+       title  optional. Text of the heading rendered above the list. Omit it to
+              place the list under a heading the note writes itself.
+
+       A note may carry several of these, each naming its own file, and each list
+       is numbered and filled independently (the loader in extend_head.html
+       scopes citations to the text that precedes each list).
+
+       The whole element is emitted hidden and is revealed by the loader once the
+       entries are in place, so a heading never appears above an empty list. A
+       missing bib argument or a file that is not under assets/ fails the build,
+       which is the only way this stays honest: the alternative is a page that
+       renders reference markers and no bibliography, with no hint why. */ -}}
+
+{{- $source := .Get "bib" -}}
+{{- $title := .Get "title" -}}
+{{- if not $source -}}
+  {{- errorf "references shortcode in %s: a bib argument is required, for example references bib=\"bib/refs.bib\"" .Page.File.Path -}}
+{{- else -}}
+  {{- $bib := resources.Get $source -}}
+  {{- if not $bib -}}
+    {{- errorf "references shortcode in %s: assets/%s does not exist" .Page.File.Path $source -}}
+  {{- else -}}
+<div class="references" hidden data-bib-src="{{ $bib.RelPermalink }}?v={{ now.Unix }}">
+    {{- with $title }}
+    <h2 class="references-title">{{ . }}</h2>
+    {{- end }}
+</div>
 {{- .Page.Store.Set "hasCitations" true -}}
+  {{- end -}}
+{{- end -}}

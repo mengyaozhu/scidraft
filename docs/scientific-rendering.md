@@ -96,13 +96,24 @@ two classes), which no single extra class can outrank.
 
 ## Citations (citation-js + BibTeX)
 
-- References live in the **site's** `assets/bib/refs.bib`.
-- Cite with `\cite{key}` in note text; the loader numbers them by first
-  appearance.
-- Place `{{< references >}}` where the bibliography should render;
-  `layouts/_shortcodes/references.html` creates the container and flags the
-  page (`hasCitations`); `extend_head.html` loads citation-js and fills the
-  container with APA entries.
+- Reference files live under the **site's** `assets/bib/`, one per paper —
+  `bib/paper-a.bib`, `bib/paper-b.bib`. There is no default file: the shortcode
+  must name the one a note uses, so a note can never silently cite the wrong
+  bibliography.
+- Place `{{< references bib="bib/paper-a.bib" title="References" >}}` where the
+  bibliography should render. `bib` is required and is the path under `assets/`;
+  `title` is optional and becomes the heading above the list. A missing argument
+  or a file that does not exist fails the build, naming the note.
+  `layouts/_shortcodes/references.html` creates the container and flags the page
+  (`hasCitations`); `extend_head.html` loads citation-js and fills the container
+  with the entries.
+- Cite with `\cite{key}` in note text. Each list is numbered from 1 and holds
+  the citations of the text **before** it that no earlier list has claimed, so a
+  note may carry several lists with different files — a main bibliography and a
+  second one further down, say. Markers that come after every list stay as
+  written.
+- Raw `pre`/`code` blocks are skipped, so syntax examples stay literal, as are
+  typeset equations and the bibliography itself.
 - Raw `pre`/`code` blocks are skipped, so syntax examples stay literal.
 - Styling: `assets/css/common/references.css` — named after the block it
   mostly styles; it also holds the one rule for inline citation markers.
@@ -112,10 +123,11 @@ two classes), which no single extra class can outrank.
   still loads the library, while the bibliography is not fetched: the loader
   returns before the request when it finds nothing to number.
 - Cost, paid by pages that use the shortcode: citation-js is about 530 KB over
-  the wire (2.8 MB unpacked, from jsDelivr), and `refs.bib` is fetched in the
-  browser after the page has loaded — which is why the reference list appears a
-  moment after the text. List pages load neither, because their `<head>` is
-  written before the cards' shortcodes run.
+  the wire (2.8 MB unpacked, from jsDelivr), and each list's own bibliography is
+  fetched in the browser after the page has loaded — which is why the reference
+  list appears a moment after the text. Two lists naming the same file fetch it
+  once. List pages load neither, because their `<head>` is written before the
+  cards' shortcodes run.
 
 ## LaTeX text commands (\textbf, \textit, \emph, \texttt)
 

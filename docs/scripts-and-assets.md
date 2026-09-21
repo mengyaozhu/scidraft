@@ -26,11 +26,12 @@ while `<head>` is emitted before the render hooks run, so per-page flags would
 be missed.
 
 The citations block is deliberately **not** given that exception, so on list
-pages neither citation-js nor the bibliography is downloaded and `\cite{...}`
+pages neither citation-js nor any bibliography is downloaded and `\cite{...}`
 stays as plain text inside the cards. On a note page the shortcode alone decides:
-the library loads whenever it is present, and `refs.bib` is fetched in the browser
-only when the page actually has markers to number. The library is about 530 KB
-over the wire (2.8 MB unpacked); `refs.bib` is 557 KB in the demo site.
+the library loads whenever it is present, and the file a list names is fetched in
+the browser only when that list actually has markers to number. The library is
+about 530 KB over the wire (2.8 MB unpacked); the bibliography files in the demo
+site are 557 KB each.
 
 ## Local bundles
 
