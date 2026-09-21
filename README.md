@@ -219,10 +219,12 @@ is in [`docs/README.md`](docs/README.md), with one detail page per function.
 
 - `layouts/` — templates (`_partials/`, `_shortcodes/`, `_markup/` render hooks,
   `notes/` section layouts)
-- `assets/css/core/` — palette variables (`theme-vars.css`)
-- `assets/css/common/` — PaperMod base styles
-- `assets/css/extended/` — SciDraft's own styles (notes, citations, galleries,
-  occupation map, …) — the place to add overrides
+- `assets/css/core/` — foundations: colour variables, page reset, media queries
+- `assets/css/common/` — the theme's own styles (header, notes, promos,
+  entry map, pagination, references, algorithms, …)
+- `assets/css/extended/custom.css` — **for your site's own styles**: it loads
+  after everything else, so additions there override the theme without
+  `!important`
 - `assets/js/` — search, menu toggle, license notices
 
 ---

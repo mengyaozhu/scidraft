@@ -22,10 +22,13 @@ be missed.
 ## Local bundles
 
 `layouts/_partials/head.html` builds fingerprinted bundles: the stylesheet
-(core + common + `assets/css/extended/*` + Chroma), `search.js`
-(fuse + fastsearch + license), and the menu toggle. Anything in
-`assets/css/extended/` is picked up automatically — that is the folder for
-site/theme style additions.
+(licence banner → `core/` variables, reset and media queries → everything in
+`common/` → Chroma themes → everything in `extended/`), `search.js`
+(fuse + fastsearch + license), and the menu toggle.
+
+Load order is deliberate: `common/` holds the theme's own styles, and
+`extended/` — whose `custom.css` begins empty — is loaded last, so a site
+owner's additions there override the theme without `!important`.
 
 ## CDN dependencies
 
@@ -43,4 +46,4 @@ would report to that property.
 
 1. Build; open a note with an algorithm — pseudocode + KaTeX scripts present
    in the page source; a plain note without `math` should not load them.
-2. The stylesheet bundle contains rules from `assets/css/extended/`.
+2. The stylesheet bundle contains rules from `assets/css/common/`.
