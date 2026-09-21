@@ -4,7 +4,7 @@
 }
 
 .post-title {
-    font-size: 40px;
+    font-size: 36px;   /* below: note bodies carry their own "# 1. <Title>" */
 }
 
 .post-description {

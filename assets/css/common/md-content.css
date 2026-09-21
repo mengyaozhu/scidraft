@@ -7,16 +7,16 @@
 
 .md-content h1 {
     margin: 40px auto 32px;
-    font-size: 40px;
-}
+    font-size: 28px;   /* must stay below .post-title (36px): a note opens with
+                          its own "# 1. <Title>" heading */
 
 .md-content h2 {
     margin: 32px auto 24px;
-    font-size: 32px;
+    font-size: 23px;
 }
 
 .md-content h3 {
-    font-size: 24px;
+    font-size: 19px;
 }
 
 .md-content h4 {
