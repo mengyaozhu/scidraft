@@ -25,9 +25,13 @@ The notes-feed exception exists because feed pages render many notes' bodies
 while `<head>` is emitted before the render hooks run, so per-page flags would
 be missed.
 
-The citations block is deliberately **not** given that exception, so on list
-pages neither citation-js nor any bibliography is downloaded and `\cite{...}`
-stays as plain text inside the cards. On a note page the shortcode alone decides:
+The citations block is given that exception as well, but only on a site that has
+a note using the `references` shortcode: a feed card's head cannot see whether any
+card on the page cites, so the library loads on list pages of such a site and the
+per-card scope keeps each card's numbers to itself. Cards fetch only the
+bibliography their own preview names, which `note-card.html` takes from the note's
+first reference list; a list page with no citing card in view still pays for the
+library. On a note page the shortcode alone decides:
 the library loads whenever it is present, and the file a list names is fetched in
 the browser only when that list actually has markers to number. The library is
 about 530 KB over the wire (2.8 MB unpacked); the bibliography files in the demo

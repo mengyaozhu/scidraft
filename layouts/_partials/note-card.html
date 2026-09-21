@@ -40,8 +40,26 @@
         {{- if $preview }}
         {{- /* Full block Markdown rendering: paragraphs, lists, emphasis.
                (markdownify would render inline only, breaking lists/bold.) */ -}}
-        {{- $preview | .RenderString (dict "display" "block") }}
+        {{- $rendered := $preview | .RenderString (dict "display" "block") }}
+        {{- $rendered }}
         <a class="note-readmore" href="{{ .RelPermalink }}">Read more »</a>
+        {{- /* A preview that cites something needs a reference list of its own,
+               but only when the preview region does not already carry one: if the
+               author's markers wrap the list as well, the shortcode has already
+               placed it here and this would be a second, empty container. The
+               file is the one the note's first reference list names, so the card
+               fetches that single bibliography rather than every file the note
+               uses. */ -}}
+        {{- if and (in $preview "\\cite{") (not (strings.Contains $rendered `class="references"`)) }}
+        {{- $match := findRESubmatch `references[^>]*bib="([^"]+)"` .RawContent 1 }}
+        {{- with $match }}
+        {{- $bib := resources.Get (index (index $match 0) 1) }}
+        {{- with $bib }}
+        <div class="references references-in-card" hidden
+            data-bib-src="{{ .RelPermalink }}?v={{ now.Unix }}"></div>
+        {{- end }}
+        {{- end }}
+        {{- end }}
         {{- else }}
         {{ .Content }}
         {{- end }}

@@ -130,8 +130,16 @@ two classes), which no single extra class can outrank.
   the wire (2.8 MB unpacked, from jsDelivr), and each list's own bibliography is
   fetched in the browser after the page has loaded — which is why the reference
   list appears a moment after the text. Two lists naming the same file fetch it
-  once. List pages load neither, because their `<head>` is written before the
-  cards' shortcodes run.
+  once.
+- Notes list pages load the library too, whenever the site has a note that cites,
+  because a feed card's `<head>` is written before the cards' shortcodes run and
+  the page cannot know from there whether any card cites. A card then fetches only
+  the file its own preview names — the file of the note's first reference list,
+  which `note-card.html` writes into the card — and each card counts its citations
+  from one, so no card can claim another's. A full-content card (a note without
+  preview markers) brings its own lists with it and needs nothing extra. Cards in
+  the recommendation box under a note are left as plain teasers: they are pointers
+  to other notes, so the loader neither numbers them nor fetches their files.
 
 ## LaTeX text commands (\textbf, \textit, \emph, \texttt)
 

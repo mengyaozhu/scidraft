@@ -82,3 +82,20 @@ sup.citation {
     color: var(--primary);
     text-decoration: underline;
 }
+
+/* A bibliography inside a feed card. The list is a preview of the note, so it
+   runs smaller and tighter than on the note page and takes a smaller gap above
+   it, while the entries themselves are the same markup and styling. */
+.note-card:not(.note-single) .references {
+    margin-block: 12px 0;
+    font-size: 0.82em;
+}
+
+.note-card:not(.note-single) .references .ref-list li {
+    margin-block-end: 0.35rem;
+}
+
+.note-card:not(.note-single) .references .references-title {
+    margin-block: 0 10px;
+    font-size: 15px;
+}

@@ -125,7 +125,18 @@
        are never touched. A list whose scope contains no citations stays hidden
        and fetches nothing, which is why a page carrying the shortcode without
        any markers still downloads no bibliography. */ -}}
-{{- if .Store.Get "hasCitations" }}
+{{- /* When the page itself cites, its own shortcode sets the flag. List pages
+       cannot set it — their <head> is written before the cards' shortcodes run —
+       so they load the library when any note in the site cites, which is the
+       same feed exception mermaid and pseudo-algorithms use. The cost is one
+       library download on list pages of a site that uses citations. */ -}}
+{{- $feedCites := false -}}
+{{- if or (eq .Section "notes") (.IsHome) -}}
+{{- range where site.RegularPages "Section" "notes" -}}
+{{- if .HasShortcode "references" }}{{ $feedCites = true }}{{ end -}}
+{{- end -}}
+{{- end -}}
+{{- if or (.Store.Get "hasCitations") $feedCites }}
 <script src="https://cdn.jsdelivr.net/npm/citation-js@0.6.9/build/citation.js" defer></script>
 <script defer>
   window.addEventListener("DOMContentLoaded", function () {
@@ -173,9 +184,19 @@
     boxes.forEach(function (box, boxIndex) {
       var src = box.dataset.bibSrc;
       if (!src) return;
+      /* Cards in the recommendation box under a note are pointers to other
+         notes, not reading pages: they keep the plain teaser they had before
+         cards could cite, and the loader neither numbers them nor fetches their
+         bibliographies. */
+      if (box.closest(".note-recommendations")) return;
 
-      /* Scope of this list: markers that precede it and are still unclaimed. */
-      var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      /* Scope of this list. Inside a feed card the scope is that card, so its
+         numbers cannot claim citations from a card above it; on a note page the
+         scope is the document and the position test below keeps each list to the
+         text that precedes it. Within either scope, markers already numbered by
+         an earlier list are skipped. */
+      var scopeRoot = box.closest("article.note-card") || document.body;
+      var walker = document.createTreeWalker(scopeRoot, NodeFilter.SHOW_TEXT, {
         acceptNode: function (node) {
           if (node.parentElement.closest("pre, code, script, style, .references, .katex")) return NodeFilter.FILTER_REJECT;
           if (node.textContent.indexOf("\\cite{") === -1) return NodeFilter.FILTER_SKIP;
