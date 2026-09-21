@@ -9,6 +9,7 @@
     margin: 40px auto 32px;
     font-size: 28px;   /* must stay below .post-title (36px): a note opens with
                           its own "# 1. <Title>" heading */
+}
 
 .md-content h2 {
     margin: 32px auto 24px;
