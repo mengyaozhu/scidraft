@@ -16,9 +16,19 @@ sup.citation {
     scroll-margin-top: 1.5rem;
 }
 
+/* Both sides use the content gap, like every other block in a note: the
+   container had a top margin only, so the space below the list came from the
+   last entry's own margin — 8px against the 20px everywhere else. */
 .references {
-    margin-block-start: 1.5rem;
+    margin-block: var(--content-gap);
     font-size: 0.9em;
+}
+
+/* The heading is inside this block, so the container owns the space above it.
+   Without this the heading's own 32px top margin wins the collapse and the list
+   sits further from the text above than the 20px every other block uses. */
+.references .references-title {
+    margin-block-start: 0;
 }
 
 .references .ref-list {
