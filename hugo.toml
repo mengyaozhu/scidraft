@@ -16,10 +16,11 @@
   ShowPostNavLinks = true
   ShowCodeCopyButtons = true
   ShowRelatedPosts = true
-  # Identity defaults; each note's front matter can override with its
-  # own institute / author
-  institute = "DyCoAI.com"
-  author = "mengyaozhu"
+  # Identity shown on note cards — replace these with your own. Each note's
+  # front matter can override them further, and the site config always wins
+  # over these theme defaults.
+  institute = "Your Institute"
+  author = "yourname"
 
   # Fallback link for {{< promotion-visual >}} images (empty by default)
   # promotionLink = ""

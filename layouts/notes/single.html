@@ -6,7 +6,7 @@
 {{- if reflect.IsSlice $author }}{{ $author = index $author 0 }}{{ end }}
 <article class="note-card note-single">
     <header class="note-head">
-        <span class="note-avatar" aria-hidden="true">D</span>
+        <span class="note-avatar" aria-hidden="true">{{ with $institute }}{{ substr . 0 1 | upper }}{{ end }}</span>
         <span class="note-names">
             <span class="note-author">{{ $institute }}</span>
             <span class="note-handle">@{{ $author }}</span>
