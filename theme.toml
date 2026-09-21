@@ -51,8 +51,6 @@ features = [
   "comments",
   "edit-post",
   "canonical-link",
-  "profile-mode",
-  "home-info-mode",
   "related-posts",
   "rss",
   "multiple-authors",
