@@ -114,6 +114,10 @@ two classes), which no single extra class can outrank.
   written.
 - Raw `pre`/`code` blocks are skipped, so syntax examples stay literal, as are
   typeset equations and the bibliography itself.
+- Comment lines are removed from a bibliography before it is parsed: `%` starts a
+  comment in BibTeX, and citation-js fails on a file containing one, even a
+  commented-out entry. A file that still cannot be parsed is reported in the list
+  itself rather than left blank.
 - Raw `pre`/`code` blocks are skipped, so syntax examples stay literal.
 - Styling: `assets/css/common/references.css` — named after the block it
   mostly styles; it also holds the one rule for inline citation markers.

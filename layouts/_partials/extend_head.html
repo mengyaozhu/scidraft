@@ -142,11 +142,30 @@
     var claimed = [];   // text nodes already numbered by an earlier list
     var backCount = 0;  // global counter: citation anchors stay unique across lists
 
-    /* Parses a file once, however many lists name it. */
+    /* Citation-js's BibTeX parser cannot read standard comment lines: a line
+       whose first non-space character is % is a comment in BibTeX, and a single
+       commented-out entry is enough to make the whole file fail to parse (seen
+       with a %@online{...} block inside an otherwise valid file). Comments are
+       therefore removed before parsing. A field value that happens to contain a
+       line beginning with % would be affected, which is rare enough to accept in
+       exchange for files that parse. */
+    function stripBibComments(text) {
+      return text.split("\n").filter(function (line) {
+        return line.replace(/^\s+/, "").charAt(0) !== "%";
+      }).join("\n");
+    }
+
+    /* Parses a file once, however many lists name it. When a file cannot be
+       parsed the list is revealed with a message rather than left hidden: a
+       silent empty list is the hardest kind of failure to notice. */
     function loadBib(url, then) {
       if (parsed[url]) { then(parsed[url]); return; }
       fetch(url).then(function (res) { return res.text(); }).then(function (bib) {
-        parsed[url] = new Cite(bib);
+        try {
+          parsed[url] = new Cite(stripBibComments(bib));
+        } catch (err) {
+          parsed[url] = { data: [], broken: true };
+        }
         then(parsed[url]);
       });
     }
@@ -204,6 +223,15 @@
       loadBib(src, function (data) {
         var list = document.createElement("ol");
         list.className = "ref-list";
+        if (data.broken) {
+          var note = document.createElement("li");
+          note.innerHTML = "<em>bibliography could not be parsed: check " +
+            src.split("/").slice(-1)[0].split("?")[0] + "</em>";
+          list.appendChild(note);
+          box.appendChild(list);
+          box.hidden = false;
+          return;
+        }
         order.forEach(function (key, i) {
           var li = document.createElement("li");
           li.id = "ref-" + boxIndex + "-" + key;
