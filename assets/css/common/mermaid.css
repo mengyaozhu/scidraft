@@ -7,4 +7,7 @@
    extend_head.html loader) so that scroll path actually engages. */
 pre.mermaid {
     overflow-x: auto;
+    /* The browser's default pre margin (1em = 16px) is replaced by the
+       theme's standard block gap so diagrams match code blocks. */
+    margin: 0 0 var(--content-gap);
 }

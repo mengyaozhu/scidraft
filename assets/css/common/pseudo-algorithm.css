@@ -32,7 +32,10 @@
     padding-block: 1px;
 }
 
-/* Wide lines scroll inside the box instead of overflowing the column. */
+/* Wide lines scroll inside the box instead of overflowing the column, and
+   the block keeps the theme's standard gap below it (a plain <div> is not
+   covered by the .md-content paragraph spacing rule, so it is set here). */
 .pseudo-algorithm {
     overflow-x: auto;
+    margin: 0 0 var(--content-gap);
 }
