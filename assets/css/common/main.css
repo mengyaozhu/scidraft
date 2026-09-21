@@ -47,20 +47,39 @@ pre {
     position: relative;
 }
 
+/* Copy button for fenced code blocks. The script in _partials/footer.html
+   appends it when ShowCodeCopyButtons is on. Visible without hovering, so it
+   is reachable on touch screens as well as with a mouse, and sized to be
+   tapped. The colours are fixed rather than taken from the theme variables:
+   the button sits on the code block, which keeps a dark background in both
+   light and dark mode, so one set of colours serves both. */
 .copy-code {
-    display: none;
     position: absolute;
-    top: 4px;
-    right: 4px;
-    color: rgba(255, 255, 255, 0.8);
-    background: rgba(78, 78, 78, 0.8);
+    top: 7px;
+    right: 7px;
+    padding: 9px 12px;
+    color: rgb(233, 233, 235);
+    background: rgb(58, 59, 64);
+    border: 1px solid rgba(255, 255, 255, 0.22);
     border-radius: var(--radius);
-    padding: 0 5px;
-    font-size: 14px;
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
     user-select: none;
 }
 
-div.highlight:hover .copy-code,
-pre:hover .copy-code {
-    display: block;
+.copy-code:hover,
+.copy-code:focus-visible {
+    color: #fff;
+    background: rgb(82, 84, 90);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Space for the button above the first line of code. Applied only to blocks
+   that actually carry a button, so switching ShowCodeCopyButtons off leaves
+   the layout exactly as it was. */
+.md-content div.highlight:has(.copy-code) pre code,
+.md-content pre:has(> .copy-code) code {
+    padding-top: 44px;
 }
