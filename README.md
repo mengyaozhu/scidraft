@@ -4,7 +4,7 @@
 
 Built for quick research notes and comprehensive scientific articles — one content
 type, with BibTeX citations, KaTeX math, mermaid diagrams, pseudo-algorithm
-blocks, galleries, and per-series A–Z / category indexes (the entry map).
+blocks, and per-series A–Z / category indexes (the entry map).
 
 [![Minimum Hugo Version](https://img.shields.io/static/v1?label=Hugo&message=v0.146.0%2B&color=blue&logo=hugo)](https://github.com/gohugoio/hugo/releases/tag/v0.146.0)
 
@@ -173,7 +173,6 @@ should render.
 |---|---|
 | `{{</* preview */>}}…{{</* /preview */>}}` | Mark the feed-card region of a long note |
 | `{{</* references */>}}` | Render the BibTeX bibliography (see Citations) |
-| `{{</* gallery */>}}` + `{{</* gallery-item image=… caption=… link=… */>}}` | Image gallery |
 | `{{</* entry-a-to-z set="…" */>}}` | A–Z index over notes with a configured title field |
 | `{{</* entry-categories set="…" */>}}` | The same entries grouped by a configured category field |
 | `{{</* promotion-visual */>}}` | Rotating image promotion from a site data file; `sponsored=true` adds paid-placement disclosure |

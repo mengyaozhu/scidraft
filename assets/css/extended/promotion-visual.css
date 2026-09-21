@@ -1,6 +1,45 @@
-/* Styles for the VISUAL promo only ({{< promotion-visual >}}): the row label's
-   own spacing. Its title size comes from promotion-shared.css, and its image
-   grid from gallery.css (shared with the {{< gallery >}} shortcode). */
+/* Styles for the VISUAL promo only ({{< promotion-visual >}}): its row label
+   spacing and the image-row grid its pictures are laid out in. (The
+   {{< gallery >}} shortcode was retired; the grid below was shared with it,
+   so it moved here with the promo.) */
+
+/* Image row grid: 3 tiles per row, wrapping automatically; 2 on tablet,
+   1 on phone. */
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 1em 0;
+}
+
+.image-gallery .gallery-item figure {
+    margin: 0;
+}
+
+.image-gallery .gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+}
+
+.image-gallery .gallery-item figcaption {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--secondary);
+    margin-top: 0.4em;
+}
+
+@media (max-width: 680px) {
+    .image-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 440px) {
+    .image-gallery {
+        grid-template-columns: 1fr;
+    }
+}
 
 /* The row label is a <p><strong>…</strong></p> inside note content: give it
    deliberate spacing so the images sit a consistent distance below it. */
