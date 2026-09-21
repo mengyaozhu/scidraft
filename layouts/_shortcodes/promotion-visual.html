@@ -1,27 +1,27 @@
 {{- /* Visual promotion: a row of items shown as an image gallery, with one
        row picked at random on each build (deliberate per-build rotation; see
        also note-recommendations.html). The featured item set is yours — the example
-       data ships as data/template-rows (resume templates), but any data file
+       data ships as data/promotion-visual.yaml (resume templates), but any data file
        or content bundle works.
 
        Parameters:
-         data  = name of the site data file to read (default "template-rows")
+         data  = name of the site data file to read (default "promotion-visual")
          link  = fallback link for images (default: site param promotionLink)
 
        Paired with promotion-textual.html (text version of the same idea). */ -}}
-{{- $data := .Get "data" | default "template-rows" -}}
+{{- $data := .Get "data" | default "promotion-visual" -}}
 {{- $rows := (index site.Data $data).rows -}}
 {{- $bundle := site.GetPage "/resume-templates/modern-professional-resume" -}}
 {{- $link := .Get "link" | default site.Params.promotionLink -}}
 {{- $sponsored := .Get "sponsored" | default false -}}
 {{- $rel := cond $sponsored "sponsored noopener" "noopener" -}}
-<div data-template-row-random>
+<div data-promotion-visual>
   {{- range $row := $rows -}}
-  <div class="template-row" data-template-row-random-item>
+  <div class="promotion-visual-row" data-promotion-visual-item>
     {{- if $sponsored }}
     <p class="promotion-sponsored-line"><span class="promotion-sponsored-label">Sponsored</span></p>
     {{- end }}
-    <p class="template-row-label"><strong>{{ $row.label }}</strong></p>
+    <p class="promotion-visual-label"><strong>{{ $row.label }}</strong></p>
     <div class="image-gallery">
       {{- range $row.images -}}
       {{- $src := .file -}}
@@ -41,8 +41,8 @@
 <script>
   (function () {
     var box = document.currentScript && document.currentScript.previousElementSibling;
-    if (!box || !box.hasAttribute('data-template-row-random')) { return; }
-    var items = box.querySelectorAll('[data-template-row-random-item]');
+    if (!box || !box.hasAttribute('data-promotion-visual')) { return; }
+    var items = box.querySelectorAll('[data-promotion-visual-item]');
     if (!items.length) { return; }
     for (var i = 0; i < items.length; i++) { items[i].style.display = 'none'; }
     var pick = items[Math.floor(Math.random() * items.length)];

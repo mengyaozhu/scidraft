@@ -28,7 +28,7 @@ data file, rendered as an image gallery; each image links out.
 
 | Parameter | Default | Meaning |
 |---|---|---|
-| `data` | `template-rows` | Site data file to read (`data/<name>.<ext>`) |
+| `data` | `promotion-visual` | Site data file to read (`data/<name>.<ext>`) |
 | `link` | `promotionLink` site param | Fallback link for images without their own |
 
 ```toml

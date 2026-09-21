@@ -12,7 +12,7 @@
 /* Promotion title — shared by both promo types (textual headline and the
    visual promo's row label) so they cannot drift apart. */
 .textual-promotion-title,
-.template-row-label {
+.promotion-visual-label {
     font-size: 24px;
     font-weight: 600;
     line-height: 1.05;
@@ -22,7 +22,7 @@
 
 /* The visual row label is a <p><strong>…</strong></p>: neutralise the
    wrapper's paragraph spacing and let the shared title rule drive size. */
-.template-row .template-row-label {
+.promotion-visual-row .promotion-visual-label {
     margin: 0 0 0.6em;
 }
 
@@ -78,7 +78,7 @@
     }
 
     .textual-promotion-title,
-    .template-row-label {
+    .promotion-visual-label {
         font-size: 20px;
     }
 
@@ -109,7 +109,7 @@
    without stealing title width). Small type + tight spacing keep the added
    height to roughly half a text line. */
 .textual-promotion p.promotion-sponsored-line,
-.template-row p.promotion-sponsored-line {
+.promotion-visual-row p.promotion-sponsored-line {
     display: flex;
     justify-content: flex-start;
     margin: 0 0 0.2rem;
