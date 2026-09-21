@@ -180,12 +180,3 @@
 .menu > li.has-submenu.open > .menu-label .menu-caret {
     transform: rotate(180deg);
 }
-
-/* The header nav wraps the menu to a second row below this breakpoint; pin it
-   to a full-width row so its left edge stays on the page gutter (otherwise
-   space-between sizes the wrapped row to its own content). */
-@media (max-width: 768px) {
-    .menu {
-        flex: 1 1 100%;
-    }
-}

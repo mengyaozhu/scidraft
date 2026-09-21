@@ -7,16 +7,16 @@
 
 .md-content h1 {
     margin: 40px auto 32px;
-    font-size: 28px;   /* below .post-title (36px): notes open with their own
-                          "# 1. <Title>" heading, which must not compete */
+    font-size: 40px;
+}
 
 .md-content h2 {
     margin: 32px auto 24px;
-    font-size: 23px;
+    font-size: 32px;
 }
 
 .md-content h3 {
-    font-size: 19px;
+    font-size: 24px;
 }
 
 .md-content h4 {
@@ -97,41 +97,6 @@
 
 .md-content table th {
     text-align: start;
-}
-
-/* Table colours: borders slightly darker than the theme border, and a tinted
-   header row. Both must cover the three dark-mode paths: the manual .dark
-   class, the [data-theme="dark"] attribute, and the system preference. */
-.md-content table th,
-.md-content table:not(.highlighttable, .highlight table, .gist .highlight) td {
-    border-color: rgb(190, 190, 190);
-}
-
-.md-content table th {
-    background-color: rgb(242, 242, 242);
-}
-
-.dark .md-content table th,
-[data-theme="dark"] .md-content table th,
-.dark .md-content table:not(.highlighttable, .highlight table, .gist .highlight) td,
-[data-theme="dark"] .md-content table:not(.highlighttable, .highlight table, .gist .highlight) td {
-    border-color: rgb(170, 170, 170);
-}
-
-.dark .md-content table th,
-[data-theme="dark"] .md-content table th {
-    background-color: rgb(45, 45, 45);
-}
-
-@media (prefers-color-scheme: dark) {
-    html:not([data-theme="light"]) .md-content table th,
-    html:not([data-theme="light"]) .md-content table:not(.highlighttable, .highlight table, .gist .highlight) td {
-        border-color: rgb(170, 170, 170);
-    }
-
-    html:not([data-theme="light"]) .md-content table th {
-        background-color: rgb(45, 45, 45);
-    }
 }
 
 .md-content table:not(.highlighttable) td code:only-child {

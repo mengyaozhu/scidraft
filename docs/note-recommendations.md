@@ -15,7 +15,7 @@ Every note page, directly below the prev/next navigation and above the
 |---|---|---|
 | `layouts/notes/single.html` | **Placement** — the only place the feature is invoked | `partial "note-recommendations.html"` (line 29 at time of writing), immediately after `partial "note-nav-links.html"` |
 | `layouts/_partials/note-recommendations.html` | **Selection logic** — builds the list | the `$pool`, `$ranked`, `$pick` variables |
-| `assets/css/scidraft/note-recommendations.css` | **Appearance** — the box styling | the `.note-recommendations` rules |
+| `assets/css/extended/note-recommendations.css` | **Appearance** — the box styling | the `.note-recommendations` rules |
 | `hugo.toml` (site root, `[params]`) | **Count** — how many notes are shown | `recommendationCount` (line 17 at time of writing) |
 
 ## How the selection works (in `note-recommendations.html`)

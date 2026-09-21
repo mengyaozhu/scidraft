@@ -10,6 +10,7 @@
   # Scientific content: enable math rendering by default
   math = true
   # Homepage switch: true = Twitter-style notes feed, false = conventional post-card flow
+  homeNotesFeed = true
   ShowShareButtons = true
   ShowReadingTime = true
   ShowToc = true

@@ -1,4 +1,4 @@
-# Asset loading (what each page loads)
+# Scripts and asset loading
 
 How SciDraft decides what to load on each page.
 
@@ -22,9 +22,9 @@ be missed.
 ## Local bundles
 
 `layouts/_partials/head.html` builds fingerprinted bundles: the stylesheet
-(core + common + `assets/css/scidraft/*` + Chroma), `search.js`
+(core + common + `assets/css/extended/*` + Chroma), `search.js`
 (fuse + fastsearch + license), and the menu toggle. Anything in
-`assets/css/scidraft/` is picked up automatically — that is the folder for
+`assets/css/extended/` is picked up automatically — that is the folder for
 site/theme style additions.
 
 ## CDN dependencies
@@ -32,15 +32,15 @@ site/theme style additions.
 KaTeX, pseudocode.js, Mermaid, and citation-js load from jsDelivr. Offline
 builds still work; the rendered features need network at view time.
 
-## Analytics: none by default
+## Known site-specific item
 
-The theme ships **no analytics**. `extend_head.html` has a marked placeholder
-where a site owner can paste their own snippet (Google Analytics, Plausible,
-etc.); a site can also override that partial entirely from its own
-`layouts/_partials/extend_head.html`.
+`extend_head.html` currently contains a **Google Analytics tag with a
+hardcoded tracking ID**. It is site-specific and should move to site config
+(or be removed) before the theme is published — as shipped, every user's site
+would report to that property.
 
 ## Verify after a change
 
 1. Build; open a note with an algorithm — pseudocode + KaTeX scripts present
    in the page source; a plain note without `math` should not load them.
-2. The stylesheet bundle contains rules from `assets/css/scidraft/`.
+2. The stylesheet bundle contains rules from `assets/css/extended/`.

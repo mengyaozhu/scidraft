@@ -129,9 +129,10 @@ the first, the byline joins them.
 ```toml
 [params]
   # Content
-  mainSections = ["notes"]     # the notes section: the feed lists it, and the
-                               # entry-map / recommendations read it
+  mainSections = ["notes"]     # sections that feed listings (used by occupation
+                               # indexes and random recommendations)
   math = true                  # KaTeX math rendering
+  homeNotesFeed = true         # true = notes feed homepage, false = classic post list
 
   # Identity defaults (see above)
   institute = "DyCoAI.com"
@@ -150,19 +151,10 @@ the first, the byline joins them.
   ShowRelatedPosts = true
 ```
 
-### Menus
-
-Menu items live in the site's `hugo.toml` under `[menu.main]`: items, weights,
-parents, and an optional `note` subtitle shown under a child name. Adding,
-reordering, or nesting them is documented in
-[docs/navigation.md](docs/navigation.md#site-menus).
-
 ### Math
 
-Math is typeset by **KaTeX** in the visitor's browser (auto-render), so no
-math is pre-rendered into the HTML. Markdown must not eat the delimiters —
-enable the goldmark passthrough block shown in Quick start, or math will
-appear as raw text. Inline
+Math is typeset by **KaTeX at build time** — formulas arrive in the HTML
+already rendered, with no client-side math library on content pages. Inline
 `\( … \)` / `$ … $` and display `\[ … \]` / `$$ … $$` both work. The search
 page loads MathJax itself, because search previews are generated in the
 browser.
@@ -230,7 +222,7 @@ is in [`docs/README.md`](docs/README.md), with one detail page per function.
   `notes/` section layouts)
 - `assets/css/core/` — palette variables (`theme-vars.css`)
 - `assets/css/common/` — PaperMod base styles
-- `assets/css/scidraft/` — SciDraft's own styles (notes, citations, galleries,
+- `assets/css/extended/` — SciDraft's own styles (notes, citations, galleries,
   occupation map, …) — the place to add overrides
 - `assets/js/` — search, menu toggle, license notices
 

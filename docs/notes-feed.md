@@ -5,7 +5,7 @@ timestamp, body (or preview), read-more link, and tags.
 
 ## Where it appears
 
-- Homepage — always the notes feed (SciDraft has one homepage model)
+- Homepage — the notes feed, unless `homeNotesFeed = false`
 - `/notes/` — always the same feed, paginated
 - Both render the identical partial, so a change applies to both
 
@@ -13,12 +13,12 @@ timestamp, body (or preview), read-more link, and tags.
 
 | File | Role | Look for |
 |---|---|---|
-| `layouts/home.html` | Renders the feed on the homepage | the `partial "notes-feed.html"` call |
+| `layouts/home.html` | Chooses the homepage mode | `site.Params.homeNotesFeed`, the `partial "notes-feed.html"` call |
 | `layouts/_partials/notes-feed.html` | Feed logic: which notes, promo rotation, pagination | `$realNotes`, `$promos`, `$regular`, `.Paginate`, `$seed` |
 | `layouts/notes/list.html` | Makes `/notes/` render the shared feed | `partial "notes-feed.html"` |
 | `layouts/_partials/note-card.html` | Each card's markup (see note-cards.md) | — |
 | `layouts/_partials/numbered-pagination.html` | The page bar under the feed | — |
-| `assets/css/scidraft/notes.css` | Feed/card styling | `.notes-feed`, `.note-card` |
+| `assets/css/extended/notes.css` | Feed/card styling | `.notes-feed`, `.note-card` |
 
 ## How it works
 
@@ -33,7 +33,7 @@ timestamp, body (or preview), read-more link, and tags.
 
 | Setting | Where | Effect |
 |---|---|---|
-
+| `homeNotesFeed` | site `hugo.toml` → `[params]` | `true`: homepage is the notes feed. `false`: homepage is the classic post-card list |
 | `pagination.pagerSize` | site `hugo.toml` | Cards per page used by Hugo's paginator |
 
 ## Verify after a change

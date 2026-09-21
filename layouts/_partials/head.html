@@ -56,11 +56,11 @@
 
 {{- /* order is important */}}
 {{- $core := (slice $theme_vars $reset $common $chroma_styles $chroma_mod $includes_all $media) | resources.Concat "assets/css/core.css" | resources.Minify }}
-{{- $scidraft := (resources.Match "css/scidraft/*.css") | resources.Concat "assets/css/scidraft.css" | resources.Minify }}
+{{- $extended := (resources.Match "css/extended/*.css") | resources.Concat "assets/css/extended.css" | resources.Minify }}
 
 {{- /* bundle all required css */}}
-{{- /* SciDraft's own styles load after the base layers so they win */ -}}
-{{- $stylesheet := (slice $license_css $core $scidraft) | resources.Concat "assets/css/stylesheet.css"  }}
+{{- /* Add extended css after theme style */ -}}
+{{- $stylesheet := (slice $license_css $core $extended) | resources.Concat "assets/css/stylesheet.css"  }}
 
 {{- if not site.Params.assets.disableFingerprinting }}
 {{- $stylesheet := $stylesheet | fingerprint }}
