@@ -22,11 +22,11 @@
 
 /* The visual row label is a <p><strong>…</strong></p>: neutralise the
    wrapper's paragraph spacing and let the shared title rule drive size. */
-p.template-row-label {
+.template-row .template-row-label {
     margin: 0 0 0.6em;
 }
 
-.textual-promotion-subtitle {
+.textual-promotion .textual-promotion-subtitle {
     margin: 0.9em 0 1.6em;
     font-size: 1rem;
     line-height: 1.4;
@@ -108,7 +108,8 @@ p.template-row-label {
    axis, directly above the promoted content (disclosure before content,
    without stealing title width). Small type + tight spacing keep the added
    height to roughly half a text line. */
-.promotion-sponsored-line {
+.textual-promotion p.promotion-sponsored-line,
+.template-row p.promotion-sponsored-line {
     display: flex;
     justify-content: flex-start;
     margin: 0 0 0.2rem;
