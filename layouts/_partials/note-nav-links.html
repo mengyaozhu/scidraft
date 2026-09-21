@@ -3,6 +3,9 @@
        (not site.Params.mainSections, which points at posts), so notes
        navigate only among other notes. */}}
 {{- $pages := where site.RegularPages "Section" "notes" }}
+{{- /* Notes with no content are not yet published, so they stay out of the
+       prev/next chain entirely (same rule the feed uses). */ -}}
+{{- $pages = where $pages "Content" "!=" "" }}
 {{- if and (gt (len $pages) 1) (in $pages .) }}
 <nav class="paginav">
   {{- with $pages.Next . }}
