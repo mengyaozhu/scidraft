@@ -46,6 +46,7 @@
 
 .post-entry {
     position: relative;
+    transition: none;   /* hover lift deliberately disabled (see below) */
     margin-bottom: var(--gap);
     padding: var(--gap);
     background: var(--entry);
@@ -54,11 +55,14 @@
     border: 1px solid var(--border);
 }
 
+/* Hover lift disabled on purpose: entries stay still and keep their border
+   colour. Restore by un-commenting the two rules:
 .post-entry:hover,
 .post-entry:focus-within {
     transform: translateY(-2px);
     border-color: var(--tertiary);
 }
+*/
 
 .tag-entry .entry-cover {
     display: none;
