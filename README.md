@@ -132,7 +132,6 @@ the first, the byline joins them.
   mainSections = ["notes"]     # sections that feed listings (used by occupation
                                # indexes and random recommendations)
   math = true                  # KaTeX math rendering
-  homeNotesFeed = true         # true = notes feed homepage, false = classic post list
 
   # Identity defaults (see above)
   institute = "DyCoAI.com"
