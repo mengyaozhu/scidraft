@@ -24,7 +24,9 @@ timestamp, body (or preview), read-more link, and tags.
 
 - Notes are `content/notes/*.md` pages with non-empty content; **promotions**
   (`promotion = true`) are excluded from the date flow.
-- Page size: 6 regular cards, or 5 + 1 promotion card when promotions exist.
+- Page size comes from the site's `pagination.pagerSize`. A promotion card is
+  inserted **in addition** to it, as the third card of the page, so a page that
+  shows a promotion carries one card more than the configured number.
   The promotion shown on a page is picked pseudo-randomly per build
   (`now.Unix` seeded hash), and never repeats the previous page's pick.
 - Long notes appear as preview cards (see note-cards.md).
@@ -33,7 +35,7 @@ timestamp, body (or preview), read-more link, and tags.
 
 | Setting | Where | Effect |
 |---|---|---|
-| `pagination.pagerSize` | site `hugo.toml` | Cards per page used by Hugo's paginator |
+| `pagination.pagerSize` | site `hugo.toml` | Notes per page in the feed (the theme itself sets 6 as a default) |
 
 ## Verify after a change
 

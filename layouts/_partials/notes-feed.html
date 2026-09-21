@@ -2,18 +2,24 @@
        section page). Promotion notes (front matter `promotion = true`) are
        excluded from the date flow and shown as the 3rd card on each page.
 
+       Page size comes from the site's own `[pagination] pagerSize`, so the
+       number of notes per page is set in one place: the config. A promotion
+       card is inserted in addition to that, as the third card of the page, so
+       a page with a promotion carries one card more than the configured
+       number.
+
        The promotion is picked pseudo-randomly: a per-build seed (build
        timestamp) hashed with the page number gives an equal-probability
        index into the promotions, reshuffled on every deploy/rebuild. With
        two or more promotions, a pick equal to the previous page's is
        re-drawn among the remaining ones, so the same promotion never
-       appears on consecutive pages. With exactly one promotion it shows
-       on every page; with none the feed keeps 6 regular cards per page. */ -}}
+       appears on consecutive pages. With exactly one promotion it shows on
+       every page. */ -}}
 {{- $realNotes := where .Pages "Content" "!=" "" }}
 {{- $promos := sort (where $realNotes ".Params.promotion" true) "Path" }}
 {{- $regular := where $realNotes ".Params.promotion" "!=" true }}
 {{- $n := len $promos }}
-{{- $paginator := .Paginate $regular (cond (gt $n 0) 5 6) }}
+{{- $paginator := .Paginate $regular }}
 {{- $promo := "" }}
 {{- if gt $n 0 }}
 {{-     $seed := now.Unix }}
