@@ -1,0 +1,57 @@
+/* Table variants — opt-in per table, chosen by a block attribute on the
+   line after the table (Goldmark block attributes are enabled in the site
+   config, `markup.goldmark.parser.attribute.block = true`):
+
+   | Model | Parameters |
+   | ----- | ---------- |
+   | small | 125M       |
+   {.table-academic}
+
+   The base skin (bordered cells, tinted header row) lives in
+   md-content.css; this file adds alternative skins only. Column alignment
+   stays the author's choice through the delimiter row (`:--`, `:-:`, `--:`).
+
+   Cell rules need `!important` to override the base skin: that rule is
+   `.md-content table:not(.highlighttable, .highlight table, .gist
+   .highlight) td`, and the `:not()` list is weighted by its heaviest
+   argument (`.gist .highlight`, two classes), so its specificity is
+   (0,3,2) — above anything a single extra class can reach. md-content.css
+   itself overrides a few rules the same way. Colours come from the theme
+   variables, so light and dark modes need no separate rules. */
+
+/* Three horizontal rules only — no vertical lines, no header tint. The
+   shape journals and conference papers use for results tables. */
+.md-content table.table-academic {
+    border-top: 1.5px solid var(--primary);
+    border-bottom: 1.5px solid var(--primary);
+}
+
+.md-content table.table-academic tr > th,
+.md-content table.table-academic tr > td {
+    border: 0 !important;
+    padding: 5px 14px !important;
+}
+
+/* Equally weighted with the rule above but later in the file, so it
+   restores the rule under the header that the shorthand removed. */
+.md-content table.table-academic tr > th {
+    background-color: transparent;
+    border-bottom: 1px solid var(--secondary) !important;
+}
+
+/* Horizontal rules plus a tinted every-other row: the reading aid for wide
+   tables whose rows are hard to follow across many columns. */
+.md-content table.table-striped tr > th,
+.md-content table.table-striped tr > td {
+    border: 0 !important;
+    border-bottom: 1px solid var(--border) !important;
+}
+
+.md-content table.table-striped tr > th {
+    background-color: transparent;
+    border-bottom: 1px solid var(--secondary) !important;
+}
+
+.md-content table.table-striped tbody tr:nth-child(odd) > td {
+    background-color: var(--code-bg);
+}

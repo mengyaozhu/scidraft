@@ -1,7 +1,7 @@
-# Scientific rendering: math, algorithms, diagrams, citations
+# Scientific rendering: math, algorithms, diagrams, tables, citations
 
 Four rendering pipelines, all wired through the theme's script hub
-`layouts/_partials/extend_head.html`.
+`layouts/_partials/extend_head.html`, plus the table skins below.
 
 ## Math (KaTeX, in the browser)
 
@@ -44,6 +44,38 @@ Fenced ```` ```mermaid ```` blocks; the render hook flags the page and
 `extend_head.html` loads Mermaid from CDN. Loaded on flagged pages plus the
 notes feed (whose cards can contain diagrams).
 
+## Tables (Markdown, three skins)
+
+Plain Markdown tables use the default skin: bordered cells and a tinted header
+row. Column alignment comes from the delimiter row (`:--`, `:-:`, `--:`), so a
+numeric column can be right-aligned without touching CSS.
+
+Two other skins are selected per table by a Goldmark block attribute on the line
+after the table. The site must enable block attributes
+(`markup.goldmark.parser.attribute.block = true`; the theme cannot supply it —
+Hugo does not merge `[markup]` from theme configs):
+
+````markdown
+| Parameters | Loss  |
+| ---------: | ----: |
+| 125M       | 2.914 |
+{.table-academic}
+````
+
+| Skin | Attribute | Look |
+|---|---|---|
+| Default | none | Bordered cells, tinted header row |
+| Academic | `{.table-academic}` | Rules above, under the header and at the bottom; no vertical lines, no tint |
+| Striped | `{.table-striped}` | Horizontal rules plus a tinted every-other row |
+
+Styling lives in `assets/css/common/table.css` (the variants) over the base skin
+in `md-content.css`. Both variants take their colours from the theme variables,
+so light and dark modes need no separate rules, and both carry `!important` on
+the cell properties: the base rule is
+`.md-content table:not(.highlighttable, .highlight table, .gist .highlight) td`,
+whose `:not()` list is weighted by its heaviest argument (`.gist .highlight`,
+two classes), which no single extra class can outrank.
+
 ## Citations (citation-js + BibTeX)
 
 - References live in the **site's** `assets/bib/refs.bib`.
@@ -69,5 +101,7 @@ That is the only MathJax left in the theme.
 2. A pseudo-algorithm block renders with line numbers; its math is typeset.
 3. A mermaid fence renders a diagram.
 4. `\cite{...}` becomes a numbered link; `{{< references >}}` lists entries.
-5. Check the browser console for CDN load failures (all four pipelines rely on
+5. A table carrying `{.table-academic}` or `{.table-striped}` changes skin,
+   while neighbouring tables keep the default one.
+6. Check the browser console for CDN load failures (all four pipelines rely on
    jsDelivr).

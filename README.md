@@ -4,7 +4,8 @@
 
 Built for quick research notes and comprehensive scientific articles — one content
 type, with BibTeX citations, KaTeX math, mermaid diagrams, pseudo-algorithm
-blocks, and per-series A–Z / category indexes (the entry map).
+blocks, per-table style variants, and per-series A–Z / category indexes (the
+entry map).
 
 [![Minimum Hugo Version](https://img.shields.io/static/v1?label=Hugo&message=v0.146.0%2B&color=blue&logo=hugo)](https://github.com/gohugoio/hugo/releases/tag/v0.146.0)
 
@@ -36,6 +37,9 @@ theme = "SciDraft"
       [markup.goldmark.extensions.passthrough.delimiters]
         block = [['$$', '$$'], ['\[', '\]']]
         inline = [['\(', '\)'], ['$', '$']]
+    # Required for the table skins: lets an attribute line follow a table.
+    [markup.goldmark.parser.attribute]
+      block = true
 ```
 
 Put notes in `content/notes/*.md`. Short notes render in full inside the feed;
@@ -152,11 +156,28 @@ the first, the byline joins them.
 
 ### Math
 
-Math is typeset by **KaTeX at build time** — formulas arrive in the HTML
-already rendered, with no client-side math library on content pages. Inline
-`\( … \)` / `$ … $` and display `\[ … \]` / `$$ … $$` both work. The search
-page loads MathJax itself, because search previews are generated in the
+Math is typeset by **KaTeX in the browser** — KaTeX auto-render runs on note
+bodies after the page loads, so content pages carry no build-time math step.
+Inline `\( … \)` / `$ … $` and display `\[ … \]` / `$$ … $$` both work. The
+search page loads MathJax itself, because search previews are generated in the
 browser.
+
+### Tables
+
+A plain Markdown table gets the default skin: bordered cells and a tinted header
+row. Column alignment comes from the delimiter row (`:--`, `:-:`, `--:`), so
+numeric columns can be right-aligned without any CSS.
+
+Two more skins are chosen per table with a Goldmark block attribute on the line
+after the table — the same syntax works for any table in any note:
+
+| Attribute | Look | Use it for |
+|---|---|---|
+| `{.table-academic}` | Rule above, rule under the header, rule at the bottom; no vertical lines, no header tint | Results and notation tables, in the shape journals ask for |
+| `{.table-striped}` | Horizontal rules plus a tinted every-other row | Wide comparison tables whose rows are hard to follow |
+
+Both need block attributes enabled in the **site** config
+(`markup.goldmark.parser.attribute.block = true`); see the quick start above.
 
 ### Citations
 
