@@ -1,0 +1,52 @@
+/* Promotion styles shared by BOTH promo types (promotion-textual and
+   promotion-visual): the title treatment and the "Sponsored" disclosure
+   badge. Type-specific rules live in promotion-textual.css and
+   promotion-visual.css and load after this file, so they override these
+   when a type needs to differ. */
+
+/* Promotion title — the textual card's headline and the visual promo's row
+   label render at the same size/weight so the two types look like one
+   family. Loaded before the type files, so a type may override. */
+.textual-promotion-title,
+.promotion-visual-label {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--primary);
+}
+
+/* "Sponsored" label — rendered when a promo is marked sponsored=true
+   (disclosure for paid/affiliate links). */
+.promotion-sponsored-label {
+    display: inline-block;
+    font-size: 0.65rem;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.12rem 0.35rem;
+    vertical-align: middle;
+}
+
+/* Badge line: its own row, left-aligned with the title on the same vertical
+   axis, directly above the promoted content (disclosure before content,
+   without stealing title width). Small type + tight spacing keep the added
+   height to roughly half a text line. */
+.textual-promotion p.promotion-sponsored-line,
+.promotion-visual-row p.promotion-sponsored-line {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 0 0.2rem;
+    line-height: 1;
+}
+
+@media (max-width: 680px) {
+    .textual-promotion-title,
+    .promotion-visual-label {
+        font-size: 20px;
+    }
+}

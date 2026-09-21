@@ -1,0 +1,9 @@
+/* Styles for the VISUAL promo only ({{< promotion-visual >}}): the row label's
+   own spacing. Its title size comes from promotion-shared.css, and its image
+   grid from gallery.css (shared with the {{< gallery >}} shortcode). */
+
+/* The row label is a <p><strong>…</strong></p> inside note content: give it
+   deliberate spacing so the images sit a consistent distance below it. */
+.promotion-visual-row .promotion-visual-label {
+    margin: 0 0 0.6em;
+}

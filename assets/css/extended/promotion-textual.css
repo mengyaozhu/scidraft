@@ -1,4 +1,7 @@
-/* Promotion (textual) box — styles the {{< promotion-textual >}} shortcode: tinted card with bold headline, subtitle, dark pill button */
+/* Styles for the TEXTUAL promo only ({{< promotion-textual >}}): the tinted
+   card, its subtitle, and the pill button. Shared rules (title size, the
+   Sponsored badge) live in promotion-shared.css and load before this file;
+   the visual promo's own rules live in promotion-visual.css. */
 
 .textual-promotion {
     background: var(--code-bg);
@@ -7,23 +10,6 @@
     padding: 2.2em 2.4em;
     margin: 1.6em 0;
     color: var(--primary);
-}
-
-/* Promotion title — shared by both promo types (textual headline and the
-   visual promo's row label) so they cannot drift apart. */
-.textual-promotion-title,
-.promotion-visual-label {
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 1.05;
-    letter-spacing: -0.01em;
-    color: var(--primary);
-}
-
-/* The visual row label is a <p><strong>…</strong></p>: neutralise the
-   wrapper's paragraph spacing and let the shared title rule drive size. */
-.promotion-visual-row .promotion-visual-label {
-    margin: 0 0 0.6em;
 }
 
 .textual-promotion .textual-promotion-subtitle {
@@ -77,42 +63,8 @@
         padding: 1.6em 1.4em;
     }
 
-    .textual-promotion-title,
-    .promotion-visual-label {
-        font-size: 20px;
-    }
-
     .textual-promotion-button {
         width: 100%;
         text-align: center;
     }
 }
-
-/* "Sponsored" label — shared by promotion-textual and promotion-visual when
-   the sponsored=true flag is set (disclosure for paid/affiliate links). */
-.promotion-sponsored-label {
-    display: inline-block;
-    font-size: 0.65rem;
-    line-height: 1;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--secondary);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 0.12rem 0.35rem;
-    vertical-align: middle;
-}
-
-/* Badge line: own row, LEFT-aligned with the title on the same vertical
-   axis, directly above the promoted content (disclosure before content,
-   without stealing title width). Small type + tight spacing keep the added
-   height to roughly half a text line. */
-.textual-promotion p.promotion-sponsored-line,
-.promotion-visual-row p.promotion-sponsored-line {
-    display: flex;
-    justify-content: flex-start;
-    margin: 0 0 0.2rem;
-    line-height: 1;
-}
-
