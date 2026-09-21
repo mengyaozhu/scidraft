@@ -116,6 +116,7 @@ details li ul {
 .post-content {
     color: var(--content);
     margin: 30px 0;
+    max-width: var(--main-width);
 }
 
 .post-footer {
