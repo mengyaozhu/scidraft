@@ -1,0 +1,10 @@
+/*
+  Your own styles go here.
+
+  This folder is loaded after the theme's own stylesheets, so anything you
+  write in this file overrides SciDraft's defaults without needing
+  !important — the right place for a site's personal tweaks.
+
+  Kept as a file (rather than an empty folder) so the folder exists in fresh
+  clones and the load order stays predictable.
+*/
