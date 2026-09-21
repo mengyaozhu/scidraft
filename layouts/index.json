@@ -1,6 +1,8 @@
 {{- $.Scratch.Add "index" slice -}}
 {{- range site.RegularPages -}}
-    {{- if and (not .Params.searchHidden) (ne .Layout `archives`) (ne .Layout `search`) }}
+    {{- /* Notes with no content are not yet published: keep them out of the
+           on-site search results. */ -}}
+    {{- if and (not .Params.searchHidden) (ne .Layout `archives`) (ne .Layout `search`) (ne (trim .Plain " \n\r\t") "") }}
     {{- $.Scratch.Add "index" (dict "title" .Title "content" .Plain "permalink" .Permalink "summary" .Summary) -}}
     {{- end }}
 {{- end -}}
