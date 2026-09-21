@@ -25,7 +25,7 @@ Any page whose body calls the shortcodes — typically two pages per series:
 |---|---|---|
 | `layouts/_shortcodes/entry-a-to-z.html` | A–Z view | `$titleField`, `$pool`, `$sorted` |
 | `layouts/_shortcodes/entry-categories.html` | Grouped index | `$categoryField`, `$categories`, `Uncategorised` |
-| `assets/css/extended/entry-map.css` | Styling for both | `.entry-*` classes |
+| `assets/css/scidraft/entry-map.css` | Styling for both | `.entry-*` classes |
 | site `hugo.toml` → `[params.entrySets.*]` | One block per series | field names + membership + label |
 | the notes | The data | the fields named in the set |
 

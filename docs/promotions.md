@@ -19,7 +19,7 @@ in `layouts/_partials/notes-feed.html` (`$promos`, `$seed`).
 
 `{{< promotion-textual >}}` — a card with headline, subtitle, and one or two
 pill buttons. Parameters drive the text and links; styles in
-`assets/css/extended/promotion-textual.css`.
+`assets/css/scidraft/promotion-textual.css`.
 
 ## 3. Visual promotion (image row)
 

@@ -22,9 +22,9 @@ be missed.
 ## Local bundles
 
 `layouts/_partials/head.html` builds fingerprinted bundles: the stylesheet
-(core + common + `assets/css/extended/*` + Chroma), `search.js`
+(core + common + `assets/css/scidraft/*` + Chroma), `search.js`
 (fuse + fastsearch + license), and the menu toggle. Anything in
-`assets/css/extended/` is picked up automatically — that is the folder for
+`assets/css/scidraft/` is picked up automatically — that is the folder for
 site/theme style additions.
 
 ## CDN dependencies
@@ -43,4 +43,4 @@ would report to that property.
 
 1. Build; open a note with an algorithm — pseudocode + KaTeX scripts present
    in the page source; a plain note without `math` should not load them.
-2. The stylesheet bundle contains rules from `assets/css/extended/`.
+2. The stylesheet bundle contains rules from `assets/css/scidraft/`.

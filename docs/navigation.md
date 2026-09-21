@@ -9,7 +9,7 @@ numbered pagination bar, and the back-to-top link.
 |---|---|
 | site `hugo.toml` → `[menu.main]` | The menu itself: items, weights, parents, `[menu.main.params] note` (subtitle) |
 | `layouts/_partials/header.html` | Renders the menu, theme toggle, site title |
-| `assets/css/extended/menu.css` | Dropdown styling (hover for pointers, focus for keyboard) |
+| `assets/css/scidraft/menu.css` | Dropdown styling (hover for pointers, focus for keyboard) |
 | `assets/js/menu-toggle.js` | Tap-to-toggle for touch devices: toggles `.open` on the parent `li` and syncs `aria-expanded` |
 | `layouts/baseof.html` | Bundles menu-toggle.js and deliberately does **not** cache the header |
 
@@ -24,7 +24,7 @@ pages. The pool is the `notes` section, so notes navigate among notes only
 
 ## Numbered pagination
 
-`layouts/_partials/numbered-pagination.html` + `assets/css/extended/numbered-pagination.css`
+`layouts/_partials/numbered-pagination.html` + `assets/css/scidraft/numbered-pagination.css`
 — the page bar (‹ 1 … 4 … 9 ›) under feeds and lists. Called from
 `home.html`, `list.html`, and `notes-feed.html`. Deliberately does not reuse
 PaperMod's `.pagination` class (its pill rules conflict).

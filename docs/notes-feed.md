@@ -18,7 +18,7 @@ timestamp, body (or preview), read-more link, and tags.
 | `layouts/notes/list.html` | Makes `/notes/` render the shared feed | `partial "notes-feed.html"` |
 | `layouts/_partials/note-card.html` | Each card's markup (see note-cards.md) | — |
 | `layouts/_partials/numbered-pagination.html` | The page bar under the feed | — |
-| `assets/css/extended/notes.css` | Feed/card styling | `.notes-feed`, `.note-card` |
+| `assets/css/scidraft/notes.css` | Feed/card styling | `.notes-feed`, `.note-card` |
 
 ## How it works
 

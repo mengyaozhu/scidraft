@@ -49,7 +49,7 @@ notes feed (whose cards can contain diagrams).
   page (`hasCitations`); `extend_head.html` loads citation-js and fills the
   container with APA entries.
 - Raw `pre`/`code` blocks are skipped, so syntax examples stay literal.
-- Styling: `assets/css/extended/references.css` — named after the block it
+- Styling: `assets/css/scidraft/references.css` — named after the block it
   mostly styles; it also holds the one rule for inline citation markers.
 
 ## Search page exception

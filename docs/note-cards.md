@@ -15,7 +15,7 @@ page header block.
 | `layouts/_partials/note-card.html` | Card markup + preview extraction + title logic | `$preview`, `findRESubmatch`, `$showTitle`, `isset .Params "showtitle"` |
 | `layouts/notes/single.html` | The note page layout (renders the card header + body) | `partial "related..."`, `$institute`, `$author` |
 | `layouts/_shortcodes/preview.html` | The marker shortcode itself (renders inner text on the full page) | `.Inner` |
-| `assets/css/extended/notes.css` | Card styling | `.note-card`, `.note-head`, `.note-body`, `.note-tags`, `.note-title`, `.note-readmore` |
+| `assets/css/scidraft/notes.css` | Card styling | `.note-card`, `.note-head`, `.note-body`, `.note-tags`, `.note-title`, `.note-readmore` |
 
 ## Preview markers
 

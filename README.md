@@ -222,7 +222,7 @@ is in [`docs/README.md`](docs/README.md), with one detail page per function.
   `notes/` section layouts)
 - `assets/css/core/` — palette variables (`theme-vars.css`)
 - `assets/css/common/` — PaperMod base styles
-- `assets/css/extended/` — SciDraft's own styles (notes, citations, galleries,
+- `assets/css/scidraft/` — SciDraft's own styles (notes, citations, galleries,
   occupation map, …) — the place to add overrides
 - `assets/js/` — search, menu toggle, license notices
 
