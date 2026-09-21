@@ -24,11 +24,9 @@
         {{- range . }}<a class="note-tag" href="{{ printf "tags/%s/" (urlize .) | absLangURL }}">#{{ . }}</a>{{ end }}
     </footer>
     {{- end }}
-    {{- /* Share row: on by default via the site setting ShowShareButtons;
-           a single note can opt out with `disableShare = true`. */ -}}
-    {{- if (and site.Params.ShowShareButtons (ne .Params.disableShare true)) }}
+    {{- /* Share row: the partial itself decides whether to render (site
+           setting ShowShareButtons, per-page opt-out `disableShare`). */ -}}
     {{- partial "share_icons.html" . -}}
-    {{- end }}
 </article>
 {{- partial "note-nav-links.html" . }}
 {{- partial "note-recommendations.html" . }}

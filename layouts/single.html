@@ -57,9 +57,9 @@
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}
     {{- end }}
-    {{- if (and site.Params.ShowShareButtons (ne .Params.disableShare true)) }}
+    {{- /* Share row: the partial itself decides whether to render (site
+           setting ShowShareButtons, per-page opt-out `disableShare`). */ -}}
     {{- partial "share_icons.html" . -}}
-    {{- end }}
   </footer>
 
   {{- if (.Param "comments") }}

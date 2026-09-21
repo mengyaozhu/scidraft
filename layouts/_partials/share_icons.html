@@ -1,3 +1,7 @@
+{{- /* Share row. Renders only when the site setting ShowShareButtons is on
+       and the page has not opted out with `disableShare = true`; callers can
+       therefore include it unconditionally. */ -}}
+{{- if (and site.Params.ShowShareButtons (ne .Params.disableShare true)) -}}
 {{- $pageurl := .Permalink }}
 {{- $title := .Title }}
 
@@ -93,3 +97,5 @@
     </li>
     {{- end }}
 </ul>
+
+{{- end -}}
