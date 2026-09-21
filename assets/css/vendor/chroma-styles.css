@@ -1,3 +1,6 @@
+/* Syntax-highlighting colours: Catppuccin Macchiato, as produced by
+   `hugo gen chromastyles --style=<name>` (generated file — regenerate rather
+   than hand-edit; layout fixes live in chroma-mod.css). */
 /* Background */ .bg { color: #cad3f5; background-color: #24273a; }
 /* PreWrapper */ .chroma { color: #cad3f5; background-color: #24273a; }
 /* Other */ .chroma .x {  }
