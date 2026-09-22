@@ -1,32 +1,27 @@
 name: Enhancement 🚀
-description: Propose a new feature or change for enhancing the experience.
+description: Propose a new feature or change for SciDraft
 title: "[Enhancement]: "
 labels: ["enhancement", "triage"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this enhancement form :)
-        - Use [Discussions](https://github.com/adityatelange/hugo-PaperMod/discussions) section if you have a query or doubts or any other relevant question.
-        - You may join [Discord community](https://discord.gg/ahpmTvhVmp) to interact with fellow contributors and users
-        - Read project's [Wiki](https://github.com/adityatelange/hugo-PaperMod/wiki) for detailed documentation.
-        - Read project's [FAQs](https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs) section for Frequently asked questions.
-        - Search for previous [Issues](https://github.com/adityatelange/hugo-PaperMod/issues)/[Pull Requests](https://github.com/adityatelange/hugo-PaperMod/pulls) if this issue is already reported or fix has been created.
+        Thanks for taking the time to propose an enhancement to SciDraft :)
+        - Search previous [Issues](https://github.com/mengyaozhu/scidraft/issues) in case this was already proposed.
+        - If it is a question rather than a proposal, consider opening a regular issue instead.
   - type: textarea
-    id: what_happened
+    id: proposal
     attributes:
-      label: What you'd like to propose?
-      description:
-      placeholder:
+      label: What would you like to propose?
+      description: Describe the feature or change, and the problem it solves for scientific writing/notes.
+      placeholder: A clear description of what you want to happen.
     validations:
       required: true
-  - type: checkboxes
-    id: terms
+  - type: textarea
+    id: alternatives
     attributes:
-      label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/adityatelange/hugo-PaperMod?tab=coc-ov-file#readme).
-      options:
-        - label: I agree to follow this project's Code of Conduct
-          required: true
+      label: Alternatives you have considered
+      description: Any existing workaround, theme option, or shortcode you already tried.
+      placeholder: Optional.
     validations:
-      required: true
+      required: false

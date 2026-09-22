@@ -1,21 +1,21 @@
-name: Deploy Hugo PaperMod Demo to Pages
+name: Deploy SciDraft demo to GitHub Pages
+
+# Builds the exampleSite/ demo on every push to main and publishes it to
+# GitHub Pages, so https://mengyaozhu.github.io/scidraft/ always shows the
+# theme exactly as its users see it. One-time setup after the first push:
+# repo Settings -> Pages -> Build and deployment -> Source: "GitHub Actions"
+# (the configure-pages step below enables this automatically when it can).
 
 on:
   push:
-    paths-ignore:
-      - "images/**"
-      - "LICENSE"
-      - "README.md"
     branches:
-      - master
-      - exampleSite
+      - main
   workflow_dispatch:
-    # manual run
     inputs:
       hugoVersion:
         description: "Hugo Version"
         required: false
-        default: "latest"
+        default: "0.147.0"
 
 # Allow one concurrent deployment
 concurrency:
@@ -27,50 +27,45 @@ defaults:
   run:
     shell: bash
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  # Build job
   build:
-    permissions:
-      contents: read
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: ${{ github.event.inputs.hugoVersion || 'latest' }}
+      HUGO_VERSION: ${{ github.event.inputs.hugoVersion || '0.147.0' }}
     steps:
-      - name: Resolve Hugo version
-        run: |
-          if [ "${HUGO_VERSION}" = "latest" ]; then
-            HUGO_VERSION=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep '"tag_name"' | sed 's/.*"v\([^"]*\)".*/\1/')
-            echo "HUGO_VERSION=${HUGO_VERSION}" >> $GITHUB_ENV
-          fi
-      - name: Install Hugo CLI
-        run: |
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux-amd64.deb \
-          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          ref: exampleSite
+
+      - name: Install Hugo CLI
+        run: |
+          wget -O "${{ runner.temp }}/hugo.deb" https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux-amd64.deb \
+          && sudo dpkg -i "${{ runner.temp }}/hugo.deb"
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v6
-      - name: Get Theme
-        run: git submodule update --init --recursive
-      - name: Update theme to Latest commit
-        run: git submodule update --remote --merge
-      - name: Build with Hugo
+        with:
+          enablement: true
+
+      - name: Build exampleSite with Hugo
         run: |
           hugo \
-            --buildDrafts --gc \
-            --baseURL ${{ steps.pages.outputs.base_url }}
+            --source exampleSite \
+            --gc \
+            --minify \
+            --baseURL "${{ steps.pages.outputs.base_url }}"
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: ./public
-  # Deployment job
+          path: exampleSite/public
+
   deploy:
-    permissions:
-      pages: write
-      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

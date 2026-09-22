@@ -2,43 +2,37 @@
 
 ## READ BEFORE OPENING A PR
 
-Thank you for contributing to hugo-PaperMod!
-Please fill out the following questions to make it easier for us to review your
-changes. You do not need to check all the boxes below.
-
-**NOTE**: PaperMod does not have any external dependencies fetched from 3rd party
-CDN servers. However we do have custom Head/Footer extender templates which you can use
-to add those to your website.
-https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#custom-head--footer
+Thank you for contributing to SciDraft!
+Please fill out the questions below to make the change easier to review.
+You do not need to check all the boxes.
 
 -->
-
 
 **What does this PR change? What problem does it solve?**
 
 <!--
-Describe the changes and their purpose here, as detailed as and if needed.
+Describe the changes and their purpose here, as detailed as needed.
 
-Please do not add 2 unrelated changes in a single PR as it is difficult to track/revert those in future.
+Please do not add 2 unrelated changes in a single PR — it is difficult to
+track and revert them later.
 -->
 
 
-**Was the change discussed in an issue or in the Discussions before?**
+**How was it verified?**
 
 <!--
-Link issues and relevant Discussions posts here. Please create an issue or start a Discussion before opening a PR if you have not done so already.
+SciDraft's demo site lives in exampleSite/. Building it is the quickest check:
 
-If this PR resolves an issue on GitHub, use "Closes #1234" so that the issue
-is closed automatically when this PR is merged.
+    cd exampleSite && hugo server --themesDir ../..
+
+Describe what you checked (pages rendered, feed behaviour, citations, ...).
 -->
 
 
 ## PR Checklist
 
-- [ ] This change adds/updates translations and I have used the [template present here](https://github.com/adityatelange/hugo-PaperMod/wiki/Translations#want-to-add-your-language-).
-- [ ] I have enabled [maintainer edits for this PR](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/allowing-changes-to-a-pull-request-branch-created-from-a-fork).
-- [ ] I have verified that the code works as described/as intended.
-- [ ] This change adds a Social Icon which has a permissive license to use it.
-- [ ] This change **does not** include any CDN resources/links.
-- [ ] This change **does not** include any unrelated scripts such as bash and python scripts.
-- [ ] This change updates the overridden internal templates from HUGO's repository.
+- [ ] I have verified the demo site builds without errors or new warnings.
+- [ ] I have checked the change on both light and dark themes (if it affects visuals).
+- [ ] This change **does not** mix unrelated changes.
+- [ ] If it adds a third-party script or font, the source is documented and licensed for redistribution.
+- [ ] If it updates translations (i18n/*.yaml), the keys match those used in the templates.
