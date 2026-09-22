@@ -1,14 +1,19 @@
-/* Promotion styles shared by BOTH promo types (promotion-textual and
-   promotion-visual): the title treatment and the "Sponsored" disclosure
-   badge. Type-specific rules live in promotion-textual.css and
-   promotion-visual.css and load after this file, so they override these
-   when a type needs to differ. */
+/* Promotion styles shared by ALL promotion types, present and future: the
+   "Sponsored" disclosure badge and its line. Type-specific rules live in
+   promotion-<type>.css and load after this file, so they override these when a
+   type needs to differ.
 
-/* Promotion title — the textual card's headline and the visual promo's row
-   label render at the same size/weight so the two types look like one
-   family. Loaded before the type files, so a type may override. */
-.textual-promotion-title,
-.promotion-visual-label {
+   Adding a new promotion type needs no edit here for the badge: emit
+   class="promotion-sponsored-line" wrapping class="promotion-sponsored-label",
+   and the shared rules below apply.
+
+   The title treatment is different in kind — each type names its own title
+   class, so the selector lists them explicitly. */
+
+/* Promotion title — every type's headline renders at the same size/weight so
+   the types look like one family. Add a type's title class to this list.
+   Loaded before the type files, so a type may override. */
+.textual-promotion-title {
     font-size: 24px;
     font-weight: 600;
     line-height: 1.05;
@@ -17,7 +22,7 @@
 }
 
 /* "Sponsored" label — rendered when a promo is marked sponsored=true
-   (disclosure for paid/affiliate links). */
+   (disclosure for paid/affiliate links). Any promotion type may use it. */
 .promotion-sponsored-label {
     display: inline-block;
     font-size: 0.65rem;
@@ -35,9 +40,12 @@
 /* Badge line: its own row, left-aligned with the title on the same vertical
    axis, directly above the promoted content (disclosure before content,
    without stealing title width). Small type + tight spacing keep the added
-   height to roughly half a text line. */
-.textual-promotion p.promotion-sponsored-line,
-.promotion-visual-row p.promotion-sponsored-line {
+   height to roughly half a text line.
+
+   Unscoped on purpose: it is keyed to the badge's own class, not to any
+   promotion type's wrapper, so every type — and every future one — picks it up
+   without appending a selector. */
+.promotion-sponsored-line {
     display: flex;
     justify-content: flex-start;
     margin: 0 0 0.2rem;
@@ -45,8 +53,7 @@
 }
 
 @media (max-width: 680px) {
-    .textual-promotion-title,
-    .promotion-visual-label {
+    .textual-promotion-title {
         font-size: 20px;
     }
 }

@@ -100,8 +100,6 @@ For example, a specialist first identifies that users are consistently bypassing
 This dynamic relationship allows document management specialists to leverage the complementary strengths of both skill types rather than relying on a permanent allocation of work.
 
 
-{{< promotion-visual sponsored=true >}}
-
 ## 1.4. Essential Responsibilities of Document Management Specialist
 
 ### 1.4.1. DMS Platform Administration and System Configuration

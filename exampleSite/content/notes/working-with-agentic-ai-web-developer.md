@@ -121,8 +121,6 @@ occupational responsibility → task and subtask → actions → skill requireme
 
 This cycle allows human and agentic capabilities to evolve alongside the requirements of web development work.
 
-{{< promotion-visual sponsored=true >}}
-
 ## 1.4. Essential Responsibilities of Web Developer
 
 ### 1.4.1. Web Application Architecture and Technology Strategy

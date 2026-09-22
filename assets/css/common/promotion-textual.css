@@ -1,7 +1,6 @@
 /* Styles for the TEXTUAL promo only ({{< promotion-textual >}}): the tinted
    card, its subtitle, and the pill button. Shared rules (title size, the
-   Sponsored badge) live in promotion-shared.css and load before this file;
-   the visual promo's own rules live in promotion-visual.css. */
+   Sponsored badge) live in promotion-shared.css and load before this file. */
 
 .textual-promotion {
     background: var(--code-bg);
