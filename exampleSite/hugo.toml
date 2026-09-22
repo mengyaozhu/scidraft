@@ -45,7 +45,6 @@ enableRobotsTXT = true
   mainSections = ["notes"]
   math = true
   recommendationCount = 3
-  promotionLink = "https://www.resumetemplates.nl/"
 
   # Identity shown on every note card unless the note sets its own.
   institute = "Your Institute"

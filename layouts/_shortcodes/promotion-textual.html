@@ -1,36 +1,35 @@
 {{- /*
-  Textual promotion box — the theme's promotion type. A visual (image-based)
-  variant, {{< promotion-visual >}}, was retired; see
-  retired-functions/function-archive/promotion-visual/ in the site that
-  develops this theme.
+  Textual promotion box — the theme's promotion type.
 
-  Renders a light card with a bold headline, an optional subtitle, and one or
-  two dark pill buttons. All content is text/CSS, so it stays crisp, selectable,
-  translatable, and responsive (no image asset required).
+  Renders a light card with a bold headline, an optional subtitle, and one
+  optional pill button. All content is text/CSS, so it stays crisp,
+  selectable, translatable, and responsive (no image asset required).
 
-  Usage (all parameters optional; defaults produce the standard box):
-    {{< textual-promotion >}}
+  Usage (all parameters optional; with no parameters the box renders the
+  placeholder headline and no button):
+    {{< promotion-textual >}}
 
-    {{< textual-promotion
-         title="Build what's next|on the AI Native Cloud"
-         subtitle="Full-stack AI platform, powered by cutting-edge research."
-         buttonText="START BUILDING"
+    {{< promotion-textual
+         title="Your headline|second line"
+         subtitle="A short supporting line."
+         buttonText="Learn more"
          buttonLink="https://example.com/" >}}
 
   Parameters
     title          Headline. Use "|" to split into multiple lines.
     subtitle       Smaller supporting line below the headline.
-    buttonText     Button label.
+    buttonText     Button label; the button renders only when both
+                   buttonText and buttonLink are set.
     buttonLink     Button URL.
     align          "left" (default) or "center".
     rel            rel attribute for links (default "noopener").
     target         Link target (default "_blank").
 */ -}}
 
-{{- $title := .Get "title" | default "Build what's next|on the AI Native Cloud" -}}
-{{- $subtitle := .Get "subtitle" | default "Full-stack AI platform, powered by cutting-edge research." -}}
-{{- $buttonText := .Get "buttonText" | default "START BUILDING" -}}
-{{- $buttonLink := .Get "buttonLink" | default "https://www.resumetemplates.nl/" -}}
+{{- $title := .Get "title" | default "Your promotion headline" -}}
+{{- $subtitle := .Get "subtitle" | default "" -}}
+{{- $buttonText := .Get "buttonText" | default "" -}}
+{{- $buttonLink := .Get "buttonLink" | default "" -}}
 {{- $align := .Get "align" | default "left" -}}
 {{- $rel := .Get "rel" | default "noopener" -}}
 {{- $sponsored := .Get "sponsored" | default false -}}

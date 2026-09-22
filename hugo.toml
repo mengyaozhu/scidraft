@@ -31,9 +31,6 @@
   institute = "Your Institute"
   author = "yourname"
 
-  # Fallback link for {{< promotion-visual >}} images (empty by default)
-  # promotionLink = ""
-
   # Entry index sets: one block per series of notes, naming the front-matter
   # fields the entry-a-to-z / entry-categories shortcodes read, the optional
   # membership tag, and the count label. Falls back to entryTitle /
