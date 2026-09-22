@@ -1,56 +1,49 @@
 name: Build Check
 
+# Verifies that the theme builds on the MINIMUM supported Hugo version
+# (min_version in theme.toml) whenever the theme changes. The deploy
+# workflow (gh-pages.yml) builds the demo on the pinned current Hugo.
+
 on:
   push:
-    paths-ignore:
-      - "images/**"
-      - "LICENSE"
-      - "README.md"
     branches:
-      - master
-      - exampleSite
+      - main
   pull_request:
-    paths-ignore:
-      - "images/**"
-      - "LICENSE"
-      - "README.md"
     branches:
-      - master
-      - exampleSite
+      - main
   workflow_dispatch:
-    # manual run
     inputs:
       hugoVersion:
         description: "Hugo Version"
         required: false
-        default: "0.146.0"
+        default: "0.158.0"
 
 defaults:
   run:
     shell: bash
 
+permissions:
+  contents: read
+
 jobs:
   build-check:
     runs-on: ubuntu-latest
     env:
-      # min_version from theme.toml
-      HUGO_VERSION: ${{ github.event.inputs.hugoVersion || '0.146.0' }}
+      # keep in sync with min_version in theme.toml
+      HUGO_VERSION: ${{ github.event.inputs.hugoVersion || '0.158.0' }}
     steps:
-      - name: Install Hugo CLI
-        run: |
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux-amd64.deb \
-          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
-
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          ref: exampleSite
 
-      - name: Get Theme
-        run: git submodule update --init --recursive
+      - name: Expose the repo as the theme Hugo expects
+        run: |
+          mkdir -p "$RUNNER_TEMP/hugo-themes"
+          ln -s "$GITHUB_WORKSPACE" "$RUNNER_TEMP/hugo-themes/SciDraft"
 
-      - name: Update theme to Latest commit
-        run: git submodule update --remote --merge
+      - name: Install Hugo CLI
+        run: |
+          wget -O "${{ runner.temp }}/hugo.deb" https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux-amd64.deb \
+          && sudo dpkg -i "${{ runner.temp }}/hugo.deb"
 
-      - name: Build with Hugo
-        run: hugo --buildDrafts --gc
+      - name: Build exampleSite with Hugo
+        run: hugo --source exampleSite --themesDir "$RUNNER_TEMP/hugo-themes" --gc --baseURL "https://example.org/"

@@ -5,7 +5,7 @@ license = "MIT"
 licenselink = "https://github.com/mengyaozhu/scidraft/blob/main/LICENSE"
 description = "A modern Hugo theme for scientific writing and research"
 homepage = "https://www.zhumengyao.com/"
-demosite = "https://mengyaozhu.github.io/scidraft/"
+demosite = "https://www.zhumengyao.com/scidraft/"
 tags = [
   "responsive",
   "blog",
@@ -60,7 +60,7 @@ features = [
   "mermaid-diagrams",
   "galleries"
 ]
-min_version = "0.146.0"
+min_version = "0.158.0"
 
 [author]
   name = "SciDraft"

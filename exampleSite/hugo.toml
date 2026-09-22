@@ -8,7 +8,7 @@
 # themesDir points at the theme repository's parent so the build uses the
 # theme's working tree rather than a copy of itself.
 
-baseURL = "https://mengyaozhu.github.io/scidraft/"
+baseURL = "https://www.zhumengyao.com/scidraft/"
 title = "SciDraft"
 theme = "SciDraft"
 themesDir = "../.."

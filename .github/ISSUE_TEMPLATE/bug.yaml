@@ -35,8 +35,8 @@ body:
       label: Hugo Version
       description: What version of Hugo are you running? (Run `hugo version`)
       options:
-        - "Hugo >= 0.146.0 (supported — minimum version for SciDraft)"
-        - "Hugo < 0.146.0 (unsupported — please upgrade)"
+        - "Hugo >= 0.158.0 (supported — minimum version for SciDraft)"
+        - "Hugo < 0.158.0 (unsupported — please upgrade)"
     validations:
       required: true
   - type: input

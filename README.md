@@ -7,11 +7,11 @@ type, with BibTeX citations, KaTeX math, mermaid diagrams, pseudo-algorithm
 blocks, per-table style variants, and per-series A–Z / category indexes (the
 entry map).
 
-[![Minimum Hugo Version](https://img.shields.io/static/v1?label=Hugo&message=v0.146.0%2B&color=blue&logo=hugo)](https://github.com/gohugoio/hugo/releases/tag/v0.146.0)
+[![Minimum Hugo Version](https://img.shields.io/static/v1?label=Hugo&message=v0.158.0%2B&color=blue&logo=hugo)](https://github.com/gohugoio/hugo/releases/tag/v0.158.0)
 
 > Based on [hugo-PaperMod](https://github.com/adityatelange/hugo-PaperMod) by Aditya Telange (MIT).
 
-Demo: [mengyaozhu.github.io/scidraft](https://mengyaozhu.github.io/scidraft/) · Home: [zhumengyao.com](https://www.zhumengyao.com/)
+Demo: [www.zhumengyao.com/scidraft](https://www.zhumengyao.com/scidraft/) · Home: [zhumengyao.com](https://www.zhumengyao.com/)
 
 ---
 
