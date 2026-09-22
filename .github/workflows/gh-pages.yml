@@ -41,6 +41,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Expose the repo as the theme Hugo expects
+        run: |
+          mkdir -p "$RUNNER_TEMP/hugo-themes"
+          ln -s "$GITHUB_WORKSPACE" "$RUNNER_TEMP/hugo-themes/SciDraft"
+
       - name: Install Hugo CLI
         run: |
           wget -O "${{ runner.temp }}/hugo.deb" https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux-amd64.deb \
@@ -56,6 +61,7 @@ jobs:
         run: |
           hugo \
             --source exampleSite \
+            --themesDir "$RUNNER_TEMP/hugo-themes" \
             --gc \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}"
