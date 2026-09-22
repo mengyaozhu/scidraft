@@ -2,10 +2,10 @@
 
 name = "SciDraft"
 license = "MIT"
-licenselink = "https://github.com/dycoai/SciDraft/blob/main/LICENSE" # update to final repo URL at publish time
+licenselink = "https://github.com/mengyaozhu/scidraft/blob/main/LICENSE"
 description = "A modern Hugo theme for scientific writing and research"
-homepage = "https://dycoai.com/"
-demosite = "https://dycoai.com/"
+homepage = "https://www.zhumengyao.com/"
+demosite = "https://mengyaozhu.github.io/scidraft/"
 tags = [
   "responsive",
   "blog",

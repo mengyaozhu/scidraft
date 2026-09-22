@@ -1,0 +1,143 @@
+# SciDraft example site.
+#
+# This is a self-contained demo of the theme it sits inside. It is not a
+# template for your own site — copy the pieces you need from it. To build it:
+#
+#     cd exampleSite && hugo server
+#
+# themesDir points at the theme repository's parent so the build uses the
+# theme's working tree rather than a copy of itself.
+
+baseURL = "https://mengyaozhu.github.io/scidraft/"
+title = "SciDraft"
+theme = "SciDraft"
+themesDir = "../.."
+enableRobotsTXT = true
+
+# Required for the search page: Hugo does not inherit [outputs] from a theme.
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+# Required for math in note bodies: preserve the \( \) and $$ $$ delimiters
+# through Markdown for KaTeX auto-render. Hugo does not merge [markup] from a theme.
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions.passthrough]
+      enable = true
+      [markup.goldmark.extensions.passthrough.delimiters]
+        block = [['$$', '$$'], ['\[', '\]']]
+        inline = [['\(', '\)'], ['$', '$']]
+    [markup.goldmark.renderer]
+      unsafe = true
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+  [markup.highlight]
+    noClasses = false
+
+[taxonomies]
+  tag = "tags"
+
+[pagination]
+  pagerSize = 8
+
+[params]
+  mainSections = ["notes"]
+  math = true
+  recommendationCount = 3
+  promotionLink = "https://www.resumetemplates.nl/"
+
+  # Identity shown on every note card unless the note sets its own.
+  institute = "Your Institute"
+  author = "yourname"
+  ShowShareButtons = true
+  ShowReadingTime = true
+  ShowToc = true
+  ShowBreadCrumbs = true
+  ShowPostNavLinks = true
+  ShowCodeCopyButtons = true
+  ShowRelatedPosts = true
+
+  # Entry index sets: one block per series of notes, naming the front-matter
+  # fields the entry-a-to-z / entry-categories shortcodes read.
+  [params.entrySets.occupations]
+    titleField    = "occupationTitle"
+    categoryField = "occupationCategory"
+    aliasesField  = "alternativeTitles"
+    summaryField  = "shortDescription"
+    tag           = "Working with Agentic AI"
+    countLabel    = "Occupations"
+  [params.entrySets.skills]
+    titleField    = "skillTitle"
+    categoryField = "skillCategory"
+    aliasesField  = "skillAliases"
+    summaryField  = "skillSummary"
+    tag           = "Agentic Skill"
+    countLabel    = "Skills"
+
+  # Feed settings. These override the theme's own defaults (8 notes, no
+  # promotion); this demo shows one promotion card in positions 3-5.
+  # Must stay LAST among the [params.*] tables: a key written after it would
+  # become a member of it rather than of [params].
+  [params.feed]
+    notesPerPage = 8
+    promotionsPerPage = 1
+    promotionPositions = "3-5"
+
+[menu]
+  [[menu.main]]
+    identifier = "notes"
+    name = "Notes"
+    url = "/notes/"
+    weight = 10
+  [[menu.main]]
+    identifier = "reference"
+    name = "Reference"
+    weight = 20
+  [[menu.main]]
+    identifier = "occupation-categories"
+    name = "Occupation Categories"
+    parent = "reference"
+    url = "/occupation-categories/"
+    weight = 21
+    [menu.main.params]
+      note = "Browse by professional field"
+  [[menu.main]]
+    identifier = "occupation-a-to-z"
+    name = "Occupation A–Z"
+    parent = "reference"
+    url = "/occupation-a-to-z/"
+    weight = 22
+    [menu.main.params]
+      note = "Look up by job title"
+  [[menu.main]]
+    identifier = "skill-a-to-z"
+    name = "Skill A–Z"
+    parent = "reference"
+    url = "/skill-a-to-z/"
+    weight = 23
+    [menu.main.params]
+      note = "Agentic skills A–Z"
+  [[menu.main]]
+    identifier = "skill-categories"
+    name = "Skill Categories"
+    parent = "reference"
+    url = "/skill-categories/"
+    weight = 24
+    [menu.main.params]
+      note = "Skills by category"
+  [[menu.main]]
+    identifier = "search"
+    name = "Search"
+    url = "/search/"
+    weight = 40
+  [[menu.main]]
+    identifier = "archives"
+    name = "Archive"
+    url = "/archives/"
+    weight = 50
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about/"
+    weight = 90

@@ -1,0 +1,17 @@
+# Hugo build output
+/public/
+/exampleSite/public/
+/exampleSite/resources/
+
+# Hugo transient build lock file
+.hugo_build.lock
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor/IDE
+.idea/
+.vscode/
+*.swp

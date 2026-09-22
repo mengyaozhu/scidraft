@@ -11,7 +11,7 @@ entry map).
 
 > Based on [hugo-PaperMod](https://github.com/adityatelange/hugo-PaperMod) by Aditya Telange (MIT).
 
-Demo: [dycoai.com](https://dycoai.com/)
+Demo: [mengyaozhu.github.io/scidraft](https://mengyaozhu.github.io/scidraft/) · Home: [zhumengyao.com](https://www.zhumengyao.com/)
 
 ---
 
