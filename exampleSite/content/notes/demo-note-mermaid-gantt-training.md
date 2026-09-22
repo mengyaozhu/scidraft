@@ -1,7 +1,11 @@
 +++
 title = "A Training Schedule (gantt)"
-date = 2026-09-21T16:00:00+09:00
+date = 2026-09-21T13:00:00+09:00
 tags = ["Demo", "Mermaid", "Optimization"]
+renderingTitle = "Mermaid: Training Gantt Chart"
+renderingCategory = "Mermaid"
+renderingAliases = ["Gantt Chart", "Training Schedule", "Timeline Diagram"]
+renderingSummary = "Lays a training schedule out as a Gantt chart, showing which stages run in parallel and where they wait on each other."
 math = true
 showTitle = true
 +++

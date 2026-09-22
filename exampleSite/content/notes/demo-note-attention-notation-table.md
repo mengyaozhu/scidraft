@@ -2,6 +2,10 @@
 title = "Notation for Multi-Head Attention (academic table)"
 date = 2026-09-21T07:12:00+09:00
 tags = ["Demo", "Attention", "Notation", "Tables"]
+renderingTitle = "Notation Reference Table"
+renderingCategory = "Tables"
+renderingAliases = ["Notation Reference", "Symbol Table", "Attention Notation"]
+renderingSummary = "Tabulates the symbols used for multi-head attention — shapes and meanings side by side — in the academic table style."
 math = true
 showTitle = true
 +++

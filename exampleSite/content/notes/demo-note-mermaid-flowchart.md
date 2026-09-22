@@ -2,6 +2,10 @@
 title = "A Transformer Training Step (flowchart)"
 date = 2026-09-21T14:02:00+09:00
 tags = ["Demo", "Mermaid", "LLM", "Neural Networks"]
+renderingTitle = "Mermaid: Flowchart"
+renderingCategory = "Mermaid"
+renderingAliases = ["Flowchart", "Flow Diagram", "Process Diagram"]
+renderingSummary = "Traces a transformer training step as a directed flowchart, showing the order of forward pass, loss and update."
 math = true
 showTitle = true
 +++

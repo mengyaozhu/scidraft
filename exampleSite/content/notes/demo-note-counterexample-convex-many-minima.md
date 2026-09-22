@@ -2,6 +2,10 @@
 title = "A Convex Function with Many Minima (counterexample)"
 date = 2026-09-21T07:02:00+09:00
 tags = ["Demo", "Counterexample", "Optimization"]
+mathTitle = "A Convex Function with Many Minima"
+mathCategory = "Counterexamples"
+mathAliases = ["Non-Unique Optimum", "Convex Counterexample", "Flat Minimum Example"]
+mathSummary = "Shows by construction that convexity does not guarantee a unique minimiser, contradicting a common shorthand."
 math = true
 showTitle = true
 +++

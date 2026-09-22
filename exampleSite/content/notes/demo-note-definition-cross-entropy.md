@@ -2,6 +2,10 @@
 title = "Cross-Entropy (definition)"
 date = 2026-09-21T09:02:00+09:00
 tags = ["Demo", "Definition", "Probability"]
+mathTitle = "Cross-Entropy"
+mathCategory = "Definitions"
+mathAliases = ["Cross-Entropy Loss", "Negative Log-Likelihood", "Log Loss"]
+mathSummary = "Defines the training objective of a language model as the expected negative log-probability assigned to the true tokens."
 math = true
 showTitle = true
 +++

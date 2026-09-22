@@ -2,6 +2,10 @@
 title = "Matrix Products Do Not Commute (counterexample)"
 date = 2026-09-21T12:12:00+09:00
 tags = ["Demo", "Counterexample", "Linear Algebra"]
+mathTitle = "Matrix Products Do Not Commute"
+mathCategory = "Counterexamples"
+mathAliases = ["Non-Commutativity of Matrices", "AB ≠ BA", "Order Dependence"]
+mathSummary = "Demonstrates with two explicit matrices that reversing a product changes the result, so matrix order cannot be assumed interchangeable."
 math = true
 showTitle = true
 +++

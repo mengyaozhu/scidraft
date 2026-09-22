@@ -2,6 +2,10 @@
 title = "Scaled Dot-Product Attention (definition)"
 date = 2026-09-21T09:12:00+09:00
 tags = ["Demo", "Definition", "Attention"]
+mathTitle = "Scaled Dot-Product Attention"
+mathCategory = "Definitions"
+mathAliases = ["Softmax Attention", "Query-Key-Value Attention"]
+mathSummary = "Fixes the notation for attention: three projections, one score matrix, and a softmax-weighted average over the values."
 math = true
 showTitle = true
 +++

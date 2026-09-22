@@ -2,6 +2,10 @@
 title = "Layer Normalisation Written as a Function (pseudocode)"
 date = 2026-09-21T08:15:00+09:00
 tags = ["Demo", "Pseudocode", "Normalisation"]
+renderingTitle = "Layer Normalization"
+renderingCategory = "Pseudo-algorithm"
+renderingAliases = ["Layer Normalisation", "LayerNorm Procedure", "Per-Sample Normalisation"]
+renderingSummary = "Gives layer normalisation as pseudocode, normalising each sample across its features and then rescaling with learned parameters."
 math = true
 showTitle = true
 +++

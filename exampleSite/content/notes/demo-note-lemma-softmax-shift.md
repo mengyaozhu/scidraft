@@ -2,6 +2,10 @@
 title = "Softmax Is Invariant to a Shift (lemma)"
 date = 2026-09-21T10:52:00+09:00
 tags = ["Demo", "Lemma", "Softmax"]
+mathTitle = "Softmax Is Invariant to a Shift"
+mathCategory = "Lemmas"
+mathAliases = ["Softmax Shift Invariance", "Translation Invariance of Softmax", "Max-Subtraction Lemma"]
+mathSummary = "Establishes that adding a constant to every logit leaves softmax unchanged, which is what makes max-subtraction safe."
 math = true
 showTitle = true
 +++

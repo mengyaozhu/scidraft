@@ -2,6 +2,10 @@
 title = "A Survey of Chain-of-Thought Prompting: Single Chains, Sampling and Demonstration Construction (survey)"
 date = 2026-09-21T15:29:00+09:00
 tags = ["Demo", "Survey", "Prompting"]
+renderingTitle = "Survey: Chain of Thought"
+renderingCategory = "Citations"
+renderingAliases = ["Chain-of-Thought Survey", "Reasoning Survey", "CoT Literature Review"]
+renderingSummary = "Surveys chain-of-thought prompting, combining prose, a pseudo-algorithm, a sequence diagram and a bibliography."
 math = true
 showTitle = true
 +++

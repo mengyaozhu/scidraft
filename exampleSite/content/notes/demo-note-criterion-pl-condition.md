@@ -2,6 +2,10 @@
 title = "The Polyak-Lojasiewicz Criterion (criterion)"
 date = 2026-09-21T11:42:00+09:00
 tags = ["Demo", "Criterion", "Optimization"]
+mathTitle = "The Polyak-Lojasiewicz Criterion"
+mathCategory = "Criteria"
+mathAliases = ["Polyak-Łojasiewicz Inequality", "PL Condition", "Gradient Domination"]
+mathSummary = "Gives the gradient-domination condition under which gradient descent converges linearly even when the objective is not convex."
 math = true
 showTitle = true
 +++

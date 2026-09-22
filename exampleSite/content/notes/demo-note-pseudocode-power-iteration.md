@@ -2,6 +2,10 @@
 title = "Power Iteration with a Convergence Check (pseudocode)"
 date = 2026-09-21T08:39:00+09:00
 tags = ["Demo", "Pseudocode", "Linear Algebra"]
+renderingTitle = "Power Iteration"
+renderingCategory = "Pseudo-algorithm"
+renderingAliases = ["Power Iteration", "Power Method", "Dominant Eigenvector Algorithm"]
+renderingSummary = "Computes a matrix's dominant eigenvector by repeated multiplication, the method behind spectral norm estimation."
 math = true
 showTitle = true
 +++

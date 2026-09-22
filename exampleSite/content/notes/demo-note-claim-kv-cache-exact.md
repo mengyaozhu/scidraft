@@ -2,6 +2,10 @@
 title = "The KV Cache Is Exact (claim)"
 date = 2026-09-21T14:22:00+09:00
 tags = ["Demo", "Claim", "Attention"]
+mathTitle = "The KV Cache Is Exact"
+mathCategory = "Claims"
+mathAliases = ["KV Cache Correctness", "Exact Decoding Cache", "Incremental Attention Equivalence"]
+mathSummary = "Argues that caching keys and values during decoding leaves the attention output bit-for-bit unchanged rather than merely close."
 math = true
 showTitle = true
 +++

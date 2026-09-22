@@ -1,7 +1,11 @@
 +++
 title = "Autoregressive Generation (sequence diagram)"
-date = 2026-09-21T15:42:00+09:00
+date = 2026-09-21T10:42:00+09:00
 tags = ["Demo", "Mermaid", "LLM", "Inference"]
+renderingTitle = "Mermaid: Sequence Diagram"
+renderingCategory = "Mermaid"
+renderingAliases = ["Sequence Diagram", "Message Sequence Chart", "Interaction Diagram"]
+renderingSummary = "Orders the calls in an inference request as a sequence diagram, from client through the model to the token stream back."
 math = true
 showTitle = true
 +++

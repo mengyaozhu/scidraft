@@ -2,6 +2,10 @@
 title = "Validation Loss by Model Size (bordered table)"
 date = 2026-09-21T15:02:00+09:00
 tags = ["Demo", "Scaling", "Tables"]
+renderingTitle = "Validation Loss by Model Size"
+renderingCategory = "Tables"
+renderingAliases = ["Loss by Model Size", "Scaling Results Table", "Validation Loss Table"]
+renderingSummary = "Sets validation loss against model size, in the bordered table style, as the tabular form of a scaling result."
 math = true
 showTitle = true
 +++

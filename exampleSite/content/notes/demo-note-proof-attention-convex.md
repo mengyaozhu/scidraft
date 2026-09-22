@@ -2,6 +2,10 @@
 title = "Proof: Attention Outputs Lie in the Convex Hull (proof)"
 date = 2026-09-21T09:52:00+09:00
 tags = ["Demo", "Proof", "Attention"]
+mathTitle = "Proof: Attention Outputs Lie in the Convex Hull"
+mathCategory = "Proofs"
+mathAliases = ["Convex Hull Proof", "Attention as Convex Combination", "Output Hull Membership Proof"]
+mathSummary = "Proves that an attention output is a convex combination of its value vectors, hence lies inside their convex hull."
 math = true
 showTitle = true
 +++

@@ -2,6 +2,10 @@
 title = "Choosing Between Human and Agentic Skills"
 date = 2026-09-21T13:42:00+09:00
 tags = ["Demo", "Agentic Skills", "Human Skills", "Pseudo-Algorithm"]
+renderingTitle = "Skill Selection"
+renderingCategory = "Pseudo-algorithm"
+renderingAliases = ["Skill Selection", "Capability Routing", "Skill Match Procedure"]
+renderingSummary = "Describes how an agent picks which skills to activate for a task, scoring candidates against the requirement before committing."
 math = true
 showTitle = false
 +++

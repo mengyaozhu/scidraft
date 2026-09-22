@@ -2,6 +2,10 @@
 title = "Softmax Cross-Entropy and Its Gradient in Python (advanced)"
 date = 2026-09-21T12:52:00+09:00
 tags = ["Demo", "Python", "Gradients"]
+renderingTitle = "Cross-Entropy Gradient in Python"
+renderingCategory = "Code"
+renderingAliases = ["Cross-Entropy Gradient Code", "Softmax Gradient Implementation", "Log-Loss Backward Pass"]
+renderingSummary = "Computes the cross-entropy gradient through softmax in Python, showing the predicted-minus-true form in code."
 math = true
 showTitle = true
 +++

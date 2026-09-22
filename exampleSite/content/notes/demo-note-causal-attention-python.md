@@ -2,6 +2,10 @@
 title = "Causal Multi-Head Attention in Python (intermediate)"
 date = 2026-09-21T13:22:00+09:00
 tags = ["Demo", "Python", "Attention"]
+renderingTitle = "Causal Attention in Python"
+renderingCategory = "Code"
+renderingAliases = ["Causal Attention in Python", "Masked Attention Code", "Attention Implementation"]
+renderingSummary = "Implements causal attention in Python, applying a triangular mask before the softmax so no position reads ahead."
 math = true
 showTitle = true
 +++

@@ -2,6 +2,10 @@
 title = "The Adam Update (formula)"
 date = 2026-09-21T11:12:00+09:00
 tags = ["Demo", "Formula", "Optimization"]
+mathTitle = "The Adam Update"
+mathCategory = "Formulas"
+mathAliases = ["Adam Optimiser", "Adaptive Moment Estimation", "Adam Update Rule"]
+mathSummary = "Writes the Adam update in symbols, combining a momentum term with a running second-moment estimate and a bias correction."
 math = true
 showTitle = true
 +++

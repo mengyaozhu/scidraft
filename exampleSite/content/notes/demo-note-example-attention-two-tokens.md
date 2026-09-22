@@ -2,6 +2,10 @@
 title = "Attention with Two Tokens (example)"
 date = 2026-09-21T08:32:00+09:00
 tags = ["Demo", "Example", "Attention"]
+mathTitle = "Attention with Two Tokens"
+mathCategory = "Examples"
+mathAliases = ["Two-Token Attention Example", "Minimal Attention Worked Example", "Single-Head Example"]
+mathSummary = "Works the smallest interesting attention case — two positions, one head — end to end so every number can be checked by hand."
 math = true
 showTitle = true
 +++

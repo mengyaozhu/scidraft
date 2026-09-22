@@ -2,6 +2,10 @@
 title = "Attention Variants for Long Contexts (striped table)"
 date = 2026-09-21T07:32:00+09:00
 tags = ["Demo", "Attention", "Long Context", "Tables"]
+renderingTitle = "Attention Variants Table"
+renderingCategory = "Tables"
+renderingAliases = ["Attention Variants", "Long-Context Comparison", "Attention Cost Table"]
+renderingSummary = "Compares attention variants for long contexts by cost and memory, in the striped table style."
 math = true
 showTitle = true
 +++

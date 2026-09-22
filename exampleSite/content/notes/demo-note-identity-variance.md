@@ -2,6 +2,10 @@
 title = "The Variance Identity (identity)"
 date = 2026-09-21T16:22:00+09:00
 tags = ["Demo", "Identity", "Statistics"]
+mathTitle = "The Variance Identity"
+mathCategory = "Identities"
+mathAliases = ["Variance Identity", "E[X²] − E[X]²", "Second-Moment Identity"]
+mathSummary = "Expresses variance as a difference of moments, giving a form that holds for every admissible value of the variables."
 math = true
 showTitle = true
 +++

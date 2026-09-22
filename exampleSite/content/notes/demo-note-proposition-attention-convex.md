@@ -2,6 +2,10 @@
 title = "Attention Outputs Are Convex Combinations (proposition)"
 date = 2026-09-21T10:22:00+09:00
 tags = ["Demo", "Proposition", "Attention"]
+mathTitle = "Attention Outputs Are Convex Combinations"
+mathCategory = "Propositions"
+mathAliases = ["Attention Convexity Proposition", "Convex Combination Proposition", "Attention Weights Sum to One"]
+mathSummary = "States that attention weights are non-negative and sum to one, so each output is a convex combination of the values."
 math = true
 showTitle = true
 +++

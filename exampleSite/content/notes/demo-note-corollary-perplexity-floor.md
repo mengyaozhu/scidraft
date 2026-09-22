@@ -2,6 +2,10 @@
 title = "Perplexity Is at Least One (corollary)"
 date = 2026-09-21T11:32:00+09:00
 tags = ["Demo", "Corollary", "Statistics"]
+mathTitle = "Perplexity Is at Least One"
+mathCategory = "Corollaries"
+mathAliases = ["Perplexity Lower Bound", "Perplexity ≥ 1", "Entropy Floor"]
+mathSummary = "Follows from the definition of perplexity that its value can never drop below one, however good the model."
 math = true
 showTitle = true
 +++

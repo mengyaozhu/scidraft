@@ -1,7 +1,11 @@
 +++
 title = "Attention Variants by Cost and Cache (quadrant chart)"
-date = 2026-09-21T16:21:00+09:00
+date = 2026-09-21T14:21:00+09:00
 tags = ["Demo", "Mermaid", "Attention"]
+renderingTitle = "Mermaid: Quadrant Chart"
+renderingCategory = "Mermaid"
+renderingAliases = ["Quadrant Chart", "Two-Axis Scatter", "Priority Matrix"]
+renderingSummary = "Plots attention variants on two axes so their cost and cache requirements can be compared at a glance."
 math = true
 showTitle = true
 +++

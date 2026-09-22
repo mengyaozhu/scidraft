@@ -2,6 +2,10 @@
 title = "Maximum Entropy Gives the Softmax (theorem)"
 date = 2026-09-21T09:22:00+09:00
 tags = ["Demo", "Theorem", "Statistics"]
+mathTitle = "Maximum Entropy Gives the Softmax"
+mathCategory = "Theorems"
+mathAliases = ["Maximum Entropy Principle", "MaxEnt Derivation of Softmax", "Entropy-Maximising Distribution"]
+mathSummary = "Derives the softmax distribution as the unique maximiser of entropy subject to matching expected scores."
 math = true
 showTitle = true
 +++

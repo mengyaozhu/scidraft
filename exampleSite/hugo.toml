@@ -74,6 +74,18 @@ enableRobotsTXT = true
     summaryField  = "skillSummary"
     tag           = "Agentic Skill"
     countLabel    = "Skills"
+  [params.entrySets.math]
+    titleField    = "mathTitle"
+    categoryField = "mathCategory"
+    aliasesField  = "mathAliases"
+    summaryField  = "mathSummary"
+    countLabel    = "Results"
+  [params.entrySets.rendering]
+    titleField    = "renderingTitle"
+    categoryField = "renderingCategory"
+    aliasesField  = "renderingAliases"
+    summaryField  = "renderingSummary"
+    countLabel    = "Methods"
 
   # Feed settings. These override the theme's own defaults (8 notes, no
   # promotion); this demo shows one promotion card in positions 3-5.
@@ -86,58 +98,53 @@ enableRobotsTXT = true
 
 [menu]
   [[menu.main]]
-    identifier = "notes"
-    name = "Notes"
-    url = "/notes/"
-    weight = 10
-  [[menu.main]]
-    identifier = "reference"
+    identifier = "working-with-ai"
     name = "Reference"
     weight = 20
   [[menu.main]]
-    identifier = "occupation-categories"
-    name = "Occupation Categories"
-    parent = "reference"
-    url = "/occupation-categories/"
+    identifier = "math-a-to-z"
+    name = "Math A–Z"
+    parent = "working-with-ai"
+    url = "/math-a-to-z/"
     weight = 21
     [menu.main.params]
-      note = "Browse by professional field"
+      note = "Look up a result by name"
   [[menu.main]]
-    identifier = "occupation-a-to-z"
-    name = "Occupation A–Z"
-    parent = "reference"
-    url = "/occupation-a-to-z/"
+    identifier = "math-categories"
+    name = "Math Categories"
+    parent = "working-with-ai"
+    url = "/math-categories/"
     weight = 22
     [menu.main.params]
-      note = "Look up by job title"
+      note = "Browse by result family"
   [[menu.main]]
-    identifier = "skill-a-to-z"
-    name = "Skill A–Z"
-    parent = "reference"
-    url = "/skill-a-to-z/"
+    identifier = "rendering-a-to-z"
+    name = "Rendering A–Z"
+    parent = "working-with-ai"
+    url = "/rendering-a-to-z/"
     weight = 23
     [menu.main.params]
-      note = "Agentic skills A–Z"
+      note = "Rendering methods A–Z"
   [[menu.main]]
-    identifier = "skill-categories"
-    name = "Skill Categories"
-    parent = "reference"
-    url = "/skill-categories/"
+    identifier = "rendering-categories"
+    name = "Rendering Categories"
+    parent = "working-with-ai"
+    url = "/rendering-categories/"
     weight = 24
     [menu.main.params]
-      note = "Skills by category"
+      note = "Methods by category"
   [[menu.main]]
-    identifier = "search"
-    name = "Search"
-    url = "/search/"
-    weight = 40
-  [[menu.main]]
-    identifier = "archives"
-    name = "Archive"
-    url = "/archives/"
-    weight = 50
+    identifier = "human-agentic-skills"
+    name = "Evolving with AI"
+    url = "/notes/"
+    weight = 10
   [[menu.main]]
     identifier = "about"
     name = "About"
     url = "/about/"
     weight = 90
+  [[menu.main]]
+    identifier = "search"
+    name = "Search"
+    url = "/search/"
+    weight = 40

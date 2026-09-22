@@ -2,6 +2,10 @@
 title = "Rotary Position Embedding (formula)"
 date = 2026-09-21T15:12:00+09:00
 tags = ["Demo", "Formula", "Geometry"]
+mathTitle = "Rotary Position Embedding"
+mathCategory = "Formulas"
+mathAliases = ["RoPE", "Rotary Positional Encoding"]
+mathSummary = "Encodes position by rotating query and key vectors, so attention scores depend on relative distance rather than absolute index."
 math = true
 showTitle = true
 +++

@@ -2,6 +2,10 @@
 title = "The Gram Matrix Is Positive Semi-Definite (property)"
 date = 2026-09-21T08:52:00+09:00
 tags = ["Demo", "Property", "Linear Algebra"]
+mathTitle = "The Gram Matrix Is Positive Semi-Definite"
+mathCategory = "Properties"
+mathAliases = ["Gram Matrix PSD", "Positive Semi-Definite Kernel Matrix", "Gram Matrix Property"]
+mathSummary = "Shows that any Gram matrix is positive semi-definite, so its eigenvalues are non-negative and it defines an inner product."
 math = true
 showTitle = true
 +++

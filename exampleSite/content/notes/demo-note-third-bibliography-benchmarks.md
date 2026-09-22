@@ -2,6 +2,10 @@
 title = "Benchmarks for Agentic Systems (demo)"
 date = 2026-09-21T07:06:00+09:00
 tags = ["Demo", "Citations", "Evaluation"]
+renderingTitle = "Benchmark Survey"
+renderingCategory = "Citations"
+renderingAliases = ["Benchmark Survey", "Third Bibliography", "Benchmark References"]
+renderingSummary = "Pairs a benchmark discussion with its own bibliography, demonstrating that bibliographies are named per note."
 math = true
 showTitle = true
 +++

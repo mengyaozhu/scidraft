@@ -2,6 +2,10 @@
 title = "Families of Attention (mindmap)"
 date = 2026-09-21T09:44:00+09:00
 tags = ["Demo", "Mermaid", "Attention"]
+renderingTitle = "Mermaid: Mindmap of Attention"
+renderingCategory = "Mermaid"
+renderingAliases = ["Mindmap", "Concept Map", "Radial Diagram"]
+renderingSummary = "Presents the components of attention as a mindmap, grouping queries, keys, values and their relationships around a centre."
 math = true
 showTitle = true
 +++

@@ -2,6 +2,10 @@
 title = "Log-Sum-Exp Bounds (lemma)"
 date = 2026-09-21T12:02:00+09:00
 tags = ["Demo", "Lemma", "Probability"]
+mathTitle = "Log-Sum-Exp Bounds"
+mathCategory = "Lemmas"
+mathAliases = ["LSE Inequalities", "Max-Plus Bounds"]
+mathSummary = "Bounds the log-sum-exp of a set of values between their maximum and that maximum plus a log-count term."
 math = true
 showTitle = true
 +++

@@ -2,6 +2,10 @@
 title = "Smoothness of the Loss (postulate)"
 date = 2026-09-21T12:32:00+09:00
 tags = ["Demo", "Postulate", "Optimization"]
+mathTitle = "Smoothness of the Loss"
+mathCategory = "Postulates"
+mathAliases = ["Smoothness Assumption", "Lipschitz Gradient Assumption", "Bounded Curvature"]
+mathSummary = "Assumes the loss has a bounded gradient Lipschitz constant, the condition most convergence proofs are stated under."
 math = true
 showTitle = true
 +++

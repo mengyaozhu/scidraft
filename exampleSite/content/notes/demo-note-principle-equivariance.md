@@ -2,6 +2,10 @@
 title = "Equivariance as a Design Principle (principle)"
 date = 2026-09-21T11:52:00+09:00
 tags = ["Demo", "Principle", "Geometry"]
+mathTitle = "Equivariance as a Design Principle"
+mathCategory = "Principles"
+mathAliases = ["Equivariance Principle", "Symmetry as Inductive Bias", "Group Equivariance"]
+mathSummary = "Treats a symmetry of the problem as a design constraint, so that transforming the input transforms the output in the matching way."
 math = true
 showTitle = true
 +++

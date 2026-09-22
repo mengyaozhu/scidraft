@@ -2,6 +2,10 @@
 title = "Bayes' Rule (rule)"
 date = 2026-09-21T16:12:00+09:00
 tags = ["Demo", "Rule", "Probability"]
+mathTitle = "Bayes' Rule"
+mathCategory = "Rules"
+mathAliases = ["Bayes' Theorem", "Bayes' Formula", "Posterior Rule"]
+mathSummary = "Relates a posterior to a likelihood and a prior, giving the rule for updating belief in light of evidence."
 math = true
 showTitle = true
 +++

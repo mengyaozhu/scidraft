@@ -2,6 +2,10 @@
 title = "Sylvester's Criterion for Positive Definiteness (criterion)"
 date = 2026-09-21T09:42:00+09:00
 tags = ["Demo", "Criterion", "Linear Algebra"]
+mathTitle = "Sylvester's Criterion for Positive Definiteness"
+mathCategory = "Criteria"
+mathAliases = ["Sylvester's Criterion", "Leading Principal Minors Test", "Positive Definiteness Test"]
+mathSummary = "Decides positive definiteness by checking the signs of a matrix's leading principal minors rather than inspecting its eigenvalues."
 math = true
 showTitle = true
 +++

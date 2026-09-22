@@ -2,6 +2,10 @@
 title = "Attention Entropy Falls with Depth (observation)"
 date = 2026-09-21T11:02:00+09:00
 tags = ["Demo", "Observation", "Attention"]
+mathTitle = "Attention Entropy Falls with Depth"
+mathCategory = "Observations"
+mathAliases = ["Attention Entropy Decay", "Entropy vs Depth", "Attention Concentration"]
+mathSummary = "Reports the empirical finding that attention distributions become more concentrated in deeper layers."
 math = true
 showTitle = true
 +++

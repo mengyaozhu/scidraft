@@ -2,6 +2,10 @@
 title = "Gradient Accumulation with an Input and Output Contract (pseudocode)"
 date = 2026-09-21T07:47:00+09:00
 tags = ["Demo", "Pseudocode", "Optimization"]
+renderingTitle = "Gradient Accumulation"
+renderingCategory = "Pseudo-algorithm"
+renderingAliases = ["Gradient Accumulation", "Micro-Batching", "Accumulated Update Procedure"]
+renderingSummary = "Shows how to reach a large effective batch size by accumulating gradients over several micro-batches before stepping."
 math = true
 showTitle = true
 +++

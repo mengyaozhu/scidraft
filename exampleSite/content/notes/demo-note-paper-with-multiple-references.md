@@ -1,15 +1,14 @@
 +++
 title = "A Paper with Multiple References (demo)"
-date = 2026-09-21T16:43:00+09:00
+date = 2026-09-22T07:20:00+09:00
 tags = ["Demo", "Citations"]
+renderingTitle = "A Paper with Multiple References"
+renderingCategory = "Citations"
+renderingAliases = ["Multiple Bibliographies", "Per-Paper References", "Multi-Bib Note"]
+renderingSummary = "Shows a single note carrying more than one reference list, each drawing on its own bibliography file."
 math = true
 showTitle = true
 +++
-
-
-
-{{< preview >}}
-
 
 **Demo note.** This note demonstrates what the **SciDraft** Hugo theme can do
 for academic and scientific publishing — for research institutions, researchers
@@ -47,10 +46,18 @@ whose chains would teach the most, one round at a time; and explanation selectio
 \cite{Ye2023-wa} chooses, from many candidate explanations, the one that helps on
 unlabeled data.
 
+The third family changes what happens after sampling, and that is where the
+reported gains are both largest and least stable. Self-consistency
+\cite{Wang2022-ir} samples several chains and takes the majority answer;
+uncertainty-guided selection \cite{Kumar2024-bj} decides per question whether one
+chain or a vote is worth the budget; the comparison of zero-shot and few-shot
+settings \cite{Cheng2025-sl} finds that the ordering of methods can reverse with
+the prompt alone; and a study of hallucination cues \cite{Cheng2025-wj} shows a
+longer chain hiding, rather than revealing, that the model is unsure.
+Tool-augmented chains \cite{Inaba2023-cg} are a fourth case: the chain calls a
+program, which changes what an answer can be grounded in.
 
 {{< references bib="bib/survey-refs-01.bib" title="References for the first part" >}}
-
-{{< /preview >}}
 
 ## Part two: how a model is adapted
 

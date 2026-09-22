@@ -2,6 +2,10 @@
 title = "Inner-Product Axioms (axiom)"
 date = 2026-09-21T15:22:00+09:00
 tags = ["Demo", "Axiom", "Linear Algebra"]
+mathTitle = "Inner-Product Axioms"
+mathCategory = "Axioms"
+mathAliases = ["Inner Product Space Axioms", "Similarity Axioms", "Positive-Definite Form"]
+mathSummary = "Fixes the three conditions a similarity measure must satisfy for attention scores to behave as inner products."
 math = true
 showTitle = true
 +++

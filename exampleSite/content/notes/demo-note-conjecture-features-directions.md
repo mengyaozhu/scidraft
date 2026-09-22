@@ -2,6 +2,10 @@
 title = "Features Are Directions (conjecture)"
 date = 2026-09-21T14:32:00+09:00
 tags = ["Demo", "Conjecture", "Geometry"]
+mathTitle = "Features Are Directions"
+mathCategory = "Conjectures"
+mathAliases = ["Linear Representation Hypothesis", "Feature Directions", "Concept Vectors"]
+mathSummary = "Conjectures that a network's learned concepts correspond to directions in activation space that can be added and compared linearly."
 math = true
 showTitle = true
 +++

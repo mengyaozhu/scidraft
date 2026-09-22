@@ -2,6 +2,10 @@
 title = "The Chain Rule (rule)"
 date = 2026-09-21T16:02:00+09:00
 tags = ["Demo", "Rule", "Gradients"]
+mathTitle = "The Chain Rule"
+mathCategory = "Rules"
+mathAliases = ["Chain Rule", "Composite Differentiation Rule", "Chain Rule of Calculus"]
+mathSummary = "States that the derivative of a composition is the product of the derivatives of its parts, the basis of backpropagation."
 math = true
 showTitle = true
 +++

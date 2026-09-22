@@ -2,6 +2,10 @@
 title = "The Gradient of Cross-Entropy Through Softmax (proposition)"
 date = 2026-09-21T09:32:00+09:00
 tags = ["Demo", "Proposition", "Gradients"]
+mathTitle = "The Gradient of Cross-Entropy Through Softmax"
+mathCategory = "Propositions"
+mathAliases = ["Softmax Gradient Proposition", "Cross-Entropy Gradient", "Softmax-Cross-Entropy Derivative"]
+mathSummary = "Gives the gradient of cross-entropy through softmax as the difference between predicted and true distributions."
 math = true
 showTitle = true
 +++

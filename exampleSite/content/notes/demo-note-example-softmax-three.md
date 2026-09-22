@@ -2,6 +2,10 @@
 title = "Softmax of Three Scores (example)"
 date = 2026-09-21T13:12:00+09:00
 tags = ["Demo", "Example", "Softmax"]
+mathTitle = "Softmax of Three Scores"
+mathCategory = "Examples"
+mathAliases = ["Softmax Worked Example", "Three-Score Softmax", "Numerical Softmax Demo"]
+mathSummary = "Evaluates softmax on three scores so the normalisation step is visible as arithmetic rather than notation."
 math = true
 showTitle = true
 +++

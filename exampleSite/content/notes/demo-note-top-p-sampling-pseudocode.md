@@ -2,6 +2,10 @@
 title = "Nucleus (Top-p) Sampling"
 date = 2026-09-21T06:52:00+09:00
 tags = ["Demo", "Pseudo-Algorithm", "LLM", "Sampling"]
+renderingTitle = "Top-p Sampling"
+renderingCategory = "Pseudo-algorithm"
+renderingAliases = ["Nucleus Sampling", "Top-p Sampling", "Nucleus Decoding"]
+renderingSummary = "Selects the smallest set of tokens whose cumulative probability reaches p, then samples from it rather than from the full distribution."
 math = true
 showTitle = true
 +++

@@ -2,6 +2,10 @@
 title = "Numerically Stable Softmax in Python (starter)"
 date = 2026-09-21T07:42:00+09:00
 tags = ["Demo", "Python", "Softmax"]
+renderingTitle = "Softmax in Python"
+renderingCategory = "Code"
+renderingAliases = ["Softmax in Python", "Stable Softmax Code", "Softmax Implementation"]
+renderingSummary = "Implements a numerically stable softmax in Python, subtracting the maximum before exponentiating."
 math = true
 showTitle = true
 +++

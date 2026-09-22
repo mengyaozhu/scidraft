@@ -2,6 +2,10 @@
 title = "Kolmogorov Axioms for a Token Distribution (axiom)"
 date = 2026-09-21T13:32:00+09:00
 tags = ["Demo", "Axiom", "Probability"]
+mathTitle = "Kolmogorov Axioms for a Token Distribution"
+mathCategory = "Axioms"
+mathAliases = ["Kolmogorov Axioms", "Probability Space Axioms", "Normalised Non-Negative Measure"]
+mathSummary = "States the three assumptions — non-negativity, unit total mass, and additivity — that make a token distribution a probability distribution."
 math = true
 showTitle = true
 +++

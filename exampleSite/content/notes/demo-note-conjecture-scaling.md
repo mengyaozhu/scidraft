@@ -2,6 +2,10 @@
 title = "Power-Law Scaling (conjecture)"
 date = 2026-09-21T07:22:00+09:00
 tags = ["Demo", "Conjecture", "Statistics"]
+mathTitle = "Power-Law Scaling"
+mathCategory = "Conjectures"
+mathAliases = ["Scaling Laws", "Power-Law Scaling Hypothesis", "Compute-Optimal Scaling"]
+mathSummary = "Holds that loss falls as a power law in model size, data and compute, so performance can be extrapolated before training."
 math = true
 showTitle = true
 +++

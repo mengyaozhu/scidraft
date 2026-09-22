@@ -2,6 +2,10 @@
 title = "Decoding as a State Machine (state diagram)"
 date = 2026-09-21T10:12:00+09:00
 tags = ["Demo", "Mermaid", "LLM", "Inference"]
+renderingTitle = "Mermaid: State Diagram"
+renderingCategory = "Mermaid"
+renderingAliases = ["State Diagram", "State Machine", "Transition Diagram"]
+renderingSummary = "Shows a decoding loop as a state diagram, with the transitions between prompt, generation and stop states."
 math = true
 showTitle = true
 +++

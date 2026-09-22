@@ -2,6 +2,10 @@
 title = "Proof of the Softmax Shift Lemma (proof)"
 date = 2026-09-21T12:22:00+09:00
 tags = ["Demo", "Proof", "Softmax"]
+mathTitle = "Proof of the Softmax Shift Lemma"
+mathCategory = "Proofs"
+mathAliases = ["Softmax Shift Proof", "Translation Invariance Proof", "Max-Subtraction Correctness"]
+mathSummary = "Proves the shift-invariance lemma by factoring the added constant out of numerator and denominator."
 math = true
 showTitle = true
 +++

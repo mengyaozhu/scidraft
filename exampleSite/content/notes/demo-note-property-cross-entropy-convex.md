@@ -2,6 +2,10 @@
 title = "Cross-Entropy Is Convex in the Logits (property)"
 date = 2026-09-21T08:02:00+09:00
 tags = ["Demo", "Property", "Optimization"]
+mathTitle = "Cross-Entropy Is Convex in the Logits"
+mathCategory = "Properties"
+mathAliases = ["Convexity of Cross-Entropy", "Log-Sum-Exp Convexity", "Convex Loss Property"]
+mathSummary = "Establishes that cross-entropy is convex in the logits, which is why the training objective has no spurious local minima."
 math = true
 showTitle = true
 +++

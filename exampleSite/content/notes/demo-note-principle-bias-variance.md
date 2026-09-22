@@ -2,6 +2,10 @@
 title = "The Bias-Variance Trade-Off (principle)"
 date = 2026-09-21T11:22:00+09:00
 tags = ["Demo", "Principle", "Statistics"]
+mathTitle = "The Bias-Variance Trade-Off"
+mathCategory = "Principles"
+mathAliases = ["Bias-Variance Trade-Off", "Bias-Variance Decomposition", "Capacity Trade-Off"]
+mathSummary = "States that expected error decomposes into bias and variance, so added capacity trades one against the other."
 math = true
 showTitle = true
 +++

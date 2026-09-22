@@ -2,6 +2,14 @@
 title = "Masked Softmax Attention (algorithm)"
 date = 2026-09-21T14:52:00+09:00
 tags = ["Demo", "Algorithm", "Attention"]
+renderingTitle = "Masked Softmax Attention"
+renderingCategory = "Tables"
+renderingAliases = ["Masked Attention Table", "Causal Mask Table", "Attention Mask Reference"]
+renderingSummary = "Tabulates how a causal mask constrains each attention position, alongside the algorithm that applies it."
+mathTitle = "Masked Softmax Attention"
+mathCategory = "Algorithms"
+mathAliases = ["Causal Masking", "Masked Attention", "Autoregressive Softmax"]
+mathSummary = "Specifies how a causal mask is applied inside softmax attention so that each position attends only to itself and earlier positions."
 math = true
 showTitle = true
 +++

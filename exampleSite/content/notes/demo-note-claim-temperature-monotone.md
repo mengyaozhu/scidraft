@@ -2,6 +2,10 @@
 title = "Temperature Cannot Sharpen (claim)"
 date = 2026-09-21T08:12:00+09:00
 tags = ["Demo", "Claim", "Softmax"]
+mathTitle = "Temperature Cannot Sharpen"
+mathCategory = "Claims"
+mathAliases = ["Temperature Monotonicity", "No Sharpening Claim", "Entropy Floor at Any Temperature"]
+mathSummary = "Asserts that lowering the softmax temperature reweights probabilities without ever making the distribution more peaked than its logits allow."
 math = true
 showTitle = true
 +++

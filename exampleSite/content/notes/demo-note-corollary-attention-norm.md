@@ -2,6 +2,10 @@
 title = "A Bound on the Attention Output Norm (corollary)"
 date = 2026-09-21T13:02:00+09:00
 tags = ["Demo", "Corollary", "Geometry"]
+mathTitle = "A Bound on the Attention Output Norm"
+mathCategory = "Corollaries"
+mathAliases = ["Attention Norm Bound", "Output Norm Corollary", "Bounded Attention Output"]
+mathSummary = "Reads off a ceiling on the norm of an attention output as a direct consequence of the convex-combination proposition."
 math = true
 showTitle = true
 +++

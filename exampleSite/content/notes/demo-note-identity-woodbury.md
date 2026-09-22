@@ -2,6 +2,10 @@
 title = "The Woodbury Identity (identity)"
 date = 2026-09-21T14:42:00+09:00
 tags = ["Demo", "Identity", "Linear Algebra"]
+mathTitle = "The Woodbury Identity"
+mathCategory = "Identities"
+mathAliases = ["Woodbury Matrix Identity", "Matrix Inversion Lemma", "Low-Rank Update Identity"]
+mathSummary = "Rewrites the inverse of a matrix plus a low-rank correction so that only a small system needs inverting."
 math = true
 showTitle = true
 +++

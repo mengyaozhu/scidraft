@@ -2,6 +2,10 @@
 title = "Backpropagation Through a Dense Layer"
 date = 2026-09-21T15:42:00+09:00
 tags = ["Demo", "Pseudo-Algorithm", "Neural Networks", "Backpropagation"]
+renderingTitle = "Backpropagation Pseudocode"
+renderingCategory = "Pseudo-algorithm"
+renderingAliases = ["Backpropagation Algorithm", "Reverse-Mode Differentiation", "Gradient Computation Pseudocode"]
+renderingSummary = "States backpropagation as a two-pass procedure: a forward pass caching activations and a reverse pass accumulating gradients."
 math = true
 showTitle = true
 +++

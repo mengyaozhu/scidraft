@@ -1,7 +1,11 @@
 +++
 title = "Attention Mechanism: Pseudocode"
-date = 2026-09-21T16:15:00+09:00
+date = 2026-09-21T15:32:00+09:00
 tags = ["Demo", "Attention", "Pseudo-Algorithm"]
+renderingTitle = "Attention Mechanism Pseudocode"
+renderingCategory = "Pseudo-algorithm"
+renderingAliases = ["Attention Pseudocode", "Scaled Dot-Product Algorithm", "Softmax Attention Procedure"]
+renderingSummary = "Writes scaled dot-product attention as pseudocode, making the matmul, scale, mask and weighted sum explicit."
 math = true
 showTitle = true
 +++

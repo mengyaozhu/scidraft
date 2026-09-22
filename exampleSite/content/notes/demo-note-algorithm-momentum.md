@@ -2,6 +2,10 @@
 title = "Gradient Descent with Momentum (algorithm)"
 date = 2026-09-21T10:32:00+09:00
 tags = ["Demo", "Algorithm", "Optimization"]
+mathTitle = "Gradient Descent with Momentum"
+mathCategory = "Algorithms"
+mathAliases = ["Heavy Ball Method", "Momentum Optimisation", "EMA Gradient Descent"]
+mathSummary = "Keeps a running average of past gradients so that descent accumulates speed along consistent directions and damps oscillation."
 math = true
 showTitle = true
 +++
