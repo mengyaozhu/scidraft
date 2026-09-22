@@ -10,6 +10,8 @@ math = true
 showTitle = true
 +++
 
+{{< preview >}}
+
 **Demo note.** This note demonstrates what the **SciDraft** Hugo theme can do
 for academic and scientific publishing — for research institutions, researchers
 and students. Its content is demonstration material only: readers should ignore
@@ -58,6 +60,8 @@ Tool-augmented chains \cite{Inaba2023-cg} are a fourth case: the chain calls a
 program, which changes what an answer can be grounded in.
 
 {{< references bib="bib/survey-refs-01.bib" title="References for the first part" >}}
+
+{{< /preview >}}
 
 ## Part two: how a model is adapted
 
