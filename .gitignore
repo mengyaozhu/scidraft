@@ -15,3 +15,5 @@ desktop.ini
 .idea/
 .vscode/
 *.swp
+
+.gitignore
