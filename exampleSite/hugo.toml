@@ -59,20 +59,6 @@ enableRobotsTXT = true
 
   # Entry index sets: one block per series of notes, naming the front-matter
   # fields the entry-a-to-z / entry-categories shortcodes read.
-  [params.entrySets.occupations]
-    titleField    = "occupationTitle"
-    categoryField = "occupationCategory"
-    aliasesField  = "alternativeTitles"
-    summaryField  = "shortDescription"
-    tag           = "Working with Agentic AI"
-    countLabel    = "Occupations"
-  [params.entrySets.skills]
-    titleField    = "skillTitle"
-    categoryField = "skillCategory"
-    aliasesField  = "skillAliases"
-    summaryField  = "skillSummary"
-    tag           = "Agentic Skill"
-    countLabel    = "Skills"
   [params.entrySets.math]
     titleField    = "mathTitle"
     categoryField = "mathCategory"
