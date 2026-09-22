@@ -105,7 +105,7 @@ resolution order is:
 
 1. the note's own front matter (`institute`, `author`)
 2. the site defaults in `hugo.toml`
-3. the theme defaults (`DyCoAI.com`, `mengyaozhu`)
+3. the theme defaults (`Your Institute`, `yourname`)
 
 ```toml
 # hugo.toml — one place for all notes
