@@ -42,12 +42,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Expose the repo where exampleSite's themesDir expects it
+      - name: Expose the repo as the theme Hugo expects
         run: |
-          # exampleSite sets themesDir = "../.." (this repo's parent), which
-          # is where a themes/-style checkout already contains the theme.
-          # On CI the parent lacks it, so link the workspace there.
-          [ -e "$GITHUB_WORKSPACE/../SciDraft" ] || ln -s "$GITHUB_WORKSPACE" "$GITHUB_WORKSPACE/../SciDraft"
+          mkdir -p "$RUNNER_TEMP/hugo-themes"
+          ln -s "$GITHUB_WORKSPACE" "$RUNNER_TEMP/hugo-themes/SciDraft"
 
       - name: Install Hugo CLI
         run: |
@@ -65,6 +63,7 @@ jobs:
           set -o pipefail
           hugo \
             --source exampleSite \
+            --themesDir "$RUNNER_TEMP/hugo-themes" \
             --gc \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}" 2>&1 | tee "$RUNNER_TEMP/build.log"
