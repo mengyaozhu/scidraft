@@ -26,8 +26,7 @@ timestamp, body (or preview), read-more link, and tags.
   (`promotion = true`) are excluded from the date flow.
 - Page size and promotions come from one settings table, `[params.feed]`, with
   the theme's defaults in the theme's `hugo.toml` overridden by the same table in
-  the site config: `notesPerPage`, `promotionsPerPage` (0 by default, so a default
-  feed page holds only notes) and `promotionPositions` (a range such as `"3-5"`).
+  the site config: `notesPerPage`, `promotionsPerPage` (1 by default) and `promotionPositions` (a range such as `"3-5"`).
   A page therefore holds notes **plus** promotions: 9 notes with 2 promotions is a
   page of 11 cards, and positions are counted in that final sequence.
 - `layouts/_partials/feed-promotions.html` decides which promotions the page
@@ -44,7 +43,7 @@ timestamp, body (or preview), read-more link, and tags.
 | Setting | Where | Effect |
 |---|---|---|
 | `params.feed.notesPerPage` | theme `hugo.toml`, overridden by site | Notes on each feed page (theme default 8) |
-| `params.feed.promotionsPerPage` | theme `hugo.toml`, overridden by site | Promotion cards added on top of them (theme default 0, meaning none) |
+| `params.feed.promotionsPerPage` | theme `hugo.toml`, overridden by site | Promotion cards added on top of them (theme default 1; 0 holds only notes) |
 | `params.feed.promotionPositions` | theme `hugo.toml`, overridden by site | Range of card positions a promotion may take, in the final page |
 | `pagination.pagerSize` | site `hugo.toml` | Other list pages; the notes feed uses `notesPerPage` instead |
 

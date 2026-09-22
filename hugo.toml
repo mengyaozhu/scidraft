@@ -9,12 +9,12 @@
 [params]
     # Notes feed: how many notes each page shows, and how many promotions it
     # carries on top of that. The same table in the site's hugo.toml overrides
-    # these. promotionsPerPage = 0 means a default feed page holds only notes;
+    # these. promotionsPerPage = 0 would hold only notes; 1 adds one promotion card;
     # promotionPositions is the range of card positions a promotion may take,
     # counted in the final page of notes plus promotions.
     [params.feed]
         notesPerPage = 8
-        promotionsPerPage = 0
+        promotionsPerPage = 1
         promotionPositions = "3-5"
   # Scientific content: enable math rendering by default
   math = true
