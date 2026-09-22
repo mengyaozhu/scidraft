@@ -1,46 +1,55 @@
 {{- /* Shared notes feed for the homepage and /notes/ (context: the notes
-       section page). Promotion notes (front matter `promotion = true`) are
-       excluded from the date flow and shown as the 3rd card on each page.
+       section page).
 
-       Page size comes from the site's own `[pagination] pagerSize`, so the
-       number of notes per page is set in one place: the config. A promotion
-       card is inserted in addition to that, as the third card of the page, so
-       a page with a promotion carries one card more than the configured
-       number.
+       Page size and promotions come from one settings table, defined in the
+       theme's hugo.toml and overridden by the same table in the site's config:
 
-       The promotion is picked pseudo-randomly: a per-build seed (build
-       timestamp) hashed with the page number gives an equal-probability
-       index into the promotions, reshuffled on every deploy/rebuild. With
-       two or more promotions, a pick equal to the previous page's is
-       re-drawn among the remaining ones, so the same promotion never
-       appears on consecutive pages. With exactly one promotion it shows on
-       every page. */ -}}
+         [params.feed]
+           notesPerPage = 8            notes on each page
+           promotionsPerPage = 0       promotions added on top (0 = none)
+           promotionPositions = "3-5"  where a promotion may sit, in the final page
+
+       So a page holds notes plus promotions: with 9 notes and 2 promotions the
+       reader sees 11 cards. Which promotions, and at which positions, is decided
+       by feed-promotions.html, which also keeps a promotion off two consecutive
+       pages when the pool is large enough for that. Promotion notes (front
+       matter `promotion = true`) are the pool; they never appear in the date
+       flow itself, and a note without the flag is an ordinary note. */ -}}
 {{- $realNotes := where .Pages "Content" "!=" "" }}
 {{- $promos := sort (where $realNotes ".Params.promotion" true) "Path" }}
 {{- $regular := where $realNotes ".Params.promotion" "!=" true }}
 {{- $n := len $promos }}
-{{- $paginator := .Paginate $regular }}
-{{- $promo := "" }}
-{{- if gt $n 0 }}
-{{-     $seed := now.Unix }}
-{{-     $page := $paginator.PageNumber }}
-{{/* Walk pages 1..N so each page sees the previous page's final pick;
-     a collision re-draws among the remaining promotions. */}}
-{{-     $final := -1 }}
-{{-     range $p := seq 1 $page }}
-{{-         $r := mod (int (printf "0x%s" (slicestr (hash.XxHash (printf "%d-%d" $seed $p)) 0 8))) $n }}
-{{-         if and (gt $n 1) (eq $r $final) }}
-{{-             $r = mod (add $r 1 (mod (int (printf "0x%s" (slicestr (hash.XxHash (printf "%d-%d-r" $seed $p)) 0 8))) (sub $n 1))) $n }}
-{{-         end }}
-{{-         $final = $r }}
-{{-     end }}
-{{-     $promo = index $promos $final }}
+
+{{- $feed := site.Params.feed | default dict }}
+{{- $perPage := $feed.notesPerPage | default 8 }}
+{{- $promoCount := $feed.promotionsPerPage | default 0 }}
+{{- $promoPositions := $feed.promotionPositions | default "3-5" }}
+{{- $paginator := .Paginate $regular $perPage }}
+
+{{- /* The promotions this page carries, each with the card position it takes. */ -}}
+{{- $promotions := slice }}
+{{- if and (gt $n 0) (gt $promoCount 0) }}
+{{- $promotions = partial "feed-promotions.html" (dict
+        "promos" $promos
+        "page" $paginator.PageNumber
+        "count" $promoCount
+        "positions" $promoPositions
+        "length" (add (len $paginator.Pages) $promoCount)) }}
 {{- end }}
+{{- $promoAt := dict }}
+{{- range $promotions }}{{ $promoAt = merge $promoAt (dict (string .pos) .page) }}{{ end }}
+
 <div class="notes-feed">
-    {{- range $i, $note := $paginator.Pages }}
-    {{- partial "note-card.html" $note }}
-    {{- if and (ne $promo "") (eq $i 1) }}
+    {{- /* Render the page as a reader sees it: a promotion takes its position,
+           the notes fill the remaining positions in their own order. */ -}}
+    {{- $noteIndex := 0 }}
+    {{- range $position := seq 1 (add (len $paginator.Pages) (len $promotions)) }}
+    {{- $promo := index $promoAt (string $position) }}
+    {{- if $promo }}
     {{- partial "note-card.html" $promo }}
+    {{- else if lt $noteIndex (len $paginator.Pages) }}
+    {{- partial "note-card.html" (index $paginator.Pages $noteIndex) }}
+    {{- $noteIndex = add $noteIndex 1 }}
     {{- end }}
     {{- end }}
     {{- partial "numbered-pagination.html" $paginator }}

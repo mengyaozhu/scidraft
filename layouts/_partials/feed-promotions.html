@@ -1,0 +1,107 @@
+{{- /* Which promotions a feed page shows, and where they sit.
+
+       Called by notes-feed.html with:
+         promos     the promotion notes, sorted
+         page       the number of the page being rendered (1 based)
+         count      how many promotions that page should carry
+         positions  the allowed position range, e.g. "3-5" or "4"
+         length     the page's length in cards: its notes plus `count`
+
+       Returns a slice of dicts, each {pos: <card position>, page: <promotion>},
+       sorted by position. Positions are counted in the final page, so in a page
+       of 9 notes carrying 2 promotions, position 3 is the third card a reader
+       sees.
+
+       Rules, in the order they decide the outcome:
+       1. A page never shows the same promotion twice, and never more promotions
+          than exist.
+       2. A promotion is not repeated on the next page — unless the pool is too
+          small for that, which is the case when there are fewer than twice as
+          many promotions as the page carries (2 per page need 4, 3 need 6). With
+          a single promotion the rule therefore always yields to it, and the same
+          promotion appears on every page.
+       3. Positions stay inside the range and are distinct. If the range cannot
+          hold all the promotions of the page, the extras take the positions
+          immediately after it, and everything is clamped to the page's last card.
+
+       The draw is deterministic for a given build: it is seeded on the build
+       time and walked page by page, so each page can rule out what the page
+       before it showed. Rebuild, and the arrangement changes; reload the page,
+       and it does not. */ -}}
+
+{{- $promos := .promos -}}
+{{- $page := .page -}}
+{{- $count := .count -}}
+{{- $range := .positions -}}
+{{- $length := .length -}}
+{{- $n := len $promos -}}
+{{- $out := slice -}}
+
+{{- if and (gt $n 0) (gt $count 0) -}}
+    {{- $k := $count -}}
+    {{- if gt $k $n }}{{ $k = $n }}{{ end -}}
+    {{- $seed := now.Unix -}}
+    {{- $allowRepeat := lt $n (mul 2 $k) -}}
+
+    {{/* Walk pages 1..this one, so this page knows what the previous showed. */}}
+    {{- $previous := slice -}}
+    {{- $picked := slice -}}
+    {{- range $p := seq 1 $page -}}
+        {{- $picked = slice -}}
+        {{- range $i := seq 1 $k -}}
+            {{- $candidates := slice -}}
+            {{- range $j := seq 0 (sub $n 1) -}}
+                {{- if not (in $picked $j) -}}
+                    {{- if or $allowRepeat (not (in $previous $j)) -}}
+                        {{- $candidates = $candidates | append $j -}}
+                    {{- end -}}
+                {{- end -}}
+            {{- end -}}
+            {{- if not $candidates -}}
+                {{/* Everything is taken or excluded: fill from whatever is left. */}}
+                {{- range $j := seq 0 (sub $n 1) -}}
+                    {{- if not (in $picked $j) }}{{ $candidates = $candidates | append $j }}{{ end -}}
+                {{- end -}}
+            {{- end -}}
+            {{- $draw := mod (int (printf "0x%s" (slicestr (hash.XxHash (printf "%d-%d-%d" $seed $p $i)) 0 8))) (len $candidates) -}}
+            {{- $picked = $picked | append (index $candidates $draw) -}}
+        {{- end -}}
+        {{- $previous = $picked -}}
+    {{- end -}}
+
+    {{/* Positions: the range first, then the cards after it if it is too small. */}}
+    {{- $parts := split (string $range) "-" -}}
+    {{- $low := int (index $parts 0) -}}
+    {{- $high := $low -}}
+    {{- if gt (len $parts) 1 }}{{ $high = int (index $parts 1) }}{{ end -}}
+    {{- if lt $low 1 }}{{ $low = 1 }}{{ end -}}
+    {{- if gt $high $length }}{{ $high = $length }}{{ end -}}
+    {{- if gt $low $high }}{{ $low = $high }}{{ end -}}
+    {{- $slots := slice -}}
+    {{- range $pos := seq $low $high }}{{ $slots = $slots | append $pos }}{{ end -}}
+    {{- range $pos := seq (add $high 1) $length -}}
+        {{- if ge (len $slots) $k }}{{ break }}{{ end -}}
+        {{- $slots = $slots | append $pos -}}
+    {{- end -}}
+    {{- /* Drawn with the same build seed as the promotions themselves, so the
+           homepage and /notes/ show the same page the same way; a rebuild
+           rearranges, a reload does not. */ -}}
+    {{- $chosen := slice -}}
+    {{- range $i := seq 1 $k -}}
+        {{- $free := slice -}}
+        {{- range $slot := $slots -}}
+            {{- if not (in $chosen $slot) }}{{ $free = $free | append $slot }}{{ end -}}
+        {{- end -}}
+        {{- if $free -}}
+            {{- $draw := mod (int (printf "0x%s" (slicestr (hash.XxHash (printf "%d-pos-%d-%d" $seed $page $i)) 0 8))) (len $free) -}}
+            {{- $chosen = $chosen | append (index $free $draw) -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $chosen = sort $chosen -}}
+
+    {{- range $i, $position := $chosen -}}
+        {{- $out = $out | append (dict "pos" $position "page" (index $promos (index $picked $i))) -}}
+    {{- end -}}
+{{- end -}}
+
+{{- return $out -}}

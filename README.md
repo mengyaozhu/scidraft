@@ -141,6 +141,12 @@ the first, the byline joins them.
   institute = "DyCoAI.com"
   author = "mengyaozhu"
 
+  # Notes feed: notes per page, plus promotion cards on top of them
+  [params.feed]
+    notesPerPage = 8           # notes on each feed page
+    promotionsPerPage = 1      # promotions added on top (0 = plain notes only)
+    promotionPositions = "3-5" # where a promotion may sit, in the final page
+
   # Recommendations under each note
   recommendationCount = 3      # any number; invalid values fall back to 3
 

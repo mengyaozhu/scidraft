@@ -11,9 +11,16 @@ Set in a note's front matter:
 promotion = true
 ```
 
-The note leaves the chronological flow and appears as the third card on feed
-pages, rotating per build (never the same as the previous page). Logic lives
-in `layouts/_partials/notes-feed.html` (`$promos`, `$seed`).
+The note leaves the chronological flow and becomes part of the promotion pool for
+feed pages. How many appear on a page, and where, is set by `[params.feed]` in the
+site config (`promotionsPerPage`, `promotionPositions`; defaults in the theme's
+`hugo.toml`, where the count is 0 so a default page carries none). Positions are
+counted in the final page of notes plus promotions, are distinct, and stay inside
+the range — clamped to the page's last card if it is shorter. A promotion is not
+repeated on the next page unless the pool is too small for that, which is the case
+below twice the per-page count; with a single promotion it therefore appears on
+every page. Logic lives in `layouts/_partials/feed-promotions.html`, called by
+`notes-feed.html`.
 
 ## 2. Text promotion (inline card)
 

@@ -24,18 +24,29 @@ timestamp, body (or preview), read-more link, and tags.
 
 - Notes are `content/notes/*.md` pages with non-empty content; **promotions**
   (`promotion = true`) are excluded from the date flow.
-- Page size comes from the site's `pagination.pagerSize`. A promotion card is
-  inserted **in addition** to it, as the third card of the page, so a page that
-  shows a promotion carries one card more than the configured number.
-  The promotion shown on a page is picked pseudo-randomly per build
-  (`now.Unix` seeded hash), and never repeats the previous page's pick.
+- Page size and promotions come from one settings table, `[params.feed]`, with
+  the theme's defaults in the theme's `hugo.toml` overridden by the same table in
+  the site config: `notesPerPage`, `promotionsPerPage` (0 by default, so a default
+  feed page holds only notes) and `promotionPositions` (a range such as `"3-5"`).
+  A page therefore holds notes **plus** promotions: 9 notes with 2 promotions is a
+  page of 11 cards, and positions are counted in that final sequence.
+- `layouts/_partials/feed-promotions.html` decides which promotions the page
+  shows and where: never the same promotion twice on one page, distinct positions
+  inside the range, and never a promotion on two consecutive pages — unless the
+  pool is too small for that, which is the case below twice the per-page count
+  (2 per page need 4, 3 need 6). With a single promotion it is therefore shown on
+  every page. Draws are seeded on the build time, so a rebuild rearranges the
+  feed and a reload does not.
 - Long notes appear as preview cards (see note-cards.md).
 
 ## Configuration
 
 | Setting | Where | Effect |
 |---|---|---|
-| `pagination.pagerSize` | site `hugo.toml` | Notes per page in the feed (the theme itself sets 6 as a default) |
+| `params.feed.notesPerPage` | theme `hugo.toml`, overridden by site | Notes on each feed page (theme default 8) |
+| `params.feed.promotionsPerPage` | theme `hugo.toml`, overridden by site | Promotion cards added on top of them (theme default 0, meaning none) |
+| `params.feed.promotionPositions` | theme `hugo.toml`, overridden by site | Range of card positions a promotion may take, in the final page |
+| `pagination.pagerSize` | site `hugo.toml` | Other list pages; the notes feed uses `notesPerPage` instead |
 
 ## Verify after a change
 
