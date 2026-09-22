@@ -119,7 +119,7 @@ enableRobotsTXT = true
     [menu.main.params]
       note = "Methods by category"
   [[menu.main]]
-    identifier = "human-agentic-skills"
+    identifier = "notes"
     name = "Evolving with AI"
     url = "/notes/"
     weight = 10
