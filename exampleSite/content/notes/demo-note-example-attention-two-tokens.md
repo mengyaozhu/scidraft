@@ -1,6 +1,6 @@
 +++
 title = "Attention with Two Tokens (example)"
-date = 2026-09-22T08:05:00+09:00
+date = 2026-09-22T07:05:00+09:00
 tags = ["Demo", "Example", "Attention"]
 mathTitle = "Attention with Two Tokens"
 mathCategory = "Examples"
