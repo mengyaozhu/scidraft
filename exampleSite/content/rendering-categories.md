@@ -3,6 +3,7 @@ title: "Rendering Categories"
 description: "Rendering methods demonstrated in the SciDraft demo notes, grouped by category — mermaid diagrams, pseudo-algorithms, tables, citations and code — with a link to each note."
 ShowToc: false
 ShowReadingTime: false
+hideAuthor: true
 ---
 This page groups every rendering method demonstrated in the **Rendering** note
 series by category. Within each category, entries are listed alphabetically, with
