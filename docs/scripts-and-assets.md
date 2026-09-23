@@ -10,9 +10,10 @@ wired. Blocks load only when needed:
 | Block | Loaded when | Flag set by |
 |---|---|---|
 | Menu toggle (bundled locally) | Always | — |
+| Header re-flow (bundled locally) | Always | — |
 | Mermaid (CDN) | Page has a mermaid block, **or** is the notes feed | `hasMermaid` store flag from the render hook |
 | Pseudo-algorithm (CDN: pseudocode + KaTeX) | Page has a pseudo-algorithm block, or is the notes feed | `hasAlgorithm` |
-| Math auto-render (CDN: KaTeX + auto-render) | `math = true` (site or note) | — |
+| Math (CDN: MathJax v4) | `math = true` (site or note) | — |
 | Citations (CDN: citation-js) | Page uses the `references` shortcode | `hasCitations` |
 | LaTeX text commands (bundled locally) | Page renders note bodies: a note, a standalone page, `/notes/` or the homepage | — |
 
@@ -42,8 +43,10 @@ site are 557 KB each.
 `layouts/_partials/head.html` builds fingerprinted bundles: the stylesheet
 (licence banner → `core/` variables, reset and media queries → everything in
 `common/` → Chroma themes → everything in `extended/`), `search.js`
-(fuse + fastsearch + license). Two further local scripts are wired in
-`extend_head.html`: the menu toggle and `js/latex-text.js`.
+(fuse + fastsearch + license). Three further local scripts are wired in
+`extend_head.html`: the menu toggle, `js/header-reflow.js` (stacks the header
+into its centered layout when the menu cannot fit beside the logo), and
+`js/latex-text.js`.
 
 Load order is deliberate: `common/` holds the theme's own styles, and
 `extended/` — whose `custom.css` begins empty — is loaded last, so a site

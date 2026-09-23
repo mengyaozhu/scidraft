@@ -142,3 +142,41 @@
         vertical-align: middle;
     }
 }
+
+/* Content-triggered stacked mode: header-reflow.js applies "nav-stacked"
+   whenever the menu cannot fit beside the logo row at the current width —
+   long site titles or many menu items — so the centered stacked layout is
+   not tied to the 767px viewport breakpoint. The rules mirror the ≤767px
+   block above. */
+.header-nav.nav-stacked {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 4px;
+    line-height: 1.4;
+}
+.header-nav.nav-stacked .logo {
+    line-height: var(--header-height);
+    position: relative;
+}
+.header-nav.nav-stacked .logo-switches {
+    position: absolute;
+    left: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+}
+.header-nav.nav-stacked .menu {
+    flex: 0 0 auto;
+    justify-content: center;
+}
+.header-nav.nav-stacked .menu a {
+    font-size: 0.92rem;
+    padding: 0 0.35rem;
+}
+.header-nav.nav-stacked .menu > li.has-submenu {
+    display: flex;
+    align-items: center;
+}
+.header-nav.nav-stacked .menu .menu-caret svg {
+    vertical-align: middle;
+}

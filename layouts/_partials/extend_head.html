@@ -8,6 +8,17 @@
 <script defer src="{{ $menuToggle.RelPermalink }}"{{ with $menuToggle.Data.Integrity }} crossorigin="anonymous"
     integrity="{{ . }}"{{ end }}></script>
 
+{{- /* Header re-flow: stacks the header into the centered two-row layout
+       whenever the menu cannot fit beside the logo row — long site titles,
+       many menu items, mid-size windows — at any screen width. See
+       assets/js/header-reflow.js for the measure-then-decide logic. */ -}}
+{{- $headerReflow := resources.Get "js/header-reflow.js" | js.Build | resources.Minify }}
+{{- if not site.Params.assets.disableFingerprinting }}
+{{- $headerReflow = $headerReflow | fingerprint }}
+{{- end }}
+<script defer src="{{ $headerReflow.RelPermalink }}"{{ with $headerReflow.Data.Integrity }} crossorigin="anonymous"
+    integrity="{{ . }}"{{ end }}></script>
+
 {{- /* Mermaid diagrams: loaded only on pages that contain a ```mermaid
        block (the render hook sets the hasMermaid page store flag), plus
        the notes feed wherever it lives: the /notes/ section page and —
