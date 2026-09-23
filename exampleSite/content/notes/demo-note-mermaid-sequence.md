@@ -1,6 +1,6 @@
 +++
 title = "Autoregressive Generation (sequence diagram)"
-date = 2026-09-21T10:42:00+09:00
+date = 2026-09-22T07:15:00+09:00
 tags = ["Demo", "Mermaid", "LLM", "Inference"]
 renderingTitle = "Mermaid: Sequence Diagram"
 renderingCategory = "Mermaid"
