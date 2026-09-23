@@ -44,6 +44,7 @@
        the feed's head cannot see the render hooks' flags. */ -}}
 {{- if or (.Store.Get "hasAlgorithm") (eq .Section "notes") (.IsHome) }}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pseudocode@2.4.0/build/pseudocode.min.css" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/pseudocode@2.4.0/build/pseudocode.min.js" defer></script>
 <script defer>
@@ -68,34 +69,95 @@
 {{- end }}
 
 {{- /* Standalone math (inline $..$ / \(..\) and display $$..$$ / \[..\])
-       in note bodies: KaTeX auto-render typesets it in the browser. Enabled
-       by the `math` site param (hugo.toml) or a note's own `math = true`;
-       skipped inside pre/code so algorithm sources and syntax examples stay
-       literal. The pseudo-algorithm block above also loads katex.min.js,
-       but only for pages with algorithms — this block is what covers
-       ordinary math. One pipeline both ways: KaTeX, never MathJax. */ -}}
+       in note bodies: MathJax v4 typesets it in the browser. v4's automatic
+       line breaking (displayOverflow: linebreak) wraps long display
+       equations to the content column on narrow screens — KaTeX cannot
+       break lines, which is why the engine changed — and lineleading
+       spaces the wrapped lines for readability. Enabled by the `math`
+       site param (hugo.toml) or a note's own `math = true`. pre/code stay
+       literal so algorithm sources and syntax examples are untouched
+       (MathJax ignores them by default, the same tag list KaTeX used).
+
+       KaTeX is no longer loaded for ordinary equations. It remains in the
+       pseudo-algorithm block above because pseudocode.js is built on it;
+       pages with algorithms therefore run both engines side by side.
+       v4 components live at the package root: there is no /es5/ prefix
+       as in v3. */ -}}
 {{- if or .Params.math site.Params.math }}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
-{{- if not (or (.Store.Get "hasAlgorithm") (eq .Section "notes") (.IsHome)) }}
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" defer></script>
-{{- end }}
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" defer></script>
+<script>
+  window.MathJax = {
+    output: {
+      displayOverflow: "linebreak",
+      linebreaks: { inline: true, width: "100%", lineleading: 0.8 }
+    },
+    tex: {
+      inlineMath: [["\\(", "\\)"], ["$", "$"]],
+      displayMath: [["$$", "$$"], ["\\[", "\\]"]]
+    },
+    options: { enableMenu: false }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" defer></script>
 <script defer>
-  window.addEventListener("DOMContentLoaded", function () {
-    if (!window.renderMathInElement) return;
-    document.querySelectorAll(".md-content, .post-content").forEach(function (el) {
-      window.renderMathInElement(el, {
-        delimiters: [
-          { left: "$$", right: "$$", display: true },
-          { left: "\\[", right: "\\]", display: true },
-          { left: "$", right: "$", display: false },
-          { left: "\\(", right: "\\)", display: false }
-        ],
-        ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code", "option"],
-        throwOnError: false
+  /* Live re-flow: MathJax lays out each equation once, against the column
+     width at load time, so resizing the window afterwards leaves stale line
+     breaks — narrow it enough and a display equation overflows the column.
+     This watcher re-typesets, but ONLY when narrowing actually causes
+     overflow (checked ~250ms after resizing stops). Widening is deliberately
+     ignored — stale breaks are harmless and a full redraw would disturb the
+     reader — and so are height-only changes: mobile URL bars fire resize
+     while scrolling, and re-typesetting on those would stutter the page. */
+  (function () {
+    "use strict";
+    var lastWidth = window.innerWidth;
+    var timer = null;
+
+    function hasOverflow() {
+      var eqs = document.querySelectorAll('mjx-container[display="true"]');
+      for (var i = 0; i < eqs.length; i++) {
+        var eq = eqs[i];
+        if (eq.scrollWidth > eq.clientWidth + 1) return true;
+        var limit = document.documentElement.clientWidth + 1;
+        if (eq.getBoundingClientRect().right > limit) return true;
+        var kids = eq.querySelectorAll("*");
+        for (var j = 0; j < kids.length; j++) {
+          if (kids[j].getBoundingClientRect().right > limit) return true;
+        }
+      }
+      return false;
+    }
+
+    function reTypeset() {
+      /* v4 has no supported in-place re-layout: typesetClear + typesetPromise
+         is a silent no-op (verified). What works is restoring each equation's
+         original TeX — v4 keeps it in the data-latex attribute of mjx-math —
+         as fresh text and typesetting that, which re-measures the column. */
+      var eqs = document.querySelectorAll("mjx-container");
+      eqs.forEach(function (eq) {
+        var root = eq.querySelector("mjx-math");
+        var tex = root && root.getAttribute("data-latex");
+        if (tex === null) return;
+        var display = eq.getAttribute("display") === "true";
+        var delim = display ? "$$" : "$";
+        eq.parentNode.insertBefore(document.createTextNode(delim + tex + delim), eq);
+        eq.remove();
       });
+      var mj = window.MathJax;
+      mj.startup.promise.then(function () { return mj.typesetPromise(); })
+        .catch(function () {});
+    }
+
+    window.addEventListener("resize", function () {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(function () {
+        var w = window.innerWidth;
+        if (w >= lastWidth) { lastWidth = w; return; }   // widening: accepted
+        var narrowed = w < lastWidth;
+        lastWidth = w;
+        if (narrowed && hasOverflow()) reTypeset();
+      }, 250);
     });
-  });
+  })();
 </script>
 {{- end }}
 
@@ -110,9 +172,10 @@
        when it puts a second bibliography further down the page. Markers that
        come after every list therefore stay as written.
 
-       Text inside pre, code, script, style, .references and .katex is skipped,
-       so LaTeX shown as an example, the bibliography itself and typeset maths
-       are never touched. A list whose scope contains no citations stays hidden
+       Text inside pre, code, script, style, .references and math output
+       (.katex / .MathJax) is skipped, so LaTeX shown as an example, the
+       bibliography itself and typeset maths are never touched. A list whose
+       scope contains no citations stays hidden
        and fetches nothing, which is why a page carrying the shortcode without
        any markers still downloads no bibliography. */ -}}
 {{- /* When the page itself cites, its own shortcode sets the flag. List pages
@@ -188,7 +251,7 @@
       var scopeRoot = box.closest("article.note-card") || document.body;
       var walker = document.createTreeWalker(scopeRoot, NodeFilter.SHOW_TEXT, {
         acceptNode: function (node) {
-          if (node.parentElement.closest("pre, code, script, style, .references, .katex")) return NodeFilter.FILTER_REJECT;
+          if (node.parentElement.closest("pre, code, script, style, .references, .katex, .MathJax, mjx-container")) return NodeFilter.FILTER_REJECT;
           if (node.textContent.indexOf("\\cite{") === -1) return NodeFilter.FILTER_SKIP;
           if (claimed.indexOf(node) !== -1) return NodeFilter.FILTER_SKIP;
           return (box.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_PRECEDING)

@@ -20,14 +20,16 @@
  *   1. Only TEXT NODES are rewritten, never HTML. Text inside pre, code,
  *      script, style, textarea is skipped, so a command shown as an example in
  *      a code block stays literal — which is the point of the skipping.
- *   2. Text inside .katex and .references is skipped too. KaTeX has already
- *      turned math into markup by the time this runs, and the bibliography is
- *      built from the BibTeX file, not from the note text.
+ *   2. Text inside .katex, .MathJax / mjx-container and .references is skipped
+ *      too. The math engines have already turned math into markup by the time
+ *      this runs (see rule 3), and the bibliography is built from the BibTeX
+ *      file, not from the note text.
  *   3. ORDERING: the <script> for this file must stay AFTER the math block in
- *      extend_head.html. Browser handlers registered later run later, so the
- *      math block (KaTeX auto-render) has already replaced math text nodes and
- *      .katex subtrees can be skipped. Run this first and it would rewrite a
- *      \textbf that belongs to an equation, breaking the formula.
+ *      extend_head.html, and the pass waits for MathJax when the page loads
+ *      it: MathJax typesets asynchronously and may still be pending at
+ *      DOMContentLoaded, and running first would rewrite a \textbf that
+ *      belongs to raw $$..$$ source, breaking the formula. KaTeX (pseudo-
+ *      algorithm blocks) renders synchronously at DOMContentLoaded as before.
  *
  * DESIGN NOTES
  * - Braces are matched by counting, not by a regular expression, so an
@@ -60,7 +62,10 @@
   var ROOTS = ".md-content, .post-content";
 
   // Subtrees that must never be rewritten (see rule 1 and 2 in the header).
-  var SKIP = "pre, code, script, style, textarea, .katex, .references";
+  // .katex is KaTeX output (pseudo-algorithm blocks); .MathJax / mjx-container
+  // is MathJax v4 output (ordinary equations).
+  var SKIP =
+    "pre, code, script, style, textarea, .katex, .MathJax, mjx-container, .references";
 
   // A command starts here: a backslash, the name, an opening brace.
   var OPENER = /\\(textbf|textit|emph|texttt)\{/g;
@@ -150,9 +155,28 @@
     });
   }
 
+  // Pages that load MathJax must wait for it: it typesets asynchronously and
+  // may still be pending at DOMContentLoaded (rule 3 above). Pages without a
+  // MathJax script run at once, as before. The poll gives up after ~10s and
+  // keeps today's behaviour rather than never converting.
+  function start() {
+    if (!document.querySelector('script[src*="mathjax"]')) { run(); return; }
+    var tries = 0;
+    (function poll() {
+      var mj = window.MathJax;
+      if (mj && mj.startup && mj.startup.promise) {
+        mj.startup.promise.then(run, run);
+      } else if (++tries < 40) {
+        setTimeout(poll, 250);
+      } else {
+        run();
+      }
+    })();
+  }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", run);
+    document.addEventListener("DOMContentLoaded", start);
   } else {
-    run();
+    start();
   }
 })();

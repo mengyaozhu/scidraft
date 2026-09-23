@@ -3,16 +3,32 @@
 Four rendering pipelines, all wired through the theme's script hub
 `layouts/_partials/extend_head.html`, plus the table skins below.
 
-## Math (KaTeX, in the browser)
+## Math (MathJax v4, in the browser)
 
 | Layer | Where | Notes |
 |---|---|---|
-| Renderer | KaTeX auto-render, loaded by `extend_head.html` when `math = true` (site param or per note) | Typesets `$..$`, `$$..$$`, `\(..\)`, `\[..\]` inside `.md-content` / `.post-content`; skips pre/code |
+| Renderer | MathJax v4 (`tex-chtml`), loaded by `extend_head.html` when `math = true` (site param or per note) | Typesets `$..$`, `$$..$$`, `\(..\)`, `\[..\]` inside `.md-content` / `.post-content`; skips pre/code. **Automatic line breaking wraps long display equations to the content column on narrow screens**, with `lineleading: 0.8` spacing the wrapped lines |
 | Delimiter preservation | **site** `hugo.toml` → `[markup.goldmark.extensions.passthrough]` | **Required.** Hugo does not merge `[markup]` from theme configs, so each site must set it (see README quick start) |
-| Styles | `katex.min.css` (CDN) | Loaded with the auto-render block |
+| Styles | none needed | The v4 component injects its own stylesheet; the text color is inherited, so dark mode works without extra rules |
 
 If math shows as raw text, the cause is almost always the missing passthrough
 block in the *site* config, or `math` not enabled.
+
+MathJax was chosen over KaTeX because KaTeX cannot wrap a long display
+equation — on phones the formula simply overflowed the column. KaTeX is still
+loaded for **pseudo-algorithm blocks only**, because pseudocode.js is built on
+it; pages with algorithms therefore run both engines side by side (their box
+math uses KaTeX fonts, the equations use MathJax). v4 components live at the
+CDN package root: `mathjax@4/tex-chtml.js` — there is no `/es5/` prefix as in
+v3.
+
+MathJax lays out each equation once, against the column width at load time, so
+resizing a window afterwards leaves stale line breaks. A small watcher in
+`extend_head.html` closes the gap: ~250 ms after resizing stops, if the window
+got **narrower** and a display equation now overflows its column, it
+re-typesets once. Widening and height-only changes (phone URL bars) are
+deliberately ignored — stale breaks after widening are harmless, and a redraw
+would disturb the reader more than it helps.
 
 **Two traps to know.** First, never write a literal `<` (or `&`) inside math
 delimiters: the passthrough keeps it verbatim, so the browser reads it as the
@@ -144,7 +160,8 @@ two classes), which no single extra class can outrank.
 ## LaTeX text commands (\textbf, \textit, \emph, \texttt)
 
 Prose pasted out of a LaTeX source often carries commands that Markdown has no
-meaning for and KaTeX will not touch, because they sit outside math delimiters.
+meaning for and the math engines will not touch, because they sit outside math
+delimiters.
 `assets/js/latex-text.js`, loaded by `extend_head.html`, converts the four that
 appear in practice into their HTML equivalents: bold, italic, emphasis and code.
 Commands inside code blocks, inside an equation, or in the bibliography are
@@ -152,9 +169,10 @@ skipped, and an argument whose braces do not balance is left exactly as written.
 
 Two consequences worth knowing. The conversion happens in the browser, so the raw
 command is visible for a moment while the page loads, the same way citations
-behave. And because the script skips `.katex` subtrees, its tag must stay below
-the math block in `extend_head.html`: that ordering is what guarantees a command
-belonging to an equation is never rewritten.
+behave. And because MathJax typesets asynchronously, the script waits for
+MathJax's startup promise on pages that load it, and skips `.katex` /
+`.MathJax` subtrees — together that guarantees a command belonging to an
+equation is never rewritten.
 
 If you write notes yourself, prefer Markdown (`**bold**`, `*italic*`, `` `code` ``)
 and treat this pass as a safety net for pasted material.
@@ -162,8 +180,9 @@ and treat this pass as a safety net for pasted material.
 ## Search page exception
 
 The search page generates result previews in the browser and loads its **own**
-MathJax (in `layouts/search.html`) to typeset math inside those previews.
-That is the only MathJax left in the theme.
+MathJax v4 (in `layouts/search.html`) to typeset math inside those previews —
+the same engine the note pipeline uses, loaded independently so the search page
+does not depend on the note head partial.
 
 ## Verify after a change
 
