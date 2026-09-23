@@ -1,6 +1,6 @@
 +++
 title = "Causal Multi-Head Attention in Python (intermediate)"
-date = 2026-09-21T13:22:00+09:00
+date = 2026-09-22T07:10:00+09:00
 tags = ["Demo", "Python", "Attention"]
 renderingTitle = "Causal Attention in Python"
 renderingCategory = "Code"
