@@ -13,7 +13,7 @@
     # promotionPositions is the range of card positions a promotion may take,
     # counted in the final page of notes plus promotions.
     [params.feed]
-        notesPerPage = 8
+        notesPerPage = 9
         promotionsPerPage = 1
         promotionPositions = "3-5"
   # Scientific content: enable math rendering by default
