@@ -113,6 +113,15 @@
         /* keep the title's original breathing room above it on mobile:
            the title centers inside its 60px row as on desktop */
         line-height: var(--header-height);
+        /* anchor the theme toggle to the centered title: the toggle hangs
+           off the text's right edge and follows it automatically */
+        position: relative;
+    }
+    .header-nav .logo-switches {
+        position: absolute;
+        left: calc(100% + 8px);
+        top: 50%;
+        transform: translateY(-50%);
     }
     .header-nav .menu {
         flex: 0 0 auto;
