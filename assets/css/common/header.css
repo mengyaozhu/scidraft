@@ -95,3 +95,41 @@
 
 /* The active menu item's appearance is owned by menu.css (one setting, one
    home) so this rule is not duplicated here. */
+
+/* Hybrid header: on narrow screens the heading (with its theme toggle) and
+   the menu stack into two centered rows instead of wrapping left-aligned.
+   Wide screens keep the single-line split layout. */
+@media (max-width: 767px) {
+    .header-nav {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        row-gap: 4px;
+        /* the 60px line-height meant for the single-line header inflates
+           each stacked row; a normal line keeps the two rows compact */
+        line-height: 1.4;
+    }
+    .header-nav .logo {
+        /* keep the title's original breathing room above it on mobile:
+           the title centers inside its 60px row as on desktop */
+        line-height: var(--header-height);
+    }
+    .header-nav .menu {
+        flex: 0 0 auto;
+        justify-content: center;
+    }
+    .header-nav .menu a {
+        font-size: 0.92rem;
+        padding: 0 0.35rem;
+    }
+    /* the dropdown caret's svg participates in the text baseline and pushed
+       the has-submenu item ~2px below its siblings; centering the label and
+       caret against each other keeps all menu items on the same line */
+    .header-nav .menu > li.has-submenu {
+        display: flex;
+        align-items: center;
+    }
+    .header-nav .menu .menu-caret svg {
+        vertical-align: middle;
+    }
+}
