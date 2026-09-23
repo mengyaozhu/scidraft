@@ -1,6 +1,6 @@
 +++
 title = "A Survey of Chain-of-Thought Prompting: Single Chains, Sampling and Demonstration Construction (survey)"
-date = 2026-09-21T15:29:00+09:00
+date = 2026-09-22T06:55:00+09:00
 tags = ["Demo", "Survey", "Prompting"]
 renderingTitle = "Survey: Chain of Thought"
 renderingCategory = "Citations"

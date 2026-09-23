@@ -1,6 +1,6 @@
 +++
 title = "Layout of a Scaling Study (advanced folder structure)"
-date = 2026-09-21T08:22:00+09:00
+date = 2026-09-22T07:01:00+09:00
 tags = ["Demo", "Python", "Project Layout"]
 math = true
 showTitle = true
