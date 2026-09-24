@@ -1,6 +1,6 @@
 # Hugo Theme SciDraft
 
-## A modern Hugo theme for scientific writing and research.
+## A modern Hugo theme for Sharing Thoughts and Academic Writing
 
 SciDraft is a Hugo theme designed for academic publications, research notes, technical explanations, and the sharing of evolving scientific thoughts.
 
