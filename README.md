@@ -1,4 +1,4 @@
-# SciDraft
+# SciDraft - A Modern Hugo Theme for Sharing Thoughts and Academic Writing
 
 **A modern Hugo theme for scientific writing and research.**
 
