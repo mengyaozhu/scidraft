@@ -1,7 +1,7 @@
 /* Twitter/X-style short posts (content type "note"). */
 
 .notes-feed {
-    max-width: 720px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
