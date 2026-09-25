@@ -127,7 +127,7 @@
         flex: 0 0 auto;
         justify-content: center;
     }
-    .header-nav .menu a {
+    .header-nav .menu > li > a {
         font-size: 0.92rem;
         padding: 0 0.35rem;
     }
@@ -169,7 +169,7 @@
     flex: 0 0 auto;
     justify-content: center;
 }
-.header-nav.nav-stacked .menu a {
+.header-nav.nav-stacked .menu > li > a {
     font-size: 0.92rem;
     padding: 0 0.35rem;
 }
