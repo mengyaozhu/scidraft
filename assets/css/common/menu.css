@@ -100,7 +100,10 @@
     margin: 0;
 }
 
-/* Flex row so the arrow can be pinned to the right edge of the row. */
+/* The single home for submenu row spacing (padding, font size): it applies
+   unchanged in one-line and stacked header modes because the stacked
+   compaction selectors in header.css stop at .menu > li > a.
+   Flex row so the arrow can be pinned to the right edge of the row. */
 .menu .submenu a {
     display: flex;
     align-items: center;

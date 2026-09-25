@@ -127,6 +127,9 @@
         flex: 0 0 auto;
         justify-content: center;
     }
+    /* Direct children only: a bare ".menu a" would also match the anchors
+       inside the nested .submenu and strip the dropdown's row spacing.
+       The one home for that spacing is .menu .submenu a in menu.css. */
     .header-nav .menu > li > a {
         font-size: 0.92rem;
         padding: 0 0.35rem;
@@ -147,7 +150,8 @@
    whenever the menu cannot fit beside the logo row at the current width —
    long site titles or many menu items — so the centered stacked layout is
    not tied to the 767px viewport breakpoint. The rules mirror the ≤767px
-   block above. */
+   block above. As there too, selectors stop at .menu > li > a: they must
+   not reach the nested .submenu, whose row spacing lives in menu.css. */
 .header-nav.nav-stacked {
     flex-direction: column;
     align-items: center;
