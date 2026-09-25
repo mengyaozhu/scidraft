@@ -120,7 +120,7 @@ enableRobotsTXT = true
       note = "Methods by category"
   [[menu.main]]
     identifier = "notes"
-    name = "Evolving with AI"
+    name = "Demo Notes"
     url = "/notes/"
     weight = 10
   [[menu.main]]
