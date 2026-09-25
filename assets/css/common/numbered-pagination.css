@@ -47,8 +47,10 @@
     color: var(--secondary);
 }
 
-/* Space between the note PREV/NEXT boxes and the "Back to feed" button. */
+/* Space between the note PREV/NEXT boxes and the "Back to feed" button.
+   Same width source as the note page itself, so the box stays as wide as
+   the page column whatever --main-width is set to. */
 .note-single + .paginav {
     margin: 1.2rem auto;
-    max-width: 720px;
+    max-width: var(--main-width);
 }
