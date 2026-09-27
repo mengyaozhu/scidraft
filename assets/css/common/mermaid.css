@@ -11,3 +11,11 @@ pre.mermaid {
        theme's standard block gap so diagrams match code blocks. */
     margin: 0 0 var(--content-gap);
 }
+
+pre.mermaid svg {
+    display: block;
+    /* Center the diagram in the content column. Auto margins collapse to
+       zero when the diagram is wider than the column, so wide charts fall
+       back to the left-aligned, horizontally scrollable behavior above. */
+    margin-inline: auto;
+}
