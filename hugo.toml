@@ -3,6 +3,11 @@
 # hugo.toml overrides the same key here. A fresh SciDraft site gets all
 # of these out of the box.
 
+# Required by themes.gohugo.io: declare the Hugo versions this theme supports.
+[module]
+  [module.hugoVersion]
+    min = "0.158.0"
+
 [pagination]
   pagerSize = 6
 
