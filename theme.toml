@@ -1,11 +1,12 @@
-# theme.toml for the SciDraft Hugo theme
+# Metadata for the SciDraft Hugo theme
 
 name = "SciDraft"
 license = "MIT"
 licenselink = "https://github.com/mengyaozhu/scidraft/blob/main/LICENSE"
-description = "A modern Hugo theme for sharing thoughts and scientific writing."
+description = "A Hugo theme for scientific writing, research notes, mathematical content, and academic publishing."
 homepage = "https://www.zhumengyao.com/"
 demosite = "https://www.zhumengyao.com/scidraft/"
+
 tags = [
   "responsive",
   "blog",
@@ -25,6 +26,7 @@ tags = [
   "math",
   "citations"
 ]
+
 features = [
   "responsive",
   "single-column",
@@ -60,15 +62,16 @@ features = [
   "mermaid-diagrams",
   "galleries"
 ]
+
 min_version = "0.158.0"
 
 [author]
-  name = "SciDraft"
+  name = "Mengyao Zhu"
   homepage = "https://www.zhumengyao.com/"
 
-# This theme is a derivative of hugo-PaperMod
+# SciDraft is derived from hugo-PaperMod.
 [original]
   name = "PaperMod"
   author = "Aditya Telange"
   homepage = "https://github.com/adityatelange"
-  repo = "https://github.com/adityatelange/hugo-PaperMod/"
+  repo = "https://github.com/adityatelange/hugo-PaperMod"
