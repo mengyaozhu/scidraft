@@ -67,7 +67,7 @@ jobs:
             --source exampleSite \
             --gc \
             --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}" 2>&1 | tee "$RUNNER_TEMP/build.log"
+            --baseURL "https://www.zhumengyao.com/scidraft/" 2>&1 | tee "$RUNNER_TEMP/build.log"
 
       - name: Report build failure to an issue
         if: failure()
