@@ -32,7 +32,7 @@ These screenshots show SciDraft's scientific writing and research-navigation fea
 
 Combine inline mathematical notation with displayed equations in research notes and articles.
 
-![Inline mathematical notation and displayed Adam update equations](screenshots/mathematics.jpg)
+![Inline mathematical notation and displayed Adam update equations](screenshots/mathematics.png)
 
 [Explore the mathematics example](https://www.zhumengyao.com/scidraft/notes/demo-note-formula-adam/).
 
@@ -40,7 +40,7 @@ Combine inline mathematical notation with displayed equations in research notes 
 
 Render numbered in-text citations and a bibliography from a note's BibTeX file, with links between citations and reference entries.
 
-![Numbered in-text citations and a bibliography generated from BibTeX](screenshots/citations.jpg)
+![Numbered in-text citations and a bibliography generated from BibTeX](screenshots/citations.png)
 
 [Explore the citations example](https://www.zhumengyao.com/scidraft/notes/demo-note-third-bibliography-benchmarks/).
 
@@ -48,7 +48,7 @@ Render numbered in-text citations and a bibliography from a note's BibTeX file, 
 
 Describe diagrams in Markdown and render them alongside the discussion. This example uses a mind map to organize attention methods.
 
-![Mermaid mind map showing families of attention methods](screenshots/diagrams.jpg)
+![Mermaid mind map showing families of attention methods](screenshots/diagrams.png)
 
 [Explore the diagram example](https://www.zhumengyao.com/scidraft/notes/demo-note-mermaid-mindmap-attention/).
 
@@ -56,7 +56,7 @@ Describe diagrams in Markdown and render them alongside the discussion. This exa
 
 Present pseudocode with an algorithm caption, numbered steps, input and output declarations, and mathematical notation.
 
-![Scaled dot-product attention pseudocode with numbered steps and equations](screenshots/algorithms.jpg)
+![Scaled dot-product attention pseudocode with numbered steps and equations](screenshots/algorithms.png)
 
 [Explore the algorithm example](https://www.zhumengyao.com/scidraft/notes/demo-note-attention-pseudocode/).
 
@@ -64,7 +64,7 @@ Present pseudocode with an algorithm caption, numbered steps, input and output d
 
 Compare methods using styled tables with mathematical expressions, multiline cells, and alternating row backgrounds.
 
-![Striped table comparing attention variants, computational costs, and cache requirements](screenshots/tables.jpg)
+![Striped table comparing attention variants, computational costs, and cache requirements](screenshots/tables.png)
 
 [Explore the table example](https://www.zhumengyao.com/scidraft/notes/demo-note-attention-variants-table/).
 
@@ -72,7 +72,7 @@ Compare methods using styled tables with mathematical expressions, multiline cel
 
 Browse entries alphabetically using letter navigation, linked titles, alternative names, and concise summaries.
 
-![Alphabetical mathematics entry map with letter navigation and linked result summaries](screenshots/entry-a-to-z.jpg)
+![Alphabetical mathematics entry map with letter navigation and linked result summaries](screenshots/entry-a-to-z.png)
 
 [Explore the A–Z entry map](https://www.zhumengyao.com/scidraft/math-a-to-z/).
 
@@ -80,7 +80,7 @@ Browse entries alphabetically using letter navigation, linked titles, alternativ
 
 Group entries by result family or subject, with category navigation and links to the corresponding notes.
 
-![Category-based mathematics entry map with navigation and grouped algorithms and axioms](screenshots/entry-categories.jpg)
+![Category-based mathematics entry map with navigation and grouped algorithms and axioms](screenshots/entry-categories.png)
 
 [Explore the category-based entry map](https://www.zhumengyao.com/scidraft/math-categories/).
 
