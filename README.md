@@ -46,11 +46,11 @@ Render numbered in-text citations and a bibliography from a note's BibTeX file, 
 
 ### Mermaid diagrams
 
-Describe diagrams in Markdown and render them alongside the discussion. This example uses a mind map to organize attention methods.
+Describe diagrams in Markdown and render them alongside the discussion. This example uses a sequence diagram to show the interactions between a client, model, and sampler during autoregressive generation.
 
-![Mermaid mind map showing families of attention methods](screenshots/diagrams.png)
+![Mermaid sequence diagram showing autoregressive generation with a client, model, and sampler](screenshots/diagrams.png)
 
-[Explore the diagram example](https://www.zhumengyao.com/scidraft/notes/demo-note-mermaid-mindmap-attention/).
+[Explore the diagram example](https://www.zhumengyao.com/scidraft/notes/demo-note-mermaid-sequence/).
 
 ### Algorithms
 
