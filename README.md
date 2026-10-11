@@ -1,4 +1,4 @@
-# SciDraft
+# SciDraft — A Hugo Theme for Scientific Writing
 
 **A Hugo theme for scientific writing, research notes, and academic publishing.**
 
