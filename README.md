@@ -24,6 +24,66 @@ SciDraft combines a clean, responsive reading experience with tools for mathemat
 
 See the [live demo](https://www.zhumengyao.com/scidraft/) for examples of these features.
 
+## Feature showcase
+
+These screenshots show SciDraft's scientific writing and research-navigation features in the bundled example site. The note content is demonstration material, not a scientific reference.
+
+### Mathematics
+
+Combine inline mathematical notation with displayed equations in research notes and articles.
+
+![Inline mathematical notation and displayed Adam update equations](screenshots/mathematics.jpg)
+
+[Explore the mathematics example](https://www.zhumengyao.com/scidraft/notes/demo-note-formula-adam/).
+
+### BibTeX-based citations
+
+Render numbered in-text citations and a bibliography from a note's BibTeX file, with links between citations and reference entries.
+
+![Numbered in-text citations and a bibliography generated from BibTeX](screenshots/citations.jpg)
+
+[Explore the citations example](https://www.zhumengyao.com/scidraft/notes/demo-note-third-bibliography-benchmarks/).
+
+### Mermaid diagrams
+
+Describe diagrams in Markdown and render them alongside the discussion. This example uses a mind map to organize attention methods.
+
+![Mermaid mind map showing families of attention methods](screenshots/diagrams.jpg)
+
+[Explore the diagram example](https://www.zhumengyao.com/scidraft/notes/demo-note-mermaid-mindmap-attention/).
+
+### Algorithms
+
+Present pseudocode with an algorithm caption, numbered steps, input and output declarations, and mathematical notation.
+
+![Scaled dot-product attention pseudocode with numbered steps and equations](screenshots/algorithms.jpg)
+
+[Explore the algorithm example](https://www.zhumengyao.com/scidraft/notes/demo-note-attention-pseudocode/).
+
+### Scientific tables
+
+Compare methods using styled tables with mathematical expressions, multiline cells, and alternating row backgrounds.
+
+![Striped table comparing attention variants, computational costs, and cache requirements](screenshots/tables.jpg)
+
+[Explore the table example](https://www.zhumengyao.com/scidraft/notes/demo-note-attention-variants-table/).
+
+### A–Z entry map
+
+Browse entries alphabetically using letter navigation, linked titles, alternative names, and concise summaries.
+
+![Alphabetical mathematics entry map with letter navigation and linked result summaries](screenshots/entry-a-to-z.jpg)
+
+[Explore the A–Z entry map](https://www.zhumengyao.com/scidraft/math-a-to-z/).
+
+### Category-based entry map
+
+Group entries by result family or subject, with category navigation and links to the corresponding notes.
+
+![Category-based mathematics entry map with navigation and grouped algorithms and axioms](screenshots/entry-categories.jpg)
+
+[Explore the category-based entry map](https://www.zhumengyao.com/scidraft/math-categories/).
+
 ## Requirements
 
 - [Hugo](https://gohugo.io/installation/) **v0.158.0 or later**
